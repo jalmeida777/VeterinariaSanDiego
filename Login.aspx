@@ -7,7 +7,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>FAREGAS - Login</title>
+    <title>Clínica Veterinaria San Diego - Login</title>
     <script src="js/jquery.growl.js" type="text/javascript"></script>
 <link href="css/jquery.growl.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
@@ -61,9 +61,9 @@
     
     </div>
 
-    <div style="margin: auto; position: absolute; top: 80px; right: 0px; width: 520px; height: 100px; left: 50px;">
-        <asp:Image ID="Image1" runat="server" Height="100px" 
-            ImageUrl="~/images/logo_faregas1.png" />
+    <div style="margin: auto; position: absolute; top: -400px; right: 0px; width: 520px; height: 100px; left: 140px; bottom: 0px;">
+        <asp:Image ID="Image1" runat="server" Height="164px" 
+            ImageUrl="~/images/LogoVeterinaria.jpg" Width="376px" />
     </div>
     </form>
 </body>

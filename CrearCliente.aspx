@@ -7,6 +7,13 @@
 <script src="js/jquery.growl.js" type="text/javascript"></script>
 <link href="css/jquery.growl.css" rel="stylesheet" type="text/css" />
 
+    <style type="text/css">
+        .style1
+        {
+            width: 100%;
+        }
+    </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="divBusqueda">
@@ -68,13 +75,16 @@
             <td width="20">
                 &nbsp;</td>
         </tr>
-        <tr>
+        <tr id="filaCodigo" runat="server" visible = "false">
             <td height="10" width="20">
                 &nbsp;</td>
-            <td colspan="2">
-                                <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
-                                <asp:Label ID="lblCodigo" runat="server" Visible="False"></asp:Label>
-                </td>
+            <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
+                                <asp:Label ID="Label1" runat="server" Text="Código:"></asp:Label>
+                                </td>
+            <td style="padding-left: 5px">
+                                <asp:Label ID="lblCodigo" runat="server"></asp:Label>
+
+            </td>
             <td width="20">
                 &nbsp;</td>
         </tr>
@@ -85,7 +95,7 @@
                 Tipo de Cliente</td>
             <td style="padding-left: 5px">
                                 <asp:DropDownList ID="ddlTipoCliente" runat="server" CssClass="combo" 
-                    Width="280px">
+                    Width="300px">
                                 </asp:DropDownList>
 
             </td>
@@ -97,28 +107,14 @@
                 &nbsp;</td>
             <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
                 <asp:Label ID="Label30" runat="server" Text="Nombre:"></asp:Label>
-            </td>
-            <td style="padding-left: 5px">
-                <asp:TextBox ID="txtNombre" runat="server" CssClass="inputNormal" 
-                    MaxLength="50" Width="300px"></asp:TextBox>
 
                 <asp:Label runat="server" Text="*" Font-Bold="True" Font-Size="10pt" 
                             ForeColor="#18AC85" ID="Label41"></asp:Label>
 
             </td>
-            <td width="20">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933">
-                <asp:Label ID="Label48" runat="server" Text="Tipo de Documento:"></asp:Label>
-            </td>
             <td style="padding-left: 5px">
-                                <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="combo" 
-                    Width="280px">
-                                </asp:DropDownList>
+                <asp:TextBox ID="txtNombre" runat="server" CssClass="inputNormal" 
+                    MaxLength="50" Width="300px"></asp:TextBox>
 
             </td>
             <td width="20">
@@ -129,13 +125,27 @@
                 &nbsp;</td>
             <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933">
                 <asp:Label ID="Label31" runat="server" Text="Número de Documento:"></asp:Label>
-            </td>
-            <td style="padding-left: 5px">
-                <asp:TextBox ID="txtNumeroDocumento" runat="server" CssClass="inputNormal" 
-                    MaxLength="11"></asp:TextBox>
 
                 <asp:Label runat="server" Text="*" Font-Bold="True" Font-Size="10pt" 
                             ForeColor="#18AC85" ID="Label47"></asp:Label>
+
+            </td>
+            <td style="padding-left: 5px">
+                <table cellpadding="0" cellspacing="0" class="style1">
+                    <tr>
+                        <td width="120">
+                <asp:TextBox ID="txtNumeroDocumento" runat="server" CssClass="inputNormal" 
+                    MaxLength="11" Width="100px"></asp:TextBox>
+
+                        </td>
+                        <td>
+                                <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="combo" 
+                    Width="180px">
+                                </asp:DropDownList>
+
+                        </td>
+                    </tr>
+                </table>
 
             </td>
             <td width="20">
@@ -149,7 +159,7 @@
             </td>
             <td style="padding-left: 5px">
                 <asp:TextBox ID="txtDireccion" runat="server" CssClass="inputNormal" 
-                    MaxLength="1000" Width="200px"></asp:TextBox>
+                    MaxLength="1000" Width="300px"></asp:TextBox>
             </td>
             <td width="20">
                 &nbsp;</td>
@@ -162,7 +172,8 @@
             </td>
             <td style="padding-left: 5px">
                                 <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="combo" 
-                    Width="280px" onselectedindexchanged="ddlProvincia_SelectedIndexChanged">
+                    Width="300px" onselectedindexchanged="ddlProvincia_SelectedIndexChanged" 
+                                    AutoPostBack="True">
                                 </asp:DropDownList>
 
             </td>
@@ -177,7 +188,7 @@
             </td>
             <td style="padding-left: 5px">
                                 <asp:DropDownList ID="ddlDistrito" runat="server" CssClass="combo" 
-                    Width="280px">
+                    Width="300px">
                                 </asp:DropDownList>
 
             </td>
@@ -217,39 +228,20 @@
                 <asp:Label ID="Label43" runat="server" Text="Celular:"></asp:Label>
             </td>
             <td style="padding-left: 5px">
+                <table cellpadding="0" cellspacing="0" class="style1">
+                    <tr>
+                        <td width="120">
                 <asp:TextBox ID="txtCelular" runat="server" CssClass="inputNormal" 
-                    MaxLength="50" Width="200px"></asp:TextBox>
-            </td>
-            <td width="20">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933">
-                <asp:Label ID="Label45" runat="server" Text="Cia Celular:"></asp:Label>
-            </td>
-            <td style="padding-left: 5px">
+                    MaxLength="50" Width="100px"></asp:TextBox>
+                        </td>
+                        <td>
                                 <asp:DropDownList ID="ddlCiaCelular" runat="server" CssClass="combo" 
-                    Width="280px">
+                    Width="180px">
                                 </asp:DropDownList>
 
-            </td>
-            <td width="20">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933">
-                <asp:Label ID="Label42" runat="server" Text="Fecha Registro:"></asp:Label>
-            </td>
-            <td style="padding-left: 5px">
-                <asp:TextBox ID="txtfecReg" runat="server" CssClass="inputsFecha" 
-                    MaxLength="10"></asp:TextBox>
-                    <cc1:CalendarExtender ID="txtfecReg_CalendarExtender" runat="server" 
-                            Enabled="True" Format="dd/MM/yyyy" TargetControlID="txtfecReg">
-                        </cc1:CalendarExtender>
+                        </td>
+                    </tr>
+                </table>
             </td>
             <td width="20">
                 &nbsp;</td>
@@ -267,15 +259,48 @@
             <td width="20">
                 &nbsp;</td>
         </tr>
-        <tr>
+        <tr id="tblFechaRegistro" runat="server" visible="false">
+            <td height="10" width="20">
+                &nbsp;</td>
+            <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933">
+                <asp:Label ID="Label42" runat="server" Text="Fecha Registro:"></asp:Label>
+            </td>
+            <td style="padding-left: 5px">
+                <asp:Label ID="lblFechaRegistro" runat="server"></asp:Label>
+            </td>
+            <td width="20">
+                &nbsp;</td>
+        </tr>
+        <tr id="tblFechaVisita" runat="server" visible="false">
             <td height="10" width="20">
                 &nbsp;</td>
             <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933">
                 <asp:Label ID="Label46" runat="server" Text="Ultima Visita:"></asp:Label>
             </td>
             <td style="padding-left: 5px">
-                <asp:TextBox ID="txtUltimaVisita" runat="server" CssClass="inputNormal" 
-                    MaxLength="20"></asp:TextBox>
+                <asp:Label ID="lblFechaUltimaVisita" runat="server"></asp:Label>
+            </td>
+            <td width="20">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td height="10" width="20">
+                &nbsp;</td>
+            <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933">
+                <asp:Label ID="Label51" runat="server" Text="Puntos Acumulados:"></asp:Label>
+            </td>
+            <td style="padding-left: 5px">
+                <table cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td width="50">
+                            <asp:Label ID="lblPuntos" runat="server"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:ImageButton ID="btnVerDatallePuntos" runat="server" 
+                                ImageUrl="~/images/search.png" />
+                        </td>
+                    </tr>
+                </table>
             </td>
             <td width="20">
                 &nbsp;</td>
@@ -289,16 +314,6 @@
             <td style="padding-left: 5px">
                 <asp:CheckBox ID="chkEstado" runat="server" Checked="True" Text="Habilitado" />
             </td>
-            <td width="20">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td style="padding-left: 5px">
-                &nbsp;</td>
             <td width="20">
                 &nbsp;</td>
         </tr>

@@ -1,9 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearTipoCliente.aspx.cs" Inherits="CrearTipoCliente" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearRaza.aspx.cs" Inherits="CrearRaza" %>
 
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-
     <script src="js/jquery.growl.js" type="text/javascript"></script>
 <link href="css/jquery.growl.css" rel="stylesheet" type="text/css" />
 
@@ -14,7 +13,7 @@
             <tr>
                 <td>
                     <h1 class="label">
-                        Tipo de Cliente</h1>
+                        Raza</h1>
                 </td>
             </tr>
         </table>
@@ -31,8 +30,8 @@
                     </cc1:ConfirmButtonExtender>
                 </td>
                 <td width="65">
-                    <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" onclick="btnSalir_Click" 
-                                />
+                    <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
+                                onclick="btnSalir_Click" />
                 </td>
                 <td>
                 </td>
@@ -75,20 +74,42 @@
                             <td height="10" width="20">
                 &nbsp;</td>
                             <td>
+                                <asp:Label ID="Label4" runat="server" Text="Especie:"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="ddlEspecie" runat="server" CssClass="combo" 
+                    Width="200px">
+                                </asp:DropDownList>
+                                <asp:Label ID="Label16" runat="server" Font-Bold="True" ForeColor="#18AC85" 
+                        Text="*"></asp:Label>
+                            </td>
+                            <td>
+                &nbsp;</td>
+                            <td>
+                &nbsp;</td>
+                            <td>
+                &nbsp;</td>
+                            <td width="20">
+                &nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="10" width="20">
+                &nbsp;</td>
+                            <td>
                                 <asp:Label ID="Label2" runat="server" Text="Descripción:"></asp:Label>
                             </td>
                             <td>
                                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="inputNormal" placeholder="Descripción"
                     Width="300px" style="text-transform:uppercase"></asp:TextBox>
+                                <asp:Label ID="Label17" runat="server" Font-Bold="True" ForeColor="#18AC85" 
+                        Text="*"></asp:Label>
                             </td>
                             <td>
                 &nbsp;</td>
                             <td>
                 &nbsp;</td>
                             <td>
-                                <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
-                                <asp:Label ID="lblCodigo" runat="server" Visible="False"></asp:Label>
-                            </td>
+                &nbsp;</td>
                             <td width="20">
                 &nbsp;</td>
                         </tr>
@@ -100,6 +121,8 @@
                             </td>
                             <td>
                                 <asp:CheckBox ID="chkEstado" runat="server" Checked="True" Text="Habilitado" />
+                                <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
+                                <asp:Label ID="lblCodigo" runat="server" Visible="False"></asp:Label>
                             </td>
                             <td>
                 &nbsp;</td>

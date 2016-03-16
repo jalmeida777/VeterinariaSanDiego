@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearTipoCliente.aspx.cs" Inherits="CrearTipoCliente" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearEspecie.aspx.cs" Inherits="CrearEspecie" %>
 
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 
@@ -14,7 +14,7 @@
             <tr>
                 <td>
                     <h1 class="label">
-                        Tipo de Cliente</h1>
+                        Especie</h1>
                 </td>
             </tr>
         </table>
@@ -31,8 +31,8 @@
                     </cc1:ConfirmButtonExtender>
                 </td>
                 <td width="65">
-                    <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" onclick="btnSalir_Click" 
-                                />
+                    <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
+                                onclick="btnSalir_Click" />
                 </td>
                 <td>
                 </td>

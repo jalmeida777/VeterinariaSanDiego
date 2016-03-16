@@ -21,43 +21,56 @@ public partial class CrearCliente : System.Web.UI.Page
             ListarTipoDocumento();
             ListarCiaCelular();
             ListarProvincia();
-            txtfecReg.Text = DateTime.Now.ToShortDateString();
+            ddlProvincia_SelectedIndexChanged(null, null);
             
             if (Request.QueryString["i_IdCliente"] != null)
             {
+                filaCodigo.Visible = true;
+                tblFechaRegistro.Visible = true;
+                tblFechaVisita.Visible = true;
+                txtNombre.Focus();
+
                 string i_IdCliente = Request.QueryString["i_IdCliente"];
+
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter("BDVETERINARIASANDIEGO_Cliente_Seleccionar " + i_IdCliente, conexion);
                 da.Fill(dt);
+
                 lblCodigo.Text = i_IdCliente;
-                ddlTipoDocumento.SelectedValue = dt.Rows[0]["i_IdTipoDocumento"].ToString();
                 ddlTipoCliente.SelectedValue = dt.Rows[0]["i_IdTipoCliente"].ToString();
-                ddlCiaCelular.SelectedValue = dt.Rows[0]["v_CiaCelular"].ToString();
-                ddlProvincia.SelectedValue = dt.Rows[0]["v_CiaCelular"].ToString();
                 txtNombre.Text = dt.Rows[0]["v_Nombres"].ToString();
                 txtNumeroDocumento.Text = dt.Rows[0]["v_NroDocumento"].ToString();
+                ddlTipoDocumento.SelectedValue = dt.Rows[0]["i_IdTipoDocumentoCliente"].ToString();
                 txtDireccion.Text = dt.Rows[0]["v_Direccion"].ToString();
+                ddlProvincia.SelectedValue = dt.Rows[0]["i_IdProvincia"].ToString();
+                ddlProvincia_SelectedIndexChanged(null, null);
+                ddlDistrito.SelectedValue = dt.Rows[0]["i_IdDistrito"].ToString();
                 txtTelefono.Text = dt.Rows[0]["v_Telefono"].ToString();
-                txtCelular.Text = dt.Rows[0]["v_Celular"].ToString();
                 txtEmail.Text = dt.Rows[0]["v_Email"].ToString();
-
-
-                if (dt.Rows[0]["d_FechaRegistro"].ToString() != "")
-                {
-                    txtfecReg.Text = DateTime.Parse(dt.Rows[0]["d_FechaRegistro"].ToString()).ToShortDateString();
-                }
-
-                txtUltimaVisita.Text = dt.Rows[0]["v_FechaUltimaVisita"].ToString();
-
-                //if (dt.Rows[0]["d_FechaUltimaVisita"].ToString() != "")
-                //{
-                // txtfecUltVisita.Text = DateTime.Parse(dt.Rows[0]["d_FechaUltimaVisita"].ToString()).ToShortDateString();
-                //}
+                txtCelular.Text = dt.Rows[0]["v_Celular"].ToString();
+                ddlCiaCelular.SelectedValue = dt.Rows[0]["i_IdCiaCelular"].ToString();
                 
                 txtComentario.Text = dt.Rows[0]["t_Comentario"].ToString();
+
+                lblFechaRegistro.Text = dt.Rows[0]["d_FechaRegistro"].ToString();
+
+                if (dt.Rows[0]["d_FechaUltimaVisita"].ToString() != "")
+                {
+                    lblFechaUltimaVisita.Text = DateTime.Parse(dt.Rows[0]["d_FechaUltimaVisita"].ToString()).ToShortDateString();
+                }
+                lblPuntos.Text = dt.Rows[0]["i_Puntos"].ToString();
+
                 chkEstado.Checked = bool.Parse(dt.Rows[0]["b_Estado"].ToString());
+
                 txtNombre.Focus();
             }
+
+            //Nuevo
+            lblPuntos.Text = "0";
+            filaCodigo.Visible = false;
+            tblFechaRegistro.Visible = false;
+            tblFechaVisita.Visible = false;
+            txtNombre.Focus();
         }
     }
 
@@ -83,7 +96,7 @@ public partial class CrearCliente : System.Web.UI.Page
 
         ddlTipoDocumento.DataSource = dt;
         ddlTipoDocumento.DataTextField = "v_Descripcion";
-        ddlTipoDocumento.DataValueField = "i_TipoDocCliente";
+        ddlTipoDocumento.DataValueField = "i_IdTipoDocumentoCliente";
         ddlTipoDocumento.DataBind();
         ddlTipoDocumento.SelectedIndex = 0;
     }
@@ -147,19 +160,6 @@ public partial class CrearCliente : System.Web.UI.Page
             return;
         }
 
-        if (txtfecReg.Text.Trim() == "")
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar una fecha de Registro válida.' });</script>", false);
-            txtfecReg.Focus();
-            return;
-        }
-
-        if (txtfecUltVisita.Text.Trim() == "")
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar una fecha de Visita válida.' });</script>", false);
-            txtfecUltVisita.Focus();
-            return;
-        }
 
         try
         {
@@ -171,33 +171,27 @@ public partial class CrearCliente : System.Web.UI.Page
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "BDVETER_Cliente_Actualizar";
                 cmd.Parameters.AddWithValue("@i_IdCliente", lblCodigo.Text);
-                cmd.Parameters.AddWithValue("@i_IdTipoDocumento", ddlTipoDocumento.SelectedValue);
+                cmd.Parameters.AddWithValue("@i_IdTipoDocumentoCliente", ddlTipoDocumento.SelectedValue);
                 cmd.Parameters.AddWithValue("@i_IdTipoCliente", ddlTipoCliente.SelectedValue);
+                cmd.Parameters.AddWithValue("@i_IdCiaCelular", ddlCiaCelular.SelectedValue);
+                cmd.Parameters.AddWithValue("@i_IdProvincia", ddlProvincia.SelectedValue);
+                cmd.Parameters.AddWithValue("@i_IdDistrito", ddlDistrito.SelectedValue);
                 cmd.Parameters.AddWithValue("@v_Nombres", txtNombre.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_NroDocumento", txtNumeroDocumento.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_Direccion", txtDireccion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_Telefono", txtTelefono.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_Celular", txtCelular.Text.Trim().ToUpper());
-                cmd.Parameters.AddWithValue("@v_CiaCelular", txtCiaCelular.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_Email", txtEmail.Text.Trim().ToUpper());
-                cmd.Parameters.AddWithValue("@d_FechaRegistro", DateTime.Parse(txtfecReg.Text));
-                cmd.Parameters.AddWithValue("@d_FechaUltimaVisita", DateTime.Parse(txtfecUltVisita.Text));
                 cmd.Parameters.AddWithValue("@t_Comentario", txtComentario.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
-                                             
-                
                 
                 conexion.Open();
                 cmd.ExecuteNonQuery();
                 conexion.Close();
                 cmd.Dispose();
-                tblCliente.Visible = true;
-                //tblGeneral.Visible = true;
-                //toolbar.Visible = true;
 
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Cliente actualizado satisfactoriamente' });</script>", false);
-                           
-                                                                
+                bloquearTodo();                          
             }
             else
             {
@@ -207,29 +201,27 @@ public partial class CrearCliente : System.Web.UI.Page
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "BDVETER_Cliente_Registrar";
-                cmd.Parameters.AddWithValue("@i_IdTipoDocumento", ddlTipoDocumento.SelectedValue);
+                cmd.Parameters.AddWithValue("@i_IdTipoDocumentoCliente", ddlTipoDocumento.SelectedValue);
                 cmd.Parameters.AddWithValue("@i_IdTipoCliente", ddlTipoCliente.SelectedValue);
+                cmd.Parameters.AddWithValue("@i_IdCiaCelular", ddlCiaCelular.SelectedValue);
+                cmd.Parameters.AddWithValue("@i_IdProvincia", ddlProvincia.SelectedValue);
+                cmd.Parameters.AddWithValue("@i_IdDistrito", ddlDistrito.SelectedValue);
                 cmd.Parameters.AddWithValue("@v_Nombres", txtNombre.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_NroDocumento", txtNumeroDocumento.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_Direccion", txtDireccion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_Telefono", txtTelefono.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_Celular", txtCelular.Text.Trim().ToUpper());
-                cmd.Parameters.AddWithValue("@v_CiaCelular", txtCiaCelular.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_Email", txtEmail.Text.Trim().ToUpper());
-                cmd.Parameters.AddWithValue("@d_FechaRegistro", DateTime.Parse(txtfecReg.Text));
-                cmd.Parameters.AddWithValue("@d_FechaUltimaVisita", DateTime.Parse(txtfecUltVisita.Text));
                 cmd.Parameters.AddWithValue("@t_Comentario", txtComentario.Text.Trim().ToUpper());
-                cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 
                                 
                 conexion.Open();
                 i_IdCliente = cmd.ExecuteScalar().ToString();
+                lblCodigo.Text = i_IdCliente;
                 conexion.Close();
                 cmd.Dispose();
-                tblCliente.Visible = true;
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Cliente registrado satisfactoriamente' });</script>", false);
-
-               
+                bloquearTodo();
             }
 
            
@@ -239,8 +231,27 @@ public partial class CrearCliente : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: '" + ex.Message + "' });</script>", false);
         }
     }
+
     protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
     {
         ListarDistrito();
+    }
+
+    void bloquearTodo() 
+    {
+        ddlTipoCliente.Enabled = false;
+        txtNombre.Enabled = false;
+        txtNumeroDocumento.Enabled = false;
+        ddlTipoDocumento.Enabled = false;
+        txtDireccion.Enabled = false;
+        ddlProvincia.Enabled = false;
+        ddlDistrito.Enabled = false;
+        txtTelefono.Enabled = false;
+        txtEmail.Enabled = false;
+        txtCelular.Enabled = false;
+        ddlCiaCelular.Enabled = false;
+        txtComentario.Enabled = false;
+        chkEstado.Enabled = false;
+        btnGuardar.Enabled = false;
     }
 }

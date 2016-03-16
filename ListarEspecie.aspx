@@ -1,10 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ListarTipoDocumentoCliente.aspx.cs" Inherits="ListarTipoDocumentoCliente" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ListarEspecie.aspx.cs" Inherits="ListarEspecie" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-
-    <script src="js/jquery.growl.js" type="text/javascript"></script>
-<link href="css/jquery.growl.css" rel="stylesheet" type="text/css" />
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -14,7 +10,7 @@
                     <tr>
                         <td colspan="2">
                             <h1 class="label">
-                                Administración de Tipo de Documentos</h1>
+                                Administración de Especies</h1>
                         </td>
                     </tr>
                     <tr>
@@ -44,6 +40,10 @@
                             <asp:ImageButton ID="btnConsultar" runat="server" 
                     ImageUrl="~/images/Buscar.jpg" onclick="btnConsultar_Click" />
                         </td>
+                        <td width="65">
+                            <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="~/images/Nuevo.jpg" 
+                        onclick="btnNuevo_Click" />
+                        </td>
                         <td>
                             <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
                                 onclick="btnSalir_Click" />
@@ -59,15 +59,23 @@
             </asp:UpdateProgress>
             <asp:Panel ID="Panel1" runat="server" Height="600px" ScrollBars="Vertical" 
                 Width="100%">
-                <asp:GridView ID="gvTipoDocumento" runat="server" AutoGenerateColumns="False" 
-                    CssClass="grid" DataKeyNames="i_IdTipoDocumentoCliente" Width="100%">
+                <asp:GridView ID="gvAlmacen" runat="server" AutoGenerateColumns="False" 
+                    CssClass="grid" DataKeyNames="i_IdEspecie" 
+                    onrowdatabound="gvAlmacen_RowDataBound" Width="100%">
                     <Columns>
-                        <asp:BoundField DataField="i_IdTipoDocumentoCliente" HeaderText="Id" 
-                            Visible="False">
+                        <asp:BoundField DataField="i_IdEspecie" HeaderText="Id" Visible="False">
                         <ItemStyle HorizontalAlign="Center" Width="50px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="v_Descripcion" HeaderText="Descripcion">
                         </asp:BoundField>
+                        <asp:TemplateField HeaderText="Editar">
+                            <ItemTemplate>
+                                <asp:ImageButton ID="ibEditar" runat="server" ImageUrl="~/images/edit.png" 
+                                    ToolTip="Editar" />
+                            </ItemTemplate>
+                            <HeaderStyle HorizontalAlign="Center" />
+                            <ItemStyle HorizontalAlign="Center" Width="50px" />
+                        </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
             </asp:Panel>
