@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-public partial class CrearRaza : System.Web.UI.Page
+public partial class CrearDiagnostico : System.Web.UI.Page
 {
     SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["conexion"].ConnectionString);
     protected void Page_Load(object sender, EventArgs e)
@@ -16,19 +16,15 @@ public partial class CrearRaza : System.Web.UI.Page
         if (Page.IsPostBack == false)
         {
 
-            ListarEspecie();
-
-            if (Request.QueryString["i_IdRaza"] != null)
+            if (Request.QueryString["i_IdDiagnostico"] != null)
             {
-                int i_IdRaza = int.Parse(Request.QueryString["i_IdRaza"].ToString());
+                int i_IdDiagnostico = int.Parse(Request.QueryString["i_IdDiagnostico"].ToString());
                 DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("BDVETER_Raza_Seleccionar " + i_IdRaza.ToString(), conexion);
+                SqlDataAdapter da = new SqlDataAdapter("BDVETER_Diagnostico_Seleccionar " + i_IdDiagnostico.ToString(), conexion);
                 da.Fill(dt);
-                lblCodigo.Text = i_IdRaza.ToString();
+                lblCodigo.Text = i_IdDiagnostico.ToString();
                 txtDescripcion.Text = dt.Rows[0]["v_Descripcion"].ToString();
                 chkEstado.Checked = bool.Parse(dt.Rows[0]["b_Estado"].ToString());
-
-                ddlEspecie.SelectedValue = dt.Rows[0]["i_IdEspecie"].ToString();
             }
             else
             {
@@ -36,24 +32,6 @@ public partial class CrearRaza : System.Web.UI.Page
 
             txtDescripcion.Focus();
         }
-
-    }
-
-    void ListarEspecie()
-    {
-        DataTable dt = new DataTable();
-        SqlDataAdapter da = new SqlDataAdapter("BDVETER_Especie_Combo", conexion);
-        da.Fill(dt);
-
-        ddlEspecie.DataSource = dt;
-        ddlEspecie.DataTextField = "v_Descripcion";
-        ddlEspecie.DataValueField = "i_IdEspecie";
-        ddlEspecie.DataBind();
-        ddlEspecie.SelectedIndex = 0;
-    }
-    protected void btnSalir_Click(object sender, ImageClickEventArgs e)
-    {
-        Response.Redirect("ListarRaza.aspx");
     }
     protected void btnGuardar_Click(object sender, ImageClickEventArgs e)
     {
@@ -66,40 +44,36 @@ public partial class CrearRaza : System.Web.UI.Page
 
         try
         {
+
+
             if (lblCodigo.Text.Trim() != "")
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "BDVETER_Raza_Actualizar";
-                cmd.Parameters.AddWithValue("@i_IdRaza", lblCodigo.Text);
-                cmd.Parameters.AddWithValue("@i_IdEspecie", ddlEspecie.SelectedValue);
+                cmd.CommandText = "BDVETER_Diagnostico_Actualizar";
+                cmd.Parameters.AddWithValue("@i_IdDiagnostico", lblCodigo.Text);
                 cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
                 conexion.Close();
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Raza actualizada.' });</script>", false);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Diagnostico actualizado.' });</script>", false);
             }
             else
             {
-                string i_IdRaza = "";
+                string i_IdDiagnostico = "";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "BDVETER_Raza_Registrar";
-                cmd.Parameters.AddWithValue("@i_IdEspecie", ddlEspecie.SelectedValue);
+                cmd.CommandText = "BDVETER_Diagnostico_Registrar";
                 cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
-                i_IdRaza = cmd.ExecuteScalar().ToString();
-                
+                i_IdDiagnostico = cmd.ExecuteScalar().ToString();
                 conexion.Close();
-                lblCodigo.Text = i_IdRaza;
-                cmd.Dispose();
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Raza registrada.' });</script>", false);
-                                             
-            
+                lblCodigo.Text = i_IdDiagnostico;
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Diagnostico registrado.' });</script>", false);
             }
 
         }
@@ -107,6 +81,9 @@ public partial class CrearRaza : System.Web.UI.Page
         {
             ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: 'El código interno ya se encuentra en uso!' });</script>", false);
         }
-      
+    }
+    protected void btnSalir_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("ListarDiagnostico.aspx");
     }
 }

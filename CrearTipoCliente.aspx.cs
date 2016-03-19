@@ -53,35 +53,35 @@ public partial class CrearTipoCliente : System.Web.UI.Page
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Play_Marca_Actualizar";
-                cmd.Parameters.AddWithValue("@i_IdMarca", lblCodigo.Text);
-                cmd.Parameters.AddWithValue("@v_NombreMarca", txtDescripcion.Text.Trim().ToUpper());
+                cmd.CommandText = "BDVETER_TipoCliente_Actualizar";
+                cmd.Parameters.AddWithValue("@i_IdTipoCliente", lblCodigo.Text);
+                cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
                 conexion.Close();
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Tipo de cliente actualizado.' });</script>", false);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Tipo de Cliente actualizado.' });</script>", false);
             }
             else
             {
-                string i_IdMarca = "";
+                string i_IdTipoCliente = "";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Play_Marca_Registrar";
-                cmd.Parameters.AddWithValue("@v_NombreMarca", txtDescripcion.Text.Trim().ToUpper());
+                cmd.CommandText = "BDVETER_TipoCliente_Registrar";
+                cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
-                i_IdMarca = cmd.ExecuteScalar().ToString();
+                i_IdTipoCliente = cmd.ExecuteScalar().ToString();
                 conexion.Close();
-                lblCodigo.Text = i_IdMarca;
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Tipo de cliente registrado.' });</script>", false);
+                lblCodigo.Text = i_IdTipoCliente;
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Tipo de Cliente registrado.' });</script>", false);
             }
 
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: '" + ex.Message + "' });</script>", false);
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: 'El código interno ya se encuentra en uso!' });</script>", false);
         }
     }
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)

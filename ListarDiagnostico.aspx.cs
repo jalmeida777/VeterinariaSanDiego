@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-public partial class ListarTipoCliente : System.Web.UI.Page
+public partial class ListarDiagnostico : System.Web.UI.Page
 {
     SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["conexion"].ConnectionString);
     protected void Page_Load(object sender, EventArgs e)
@@ -18,7 +18,7 @@ public partial class ListarTipoCliente : System.Web.UI.Page
             Label lblTitulo = (Label)Master.FindControl("lblTitulo");
             if (lblTitulo != null)
             {
-                lblTitulo.Text = "Administración de Tipo de Cliente";
+                lblTitulo.Text = "Administración de Diagnosticos";
             }
             Listar();
         }
@@ -31,18 +31,17 @@ public partial class ListarTipoCliente : System.Web.UI.Page
         if (chkEstado.Checked) { Estado = "1"; } else { Estado = "0"; }
 
         DataTable dt = new DataTable();
-        SqlDataAdapter da = new SqlDataAdapter("BDVETER_TipoCliente_Listar '" + txtBuscar.Text.Trim() + "'," + Estado, conexion);
-               
+        SqlDataAdapter da = new SqlDataAdapter("BDVETER_Diagnostico_Listar '" + txtBuscar.Text.Trim() + "'," + Estado, conexion);
+
         da.Fill(dt);
 
-        gvTipoCliente.DataSource = dt;
-        gvTipoCliente.DataBind();
+        gvDiagnostico.DataSource = dt;
+        gvDiagnostico.DataBind();
     }
     protected void btnConsultar_Click(object sender, ImageClickEventArgs e)
     {
         Listar();
     }
-
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)
     {
         Response.Redirect("Principal.aspx");
@@ -57,21 +56,24 @@ public partial class ListarTipoCliente : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            int i_IdTipoCliente = int.Parse(gvTipoCliente.DataKeys[e.Row.RowIndex].Value.ToString());
+            int i_IdDiagnostico = int.Parse(gvDiagnostico.DataKeys[e.Row.RowIndex].Value.ToString());
             ImageButton btnEditar = e.Row.FindControl("ibEditar") as ImageButton;
 
             if (btnEditar != null)
             {
-                btnEditar.PostBackUrl = "CrearTipoCliente.aspx?i_IdTipoCliente=" + i_IdTipoCliente;
+                btnEditar.PostBackUrl = "CrearDiagnostico.aspx?i_IdDiagnostico=" + i_IdDiagnostico;
             }
 
 
         }
     }
+
+
     protected void btnNuevo_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("CrearTipoCliente.aspx");
+        Response.Redirect("CrearDiagnostico.aspx");
     }
+
     protected void chkEstado_CheckedChanged(object sender, EventArgs e)
     {
         Listar();

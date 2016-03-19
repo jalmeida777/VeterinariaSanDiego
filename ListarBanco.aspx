@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ListarTipoDocumentoCliente.aspx.cs" Inherits="ListarTipoDocumentoCliente" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ListarBanco.aspx.cs" Inherits="ListarBanco" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -10,7 +10,7 @@
                     <tr>
                         <td colspan="2">
                             <h1 class="label">
-                                Administración de Tipo de Documentos</h1>
+                                Administración de Bancos</h1>
                         </td>
                     </tr>
                     <tr>
@@ -47,8 +47,8 @@
                                 onclick="btnNuevo_Click" />
                         </td>
                         <td>
-                            <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
-                                onclick="btnSalir_Click" />
+                            <asp:ImageButton ID="btnSalir" runat="server" Height="22px" 
+                                ImageUrl="~/images/Salir.jpg" onclick="btnSalir_Click" />
                         </td>
                     </tr>
                 </table>
@@ -61,12 +61,11 @@
             </asp:UpdateProgress>
             <asp:Panel ID="Panel1" runat="server" Height="600px" ScrollBars="Vertical" 
                 Width="100%">
-                <asp:GridView ID="gvTipoDocumento" runat="server" AutoGenerateColumns="False" 
-                    CssClass="grid" DataKeyNames="i_IdTipoDocumentoCliente" 
+                <asp:GridView ID="gvBanco" runat="server" AutoGenerateColumns="False" 
+                    CssClass="grid" DataKeyNames="i_IdBanco" 
                     onrowdatabound="gvAlmacen_RowDataBound" Width="100%">
                     <Columns>
-                        <asp:BoundField DataField="i_IdTipoDocumentoCliente" HeaderText="Id" 
-                            Visible="False">
+                        <asp:BoundField DataField="i_IdBanco" HeaderText="Id" Visible="False">
                         <ItemStyle HorizontalAlign="Center" Width="50px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="v_Descripcion" HeaderText="Descripcion">

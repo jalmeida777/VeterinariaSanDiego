@@ -8,53 +8,33 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-public partial class CrearRaza : System.Web.UI.Page
+public partial class CrearTipoDocumentoCliente : System.Web.UI.Page
 {
     SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["conexion"].ConnectionString);
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Page.IsPostBack == false)
+         if (Page.IsPostBack == false)
         {
 
-            ListarEspecie();
-
-            if (Request.QueryString["i_IdRaza"] != null)
+            if (Request.QueryString["i_TipoDocCliente"] != null)
             {
-                int i_IdRaza = int.Parse(Request.QueryString["i_IdRaza"].ToString());
+                int i_TipoDocCliente = int.Parse(Request.QueryString["i_TipoDocCliente"].ToString());
                 DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("BDVETER_Raza_Seleccionar " + i_IdRaza.ToString(), conexion);
+                SqlDataAdapter da = new SqlDataAdapter("BDVETER_TipoDocumentoCliente_Seleccionar " + i_TipoDocCliente.ToString(), conexion);
                 da.Fill(dt);
-                lblCodigo.Text = i_IdRaza.ToString();
+                lblCodigo.Text = i_TipoDocCliente.ToString();
                 txtDescripcion.Text = dt.Rows[0]["v_Descripcion"].ToString();
                 chkEstado.Checked = bool.Parse(dt.Rows[0]["b_Estado"].ToString());
-
-                ddlEspecie.SelectedValue = dt.Rows[0]["i_IdEspecie"].ToString();
             }
             else
             {
             }
 
             txtDescripcion.Focus();
-        }
-
+            }
     }
 
-    void ListarEspecie()
-    {
-        DataTable dt = new DataTable();
-        SqlDataAdapter da = new SqlDataAdapter("BDVETER_Especie_Combo", conexion);
-        da.Fill(dt);
 
-        ddlEspecie.DataSource = dt;
-        ddlEspecie.DataTextField = "v_Descripcion";
-        ddlEspecie.DataValueField = "i_IdEspecie";
-        ddlEspecie.DataBind();
-        ddlEspecie.SelectedIndex = 0;
-    }
-    protected void btnSalir_Click(object sender, ImageClickEventArgs e)
-    {
-        Response.Redirect("ListarRaza.aspx");
-    }
     protected void btnGuardar_Click(object sender, ImageClickEventArgs e)
     {
         if (txtDescripcion.Text == "")
@@ -66,40 +46,36 @@ public partial class CrearRaza : System.Web.UI.Page
 
         try
         {
+
+
             if (lblCodigo.Text.Trim() != "")
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "BDVETER_Raza_Actualizar";
-                cmd.Parameters.AddWithValue("@i_IdRaza", lblCodigo.Text);
-                cmd.Parameters.AddWithValue("@i_IdEspecie", ddlEspecie.SelectedValue);
+                cmd.CommandText = "BDVETER_TipoDocumentoCliente_Actualizar";
+                cmd.Parameters.AddWithValue("@i_IdTipoDocCliente", lblCodigo.Text);
                 cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
                 conexion.Close();
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Raza actualizada.' });</script>", false);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Tipo de Documento de Cliente actualizado.' });</script>", false);
             }
             else
             {
-                string i_IdRaza = "";
+                string i_IdTipoDocCliente = "";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "BDVETER_Raza_Registrar";
-                cmd.Parameters.AddWithValue("@i_IdEspecie", ddlEspecie.SelectedValue);
+                cmd.CommandText = "BDVETER_TipoDocumentoCliente_Registrar";
                 cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
-                i_IdRaza = cmd.ExecuteScalar().ToString();
-                
+                i_IdTipoDocCliente = cmd.ExecuteScalar().ToString();
                 conexion.Close();
-                lblCodigo.Text = i_IdRaza;
-                cmd.Dispose();
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Raza registrada.' });</script>", false);
-                                             
-            
+                lblCodigo.Text = i_IdTipoDocCliente;
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Tipo de Documento de Cliente registrado.' });</script>", false);
             }
 
         }
@@ -107,6 +83,9 @@ public partial class CrearRaza : System.Web.UI.Page
         {
             ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: 'El código interno ya se encuentra en uso!' });</script>", false);
         }
-      
+    }
+    protected void btnSalir_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("ListarTipoDocumentoCliente.aspx");
     }
 }

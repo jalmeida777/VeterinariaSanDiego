@@ -27,8 +27,12 @@ public partial class ListarTipoDocumentoCliente : System.Web.UI.Page
 
     void Listar()
     {
+        string Estado = "";
+        if (chkEstado.Checked) { Estado = "1"; } else { Estado = "0"; }
+
         DataTable dt = new DataTable();
-        SqlDataAdapter da = new SqlDataAdapter("BDVETER_TipoDocumentoCliente_Listar '" + txtBuscar.Text.Trim() + "'", conexion);
+        SqlDataAdapter da = new SqlDataAdapter("BDVETER_TipoDocumentoCliente_Listar '" + txtBuscar.Text.Trim() + "'," + Estado, conexion);
+        
         da.Fill(dt);
 
         gvTipoDocumento.DataSource = dt;
@@ -50,6 +54,27 @@ public partial class ListarTipoDocumentoCliente : System.Web.UI.Page
         Listar();
     }
 
+    protected void gvAlmacen_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            int i_TipoDocCliente = int.Parse(gvTipoDocumento.DataKeys[e.Row.RowIndex].Value.ToString());
+            ImageButton btnEditar = e.Row.FindControl("ibEditar") as ImageButton;
+
+            if (btnEditar != null)
+            {
+                btnEditar.PostBackUrl = "CrearTipoDocumentoCliente.aspx?i_TipoDocCliente=" + i_TipoDocCliente;
+            }
 
 
+        }
+    }
+    protected void btnNuevo_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("CrearTipoDocumentoCliente.aspx");
+    }
+    protected void chkEstado_CheckedChanged(object sender, EventArgs e)
+    {
+        Listar();
+    }
 }

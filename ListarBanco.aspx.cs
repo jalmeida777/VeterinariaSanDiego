@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-public partial class ListarTipoCliente : System.Web.UI.Page
+public partial class ListarBanco : System.Web.UI.Page
 {
     SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["conexion"].ConnectionString);
     protected void Page_Load(object sender, EventArgs e)
@@ -18,7 +18,7 @@ public partial class ListarTipoCliente : System.Web.UI.Page
             Label lblTitulo = (Label)Master.FindControl("lblTitulo");
             if (lblTitulo != null)
             {
-                lblTitulo.Text = "Administración de Tipo de Cliente";
+                lblTitulo.Text = "Administración de Bancos";
             }
             Listar();
         }
@@ -31,21 +31,29 @@ public partial class ListarTipoCliente : System.Web.UI.Page
         if (chkEstado.Checked) { Estado = "1"; } else { Estado = "0"; }
 
         DataTable dt = new DataTable();
-        SqlDataAdapter da = new SqlDataAdapter("BDVETER_TipoCliente_Listar '" + txtBuscar.Text.Trim() + "'," + Estado, conexion);
-               
+        SqlDataAdapter da = new SqlDataAdapter("BDVETER_Banco_Listar '" + txtBuscar.Text.Trim() + "'," + Estado, conexion);
+
         da.Fill(dt);
 
-        gvTipoCliente.DataSource = dt;
-        gvTipoCliente.DataBind();
+        gvBanco.DataSource = dt;
+        gvBanco.DataBind();
     }
     protected void btnConsultar_Click(object sender, ImageClickEventArgs e)
     {
         Listar();
     }
-
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)
     {
         Response.Redirect("Principal.aspx");
+    }
+    protected void btnNuevo_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("CrearBanco.aspx");
+    }
+
+    protected void chkEstado_CheckedChanged(object sender, EventArgs e)
+    {
+        Listar();
     }
 
     protected void txtBuscar_TextChanged(object sender, EventArgs e)
@@ -57,23 +65,14 @@ public partial class ListarTipoCliente : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            int i_IdTipoCliente = int.Parse(gvTipoCliente.DataKeys[e.Row.RowIndex].Value.ToString());
+            int i_IdBanco = int.Parse(gvBanco.DataKeys[e.Row.RowIndex].Value.ToString());
             ImageButton btnEditar = e.Row.FindControl("ibEditar") as ImageButton;
 
             if (btnEditar != null)
             {
-                btnEditar.PostBackUrl = "CrearTipoCliente.aspx?i_IdTipoCliente=" + i_IdTipoCliente;
+                btnEditar.PostBackUrl = "CrearBanco.aspx?i_IdBanco=" + i_IdBanco;
             }
-
-
+            
         }
-    }
-    protected void btnNuevo_Click(object sender, ImageClickEventArgs e)
-    {
-        Response.Redirect("CrearTipoCliente.aspx");
-    }
-    protected void chkEstado_CheckedChanged(object sender, EventArgs e)
-    {
-        Listar();
     }
 }

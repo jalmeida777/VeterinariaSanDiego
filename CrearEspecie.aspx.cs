@@ -78,9 +78,9 @@ public partial class CrearEspecie : System.Web.UI.Page
             }
 
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: '" + ex.Message + "' });</script>", false);
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: 'El código interno ya se encuentra en uso!' });</script>", false);
         }
     }
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)
