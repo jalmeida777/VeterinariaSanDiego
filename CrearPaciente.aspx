@@ -1,5 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearCliente.aspx.cs" Inherits="CrearCliente" %>
-
+﻿<%@ Page Title="Crear Paciente" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearPaciente.aspx.cs" Inherits="CrearPaciente" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
@@ -7,14 +6,16 @@
 <script src="js/jquery.growl.js" type="text/javascript"></script>
 <link href="css/jquery.growl.css" rel="stylesheet" type="text/css" />
 
-    </asp:Content>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+
     <div class="divBusqueda">
         <table width="100%">
             <tr>
                 <td>
                     <h1 class="label">
-                        Cliente</h1>
+                        Paciente</h1>
                 </td>
             </tr>
         </table>
@@ -44,7 +45,7 @@
             </tr>
         </table>
     </div>
-    
+
      <table width="100%" runat="server" id="tblCliente"
         
         style="background-image: url('images/form_sheetbg.png'); background-repeat: repeat; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #ddd;" 
@@ -78,7 +79,7 @@
                 &nbsp;</td>
             <td colspan="2">
 
-                <asp:Label runat="server" Text="Nombre del cliente" ID="Label30"></asp:Label>
+                <asp:Label runat="server" Text="Nombre del paciente" ID="Label30"></asp:Label>
                 <asp:Label runat="server" Text="*" Font-Bold="True" Font-Size="10pt" 
                     ForeColor="#18AC85" ID="Label53"></asp:Label>
                 </td>
@@ -115,7 +116,7 @@
 
                     <cc1:TabPanel runat="server" HeaderText="Datos Generales" ID="TabPanel1">
                         <HeaderTemplate>
-                            Cliente
+                            Paciente
                         </HeaderTemplate>
                     <ContentTemplate>
 
@@ -128,7 +129,7 @@
                             </tr>
                             <tr id="filaCodigo" runat="server">
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;" 
-                                    runat="server">
+                                    runat="server" >
                                     <asp:Label ID="Label1" runat="server" Text="Código:"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px" runat="server">
@@ -136,158 +137,92 @@
                                 </td>
                             </tr>
                             <tr>
+                            <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
+                                <asp:Label ID="Label54" runat="server" Text="Cliente:"></asp:Label>
+                            </td>
+                            <td style="padding-left: 5px">
+                                <asp:Label ID="lblNombreCliente" runat="server"></asp:Label>
+                            </td>
+                            </tr>
+                            <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label52" runat="server" Text="Tipo de Cliente:"></asp:Label>
+                                    <asp:Label ID="Label55" runat="server" Text="Especie:"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
-                                    <asp:DropDownList ID="ddlTipoCliente" runat="server" CssClass="combo" 
-                                        Width="300px">
+                                    <asp:DropDownList ID="ddlEspecie" runat="server" CssClass="combo" Width="200px">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label31" runat="server" Text="Número de Documento:"></asp:Label>
-                                    <asp:Label ID="Label47" runat="server" Font-Bold="True" Font-Size="10pt" 
-                                        ForeColor="#18AC85" Text="*"></asp:Label>
+                                    <asp:Label ID="Label56" runat="server" Text="Raza:"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
-                                    <table cellpadding="0" cellspacing="0" width="100%">
-                                        <tr>
-                                            <td width="120">
-                                                <asp:TextBox ID="txtNumeroDocumento" runat="server" CssClass="inputNormal" 
-                                                    MaxLength="11" Width="100px"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="combo" 
-                                                    Width="180px">
-                                                </asp:DropDownList>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label32" runat="server" Text="Dirección:"></asp:Label>
-                                    <asp:Label ID="Label54" runat="server" Font-Bold="True" Font-Size="10pt" 
-                                        ForeColor="#18AC85" Text="*"></asp:Label>
-                                </td>
-                                <td style="padding-left: 5px">
-                                    <asp:TextBox ID="txtDireccion" runat="server" CssClass="inputNormal" 
-                                        MaxLength="1000" Width="300px"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label49" runat="server" Text="Provincia:"></asp:Label>
-                                </td>
-                                <td style="padding-left: 5px">
-                                    <asp:DropDownList ID="ddlProvincia" runat="server" AutoPostBack="True" 
-                                        CssClass="combo" onselectedindexchanged="ddlProvincia_SelectedIndexChanged" 
-                                        Width="300px">
+                                    <asp:DropDownList ID="ddlRaza" runat="server" CssClass="combo" Width="200px">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label50" runat="server" Text="Distrito:"></asp:Label>
+                                    <asp:Label ID="Label57" runat="server" Text="Sexo:"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
-                                    <asp:DropDownList ID="ddlDistrito" runat="server" CssClass="combo" 
-                                        Width="300px">
+                                    <asp:DropDownList ID="ddlSexo" runat="server" CssClass="combo" Width="200px">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label33" runat="server" Text="Teléfono:"></asp:Label>
+                                    <asp:Label ID="Label58" runat="server" Text="Pelaje:"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
-                                    <asp:TextBox ID="txtTelefono" runat="server" CssClass="inputNormal" 
-                                        MaxLength="20"></asp:TextBox>
+                                    <asp:TextBox ID="txtPelaje" runat="server" CssClass="inputNormal" Width="200px"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label34" runat="server" Text="Email:"></asp:Label>
+                                    <asp:Label ID="Label59" runat="server" Text="Microchip:"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
-                                    <asp:TextBox ID="txtEmail" runat="server" CssClass="inputNormal" MaxLength="50" 
+                                    <asp:TextBox ID="txtMicrochip" runat="server" CssClass="inputNormal" 
                                         Width="200px"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label43" runat="server" Text="Celular:"></asp:Label>
+                                    <asp:Label ID="Label60" runat="server" Text="Fecha de Nacimiento:"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
-                                    <table cellpadding="0" cellspacing="0" width="100%">
-                                        <tr>
-                                            <td width="120">
-                                                <asp:TextBox ID="txtCelular" runat="server" CssClass="inputNormal" 
-                                                    MaxLength="50" Width="100px"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:DropDownList ID="ddlCiaCelular" runat="server" CssClass="combo" 
-                                                    Width="180px">
-                                                </asp:DropDownList>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <asp:TextBox ID="txtFechaInicial" runat="server" CssClass="inputsFecha" 
+                                        MaxLength="10"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy" 
+                                        TargetControlID="txtFechaInicial">
+                                    </cc1:CalendarExtender>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label37" runat="server" Text="Comentario:"></asp:Label>
+                                    <asp:Label ID="Label61" runat="server" Text="Edad:"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
-                                    <asp:TextBox ID="txtComentario" runat="server" TextMode="MultiLine" 
-                                        Width="210px"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr id="tblFechaRegistro" runat="server">
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;" 
-                                    runat="server">
-                                    <asp:Label ID="Label42" runat="server" Text="Fecha Registro:"></asp:Label>
-                                </td>
-                                <td style="padding-left: 5px" runat="server">
-                                    <asp:Label ID="lblFechaRegistro" runat="server"></asp:Label>
-                                </td>
-                            </tr>
-                            <tr id="tblFechaVisita" runat="server">
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;" 
-                                    runat="server">
-                                    <asp:Label ID="Label46" runat="server" Text="Ultima Visita:"></asp:Label>
-                                </td>
-                                <td style="padding-left: 5px" runat="server">
-                                    <asp:Label ID="lblFechaUltimaVisita" runat="server"></asp:Label>
+                                    <asp:Label ID="lblEdad" runat="server"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label51" runat="server" Text="Puntos Acumulados:"></asp:Label>
+                                    <asp:Label ID="Label62" runat="server" Text="Ultima Visita:"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
-                                    <table cellpadding="0" cellspacing="0" width="100%">
-                                        <tr>
-                                            <td width="50">
-                                                <asp:Label ID="lblPuntos" runat="server"></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:ImageButton ID="btnVerDatallePuntos" runat="server" 
-                                                    ImageUrl="~/images/search.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <asp:Label ID="lblUltimaVisita" runat="server"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label38" runat="server" Text="Estado:"></asp:Label>
+                                    <asp:Label ID="Label63" runat="server" Text="Estado:"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
-                                    <asp:CheckBox ID="chkEstado" runat="server" Checked="True" Text="Habilitado" />
+                                    <asp:DropDownList ID="ddlEstado" runat="server" CssClass="combo" Width="200px">
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
                         </table>
@@ -296,6 +231,9 @@
                     </cc1:TabPanel>
 
                     <cc1:TabPanel ID="TabPanel2" runat="server" HeaderText="Pacientes">
+                        <HeaderTemplate>
+                            Vacunas
+                        </HeaderTemplate>
                         <ContentTemplate>
                             <table width="100%">
                                 <tr>
@@ -304,12 +242,21 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:GridView ID="gvPacientes" runat="server" CssClass="grid">
-                                        </asp:GridView>
-                                    </td>
+                                        &nbsp;</td>
                                 </tr>
                             </table>
                         </ContentTemplate>
+                    </cc1:TabPanel>
+
+                    <cc1:TabPanel ID="TabPanel3" runat="server" HeaderText="Antipulgas">
+                    </cc1:TabPanel>
+                    <cc1:TabPanel ID="TabPanel4" runat="server" HeaderText="Antiparasitarios">
+                    </cc1:TabPanel>
+
+                    <cc1:TabPanel ID="TabPanel5" runat="server" HeaderText="Control Médico">
+                    </cc1:TabPanel>
+
+                    <cc1:TabPanel ID="TabPanel6" runat="server" HeaderText="Baño y Peluquería">
                     </cc1:TabPanel>
 
             </cc1:TabContainer>
@@ -343,6 +290,6 @@
                 &nbsp;</td>
         </tr>
       </table>
-     
+
 </asp:Content>
 

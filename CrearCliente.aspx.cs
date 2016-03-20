@@ -22,9 +22,12 @@ public partial class CrearCliente : System.Web.UI.Page
             ListarCiaCelular();
             ListarProvincia();
             ddlProvincia_SelectedIndexChanged(null, null);
-            
+
             if (Request.QueryString["i_IdCliente"] != null)
             {
+                btnModificar.Enabled = true;
+                btnGuardar.Enabled = false;
+                bloquearTodo();
                 filaCodigo.Visible = true;
                 tblFechaRegistro.Visible = true;
                 tblFechaVisita.Visible = true;
@@ -49,7 +52,7 @@ public partial class CrearCliente : System.Web.UI.Page
                 txtEmail.Text = dt.Rows[0]["v_Email"].ToString();
                 txtCelular.Text = dt.Rows[0]["v_Celular"].ToString();
                 ddlCiaCelular.SelectedValue = dt.Rows[0]["i_IdCiaCelular"].ToString();
-                
+
                 txtComentario.Text = dt.Rows[0]["t_Comentario"].ToString();
 
                 lblFechaRegistro.Text = dt.Rows[0]["d_FechaRegistro"].ToString();
@@ -64,13 +67,17 @@ public partial class CrearCliente : System.Web.UI.Page
 
                 txtNombre.Focus();
             }
-
-            //Nuevo
-            lblPuntos.Text = "0";
-            filaCodigo.Visible = false;
-            tblFechaRegistro.Visible = false;
-            tblFechaVisita.Visible = false;
-            txtNombre.Focus();
+            else
+            {
+                //Nuevo
+                lblPuntos.Text = "0";
+                filaCodigo.Visible = false;
+                tblFechaRegistro.Visible = false;
+                tblFechaVisita.Visible = false;
+                btnModificar.Enabled = false;
+                btnGuardar.Enabled = true;
+                txtNombre.Focus();
+            }
         }
     }
 
@@ -159,7 +166,16 @@ public partial class CrearCliente : System.Web.UI.Page
             txtNumeroDocumento.Focus();
             return;
         }
-
+        if (txtDireccion.Text.Trim() == "") 
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar la dirección del cliente.' });</script>", false);
+            txtDireccion.Focus();
+            return;
+        }
+        
+        DataTable dtUsuario = new DataTable();
+        dtUsuario = (DataTable)Session["dtUsuario"];
+        string n_IdUsuario = dtUsuario.Rows[0]["n_IdUsuario"].ToString();
 
         try
         {
@@ -213,6 +229,7 @@ public partial class CrearCliente : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@v_Celular", txtCelular.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_Email", txtEmail.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@t_Comentario", txtComentario.Text.Trim().ToUpper());
+                cmd.Parameters.AddWithValue("@n_IdUsuarioRegistra", n_IdUsuario);
                 
                                 
                 conexion.Open();
@@ -253,5 +270,30 @@ public partial class CrearCliente : System.Web.UI.Page
         txtComentario.Enabled = false;
         chkEstado.Enabled = false;
         btnGuardar.Enabled = false;
+        btnModificar.Enabled = true;
+    }
+
+    void DesbloquearTodo() 
+    {
+        ddlTipoCliente.Enabled = true;
+        txtNombre.Enabled = true;
+        txtNumeroDocumento.Enabled = true;
+        ddlTipoDocumento.Enabled = true;
+        txtDireccion.Enabled = true;
+        ddlProvincia.Enabled = true;
+        ddlDistrito.Enabled = true;
+        txtTelefono.Enabled = true;
+        txtEmail.Enabled = true;
+        txtCelular.Enabled = true;
+        ddlCiaCelular.Enabled = true;
+        txtComentario.Enabled = true;
+        chkEstado.Enabled = true;
+        btnGuardar.Enabled = true;
+        btnModificar.Enabled = false;
+    }
+
+    protected void btnModificar_Click(object sender, EventArgs e)
+    {
+        DesbloquearTodo();
     }
 }
