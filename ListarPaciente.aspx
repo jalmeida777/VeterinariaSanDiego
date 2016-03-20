@@ -22,13 +22,14 @@
                     <td width="60">
                         <asp:Label ID="Label2" runat="server" Text="Buscar:"></asp:Label>
                     </td>
-                    <td width="155">
-                        <asp:DropDownList ID="ddlBusqueda" runat="server" Width="150px" 
+                    <td width="195">
+                        <asp:DropDownList ID="ddlBusqueda" runat="server" Width="190px" 
                             AutoPostBack="True" 
                             onselectedindexchanged="ddlBusqueda_SelectedIndexChanged" CssClass="combo">
-                            <asp:ListItem Selected="True">Fecha de Nacimiento</asp:ListItem>
+                            <asp:ListItem Selected="True">Nombre</asp:ListItem>
+                            <asp:ListItem>Fecha de Nacimiento</asp:ListItem>
                             <asp:ListItem>Fecha de Ultima Visita</asp:ListItem>
-                            <asp:ListItem>Fecha de NacimientoEspecie</asp:ListItem>
+                            <asp:ListItem>Especie</asp:ListItem>
                             <asp:ListItem>Raza</asp:ListItem>
                             <asp:ListItem>Sexo</asp:ListItem>
                             <asp:ListItem>Estado</asp:ListItem>
@@ -57,19 +58,52 @@
                                 </td>
                             </tr>
                         </table>
+
+                        <table cellpadding="0" cellspacing="0" width="100%" id="tblEspecie" runat="server" visible="false">
+                            <tr>
+                            <td width="205">
+                                <asp:DropDownList ID="ddlEspecie" runat="server" AutoPostBack="True" 
+                                    CssClass="combo" onselectedindexchanged="ddlEspecie_SelectedIndexChanged" 
+                                    Width="200px">
+                                </asp:DropDownList>
+                            </td>
+                            <td>
+
+                        <table cellpadding="0" cellspacing="0" width="100%" id="tblRaza" runat="server" visible="false">
+                            <tr>
+                            <td>
+                                <asp:DropDownList ID="ddlRaza" runat="server" CssClass="combo" Width="200px">
+                                </asp:DropDownList>
+                            </td>
+                            </tr>
+                        </table>
+
+                            </td>
+                            </tr>
+                        </table>
+
+                        <table cellpadding="0" cellspacing="0" width="100%" id="tblSexo" runat="server" visible="false">
+                            <tr>
+                            <td>
+                                <asp:DropDownList ID="ddlSexo" runat="server" CssClass="combo" Width="200px">
+                                </asp:DropDownList>
+                            </td>
+                            </tr>
+                        </table>
+
+                        <table cellpadding="0" cellspacing="0" width="100%" id="tblEstado" runat="server" visible="false">
+                            <tr>
+                            <td>
+                                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="combo" Width="200px">
+                                </asp:DropDownList>
+                            </td>
+                            </tr>
+                        </table>
+
                     </td>
                 </tr>
-                <tr>
-                    <td width="60">
-                        &nbsp;</td>
-                    <td width="155">
-                        &nbsp;</td>
-                    <td>
-                        <asp:CheckBox ID="chkEstado" runat="server" Checked="True" 
-                            Text="Ver Habilitados" />
-                    </td>
-                </tr>
-            </table>
+                </table>
+                
         </div>
         <div class="toolbar">
             <table width="100%">
@@ -94,8 +128,6 @@
             </table>
         </div>
 
-        <asp:Panel ID="Panel1" runat="server" Height="600px" ScrollBars="Vertical" 
-                Width="100%">
             <dx:ASPxGridViewExporter ID="ASPxGridViewExporter1" runat="server" 
                 FileName="Clientes" GridViewID="gv" Landscape="True" PaperKind="A4">
             </dx:ASPxGridViewExporter>
@@ -103,46 +135,59 @@
                 CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" 
                 CssPostfix="PlasticBlue" EnableCallbackCompression="False" 
                 EnableCallBacks="False" EnableRowsCache="False" EnableTheming="False" 
-                EnableViewState="False" KeyFieldName="i_IdCliente" 
+                EnableViewState="False" KeyFieldName="i_IdPaciente" 
                 Width="100%" 
-                onbeforecolumnsortinggrouping="gv_BeforeColumnSortingGrouping" 
-                onhtmlrowprepared="gv_HtmlRowPrepared">
+            onbeforecolumnsortinggrouping="gv_BeforeColumnSortingGrouping" 
+            onhtmlrowprepared="gv_HtmlRowPrepared">
                 <TotalSummary>
                     <dx1:ASPxSummaryItem DisplayFormat="{0:C}" FieldName="f_Total" 
                         ShowInColumn="Total" ShowInGroupFooterColumn="Total" SummaryType="Sum" />
                 </TotalSummary>
                 <Columns>
                     <dx1:GridViewDataTextColumn Caption="Cliente" FieldName="v_Nombres" 
-                        VisibleIndex="0" Width="200px">
-                        <DataItemTemplate>
-                            <asp:LinkButton ID="lbCliente" runat="server" Text='<%# Bind("v_Nombres") %>'></asp:LinkButton>
-                        </DataItemTemplate>
-                    </dx1:GridViewDataTextColumn>
-                    <dx1:GridViewDataTextColumn Caption="Celular" FieldName="v_Celular" 
                         VisibleIndex="1" Width="100px">
                     </dx1:GridViewDataTextColumn>
-                    <dx1:GridViewDataTextColumn Caption="Teléfono" FieldName="v_Telefono" 
-                        VisibleIndex="2" Width="100px">
+                    <dx1:GridViewDataTextColumn Caption="Paciente" FieldName="v_NombrePaciente" 
+                        VisibleIndex="0" Width="100px">
+                        <DataItemTemplate>
+                            <asp:LinkButton ID="lbPaciente" runat="server" 
+                                Text='<%# Bind("v_NombrePaciente") %>'></asp:LinkButton>
+                        </DataItemTemplate>
                     </dx1:GridViewDataTextColumn>
-                    <dx1:GridViewDataTextColumn Caption="Email" FieldName="v_Email" 
-                        VisibleIndex="3" Width="100px">
+                    <dx1:GridViewDataTextColumn Caption="Especie" FieldName="Especie" 
+                        VisibleIndex="2" Width="80px">
                     </dx1:GridViewDataTextColumn>
-                    <dx1:GridViewDataTextColumn Caption="Distrito" FieldName="Distrito" 
-                        VisibleIndex="4" Width="100px">
+                    <dx1:GridViewDataTextColumn Caption="Raza" FieldName="Raza" VisibleIndex="3" 
+                        Width="80px">
                     </dx1:GridViewDataTextColumn>
-                    <dx1:GridViewDataTextColumn Caption="Total Facturado" 
-                        FieldName="TotalFacturado" VisibleIndex="5" Width="100px">
+                    <dx1:GridViewDataTextColumn Caption="Sexo" FieldName="Sexo" VisibleIndex="4" 
+                        Width="80px">
                     </dx1:GridViewDataTextColumn>
-                    <dx1:GridViewDataTextColumn Caption="Total Pagado" FieldName="TotalPagado" 
-                        VisibleIndex="6" Width="100px">
+                    <dx1:GridViewDataTextColumn Caption="Fecha de Nacimiento" 
+                        FieldName="d_FechaNacimiento" VisibleIndex="5" Width="100px">
                     </dx1:GridViewDataTextColumn>
-                    <dx1:GridViewDataTextColumn Caption="Saldo Total" FieldName="SaldoTotal" 
-                        VisibleIndex="7" Width="100px">
+                    <dx1:GridViewDataTextColumn Caption="Fecha Ultima Visita" 
+                        FieldName="d_FechaUltimaVisita" VisibleIndex="6" Width="100px">
+                    </dx1:GridViewDataTextColumn>
+                    <dx1:GridViewDataTextColumn Caption="Fecha Ultimo Baño" 
+                        FieldName="d_FechaUltimoBaño" VisibleIndex="7" Width="100px">
+                    </dx1:GridViewDataTextColumn>
+                    <dx1:GridViewDataTextColumn Caption="Fecha Ultima Vacuna" 
+                        FieldName="d_FechaUltimaVacuna" VisibleIndex="8" Width="100px">
+                    </dx1:GridViewDataTextColumn>
+                    <dx1:GridViewDataTextColumn Caption="Fecha Ultima ATP" 
+                        FieldName="d_FechaUltimaATP" VisibleIndex="9" Width="100px">
+                    </dx1:GridViewDataTextColumn>
+                    <dx1:GridViewDataTextColumn Caption="Fecha Ultima APG" 
+                        FieldName="d_FechaUltimaAPG" VisibleIndex="10" Width="100px">
+                    </dx1:GridViewDataTextColumn>
+                    <dx1:GridViewDataTextColumn Caption="Microchip" FieldName="v_Microchip" 
+                        VisibleIndex="11" Width="80px">
+                    </dx1:GridViewDataTextColumn>
+                    <dx1:GridViewDataTextColumn Caption="Estado" FieldName="v_Estado" 
+                        VisibleIndex="12" Width="80px">
                     </dx1:GridViewDataTextColumn>
                 </Columns>
-                <SettingsBehavior AutoFilterRowInputDelay="0" />
-                <SettingsBehavior AutoFilterRowInputDelay="0" />
-                <SettingsBehavior AutoFilterRowInputDelay="0" />
                 <SettingsBehavior AutoFilterRowInputDelay="0" />
                 <SettingsPager PageSize="5" ShowDefaultImages="False">
                     <AllButton Text="All">
@@ -154,16 +199,7 @@
                 </SettingsPager>
                 <Settings ShowFooter="True" />
                 <SettingsCookies StoreFiltering="False" />
-                <SettingsDetail ShowDetailRow="True" />
-                <Settings ShowFooter="True" />
-                <SettingsCookies StoreFiltering="False" />
-                <SettingsDetail ShowDetailRow="True" />
-                <Settings ShowFooter="True" />
-                <SettingsCookies StoreFiltering="False" />
-                <SettingsDetail ShowDetailRow="True" />
-                <Settings ShowFooter="True" />
-                <SettingsCookies StoreFiltering="False" />
-                <settingsdetail showdetailbuttons="False" />
+                <SettingsDetail />
                 <Images SpriteCssFilePath="~/App_Themes/PlasticBlue/{0}/sprite.css">
                     <LoadingPanelOnStatusBar Url="~/App_Themes/PlasticBlue/GridView/gvLoadingOnStatusBar.gif">
                     </LoadingPanelOnStatusBar>
@@ -186,7 +222,6 @@
                     </ProgressBar>
                 </StylesEditors>
             </dx1:ASPxGridView>
-        </asp:Panel>
-
+        
 </asp:Content>
 

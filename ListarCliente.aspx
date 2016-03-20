@@ -103,7 +103,7 @@
                 CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" 
                 CssPostfix="PlasticBlue" EnableCallbackCompression="False" 
                 EnableCallBacks="False" EnableRowsCache="False" EnableTheming="False" 
-                EnableViewState="False" KeyFieldName="i_IdCliente" 
+                EnableViewState="False" KeyFieldName="i_IdCliente" SettingsDetail-ShowDetailButtons="true"
                 Width="100%" 
                 onbeforecolumnsortinggrouping="gv_BeforeColumnSortingGrouping" 
                 onhtmlrowprepared="gv_HtmlRowPrepared">

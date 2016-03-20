@@ -12,4 +12,16 @@ public partial class CrearPaciente : System.Web.UI.Page
 
     }
 
+    protected void btnModificar_Click(object sender, EventArgs e)
+    {
+
+    }
+    protected void btnGuardar_Click(object sender, ImageClickEventArgs e)
+    {
+
+    }
+    protected void btnSalir_Click(object sender, ImageClickEventArgs e)
+    {
+
+    }
 }
