@@ -30,6 +30,7 @@ public partial class ListarCliente : System.Web.UI.Page
             }
             Listar();
         }
+        Listar();
         txtBuscar.Focus();
     }
 
@@ -129,4 +130,27 @@ public partial class ListarCliente : System.Web.UI.Page
 
         }
     }
+
+    protected void gvPaciente_BeforePerformDataSelect(object sender, EventArgs e)
+    {
+        Session["i_IdCliente"] = (sender as ASPxGridView).GetMasterRowKeyValue();
+    }
+
+
+    protected void gvPaciente_HtmlRowPrepared(object sender, ASPxGridViewTableRowEventArgs e)
+    {
+        if (e.RowType == DevExpress.Web.ASPxGridView.GridViewRowType.Data)
+        {
+            ASPxGridView gvPaciente = (ASPxGridView)sender;
+            string i_IdPaciente = e.GetValue("i_IdPaciente").ToString();
+
+            LinkButton lbPaciente = new LinkButton();
+            lbPaciente = (LinkButton)gvPaciente.FindRowCellTemplateControl(e.VisibleIndex, (GridViewDataColumn)(gvPaciente.Columns[0]), "lbPaciente");
+
+            lbPaciente.PostBackUrl = "CrearPaciente.aspx?i_IdPaciente=" + i_IdPaciente;
+
+        }
+    }
+
+
 }

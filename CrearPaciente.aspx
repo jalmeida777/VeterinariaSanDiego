@@ -68,7 +68,8 @@
             <td height="10" width="20">
                 &nbsp;</td>
             <td>
-                &nbsp;</td>
+                <asp:HiddenField ID="hfCliente" runat="server" />
+            </td>
             <td>
                 &nbsp;</td>
             <td width="20">
@@ -133,7 +134,7 @@
                                     <asp:Label ID="Label1" runat="server" Text="Código:"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px" runat="server">
-                                    <asp:Label ID="lblCodigo" runat="server"></asp:Label>
+                                    <asp:Label ID="lblCodigoPaciente" runat="server"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
@@ -141,21 +142,37 @@
                                 <asp:Label ID="Label54" runat="server" Text="Cliente:"></asp:Label>
                             </td>
                             <td style="padding-left: 5px">
-                                <asp:Label ID="lblNombreCliente" runat="server"></asp:Label>
+                                <asp:Label ID="lblNombreCliente" runat="server" Font-Bold="True"></asp:Label>
                             </td>
                             </tr>
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label55" runat="server" Text="Especie:"></asp:Label>
+                                    <asp:Label ID="Label64" runat="server" Text="N° Historia:"></asp:Label>
+                                    <asp:Label ID="Label47" runat="server" Font-Bold="True" Font-Size="10pt" 
+                                        ForeColor="#18AC85" Text="*"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
-                                    <asp:DropDownList ID="ddlEspecie" runat="server" CssClass="combo" Width="200px">
+                                    <asp:TextBox ID="txtHistoria" runat="server" CssClass="inputNormal" 
+                                        Width="200px"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
+                                    <asp:Label ID="Label55" runat="server" Text="Especie:"></asp:Label>
+                                    <asp:Label ID="Label65" runat="server" Font-Bold="True" Font-Size="10pt" 
+                                        ForeColor="#18AC85" Text="*"></asp:Label>
+                                </td>
+                                <td style="padding-left: 5px">
+                                    <asp:DropDownList ID="ddlEspecie" runat="server" CssClass="combo" Width="200px" 
+                                        AutoPostBack="True" onselectedindexchanged="ddlEspecie_SelectedIndexChanged">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
                                     <asp:Label ID="Label56" runat="server" Text="Raza:"></asp:Label>
+                                    <asp:Label ID="Label66" runat="server" Font-Bold="True" Font-Size="10pt" 
+                                        ForeColor="#18AC85" Text="*"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
                                     <asp:DropDownList ID="ddlRaza" runat="server" CssClass="combo" Width="200px">
@@ -165,6 +182,8 @@
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
                                     <asp:Label ID="Label57" runat="server" Text="Sexo:"></asp:Label>
+                                    <asp:Label ID="Label67" runat="server" Font-Bold="True" Font-Size="10pt" 
+                                        ForeColor="#18AC85" Text="*"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
                                     <asp:DropDownList ID="ddlSexo" runat="server" CssClass="combo" Width="200px">
@@ -191,12 +210,14 @@
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
                                     <asp:Label ID="Label60" runat="server" Text="Fecha de Nacimiento:"></asp:Label>
+                                    <asp:Label ID="Label68" runat="server" Font-Bold="True" Font-Size="10pt" 
+                                        ForeColor="#18AC85" Text="*"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
-                                    <asp:TextBox ID="txtFechaInicial" runat="server" CssClass="inputsFecha" 
+                                    <asp:TextBox ID="txtFechaNacimiento" runat="server" CssClass="inputsFecha" 
                                         MaxLength="10"></asp:TextBox>
                                     <cc1:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy" 
-                                        TargetControlID="txtFechaInicial">
+                                        TargetControlID="txtFechaNacimiento" Enabled="True">
                                     </cc1:CalendarExtender>
                                 </td>
                             </tr>
@@ -219,6 +240,8 @@
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
                                     <asp:Label ID="Label63" runat="server" Text="Estado:"></asp:Label>
+                                    <asp:Label ID="Label69" runat="server" Font-Bold="True" Font-Size="10pt" 
+                                        ForeColor="#18AC85" Text="*"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
                                     <asp:DropDownList ID="ddlEstado" runat="server" CssClass="combo" Width="200px">

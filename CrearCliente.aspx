@@ -2,6 +2,9 @@
 
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 
+<%@ Register assembly="DevExpress.Web.ASPxGridView.v11.2, Version=11.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxGridView" tagprefix="dx1" %>
+<%@ Register assembly="DevExpress.Web.ASPxEditors.v11.2, Version=11.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxEditors" tagprefix="dx" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 
 <script src="js/jquery.growl.js" type="text/javascript"></script>
@@ -304,8 +307,66 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:GridView ID="gvPacientes" runat="server" CssClass="grid">
-                                        </asp:GridView>
+                                        <asp:ImageButton ID="btnNuevoPaciente" runat="server" 
+                                            ImageUrl="~/images/Nuevo.jpg" onclick="btnNuevoPaciente_Click" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <dx1:ASPxGridView ID="gvPaciente" runat="server" AutoGenerateColumns="False" 
+                                            CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" CssPostfix="PlasticBlue" 
+                                            DataSourceID="SqlDataSource1" EnableCallbackCompression="False" 
+                                            EnableCallBacks="False" EnableRowsCache="False" EnableTheming="False" 
+                                            EnableViewState="False" KeyFieldName="i_IdPaciente" 
+                                            onhtmlrowprepared="gvPaciente_HtmlRowPrepared" Width="100%"><totalsummary><dx1:ASPxSummaryItem 
+                                            DisplayFormat="{0:C}" FieldName="f_Total" ShowInColumn="Total" 
+                                            ShowInGroupFooterColumn="Total" SummaryType="Sum" /></totalsummary><Columns><dx1:GridViewDataTextColumn 
+                                                Caption="Paciente" FieldName="v_NombrePaciente" ShowInCustomizationForm="True" 
+                                                VisibleIndex="0" Width="100px"><dataitemtemplate><asp:LinkButton 
+                                                ID="lbPaciente" runat="server" Text='<%# Bind("v_NombrePaciente") %>'></asp:LinkButton></dataitemtemplate></dx1:GridViewDataTextColumn><dx1:GridViewDataTextColumn 
+                                                Caption="Especie" FieldName="Especie" ShowInCustomizationForm="True" 
+                                                VisibleIndex="2" Width="80px"></dx1:GridViewDataTextColumn><dx1:GridViewDataTextColumn 
+                                                Caption="Raza" FieldName="Raza" ShowInCustomizationForm="True" VisibleIndex="3" 
+                                                Width="80px"></dx1:GridViewDataTextColumn><dx1:GridViewDataTextColumn 
+                                                Caption="Sexo" FieldName="Sexo" ShowInCustomizationForm="True" VisibleIndex="4" 
+                                                Width="80px"></dx1:GridViewDataTextColumn><dx1:GridViewDataTextColumn 
+                                                Caption="Fecha de Nacimiento" FieldName="d_FechaNacimiento" 
+                                                ShowInCustomizationForm="True" VisibleIndex="5" Width="100px"></dx1:GridViewDataTextColumn><dx1:GridViewDataTextColumn 
+                                                Caption="Fecha Ultima Visita" FieldName="d_FechaUltimaVisita" 
+                                                ShowInCustomizationForm="True" VisibleIndex="6" Width="100px"></dx1:GridViewDataTextColumn><dx1:GridViewDataTextColumn 
+                                                Caption="Fecha Ultimo Baño" FieldName="d_FechaUltimoBaño" 
+                                                ShowInCustomizationForm="True" VisibleIndex="7" Width="100px"></dx1:GridViewDataTextColumn><dx1:GridViewDataTextColumn 
+                                                Caption="Fecha Ultima Vacuna" FieldName="d_FechaUltimaVacuna" 
+                                                ShowInCustomizationForm="True" VisibleIndex="8" Width="100px"></dx1:GridViewDataTextColumn><dx1:GridViewDataTextColumn 
+                                                Caption="Fecha Ultima ATP" FieldName="d_FechaUltimaATP" 
+                                                ShowInCustomizationForm="True" VisibleIndex="9" Width="100px"></dx1:GridViewDataTextColumn><dx1:GridViewDataTextColumn 
+                                                Caption="Fecha Ultima APG" FieldName="d_FechaUltimaAPG" 
+                                                ShowInCustomizationForm="True" VisibleIndex="10" Width="100px"></dx1:GridViewDataTextColumn><dx1:GridViewDataTextColumn 
+                                                Caption="Microchip" FieldName="v_Microchip" ShowInCustomizationForm="True" 
+                                                VisibleIndex="11" Width="80px"></dx1:GridViewDataTextColumn><dx1:GridViewDataTextColumn 
+                                                Caption="Estado" FieldName="v_Estado" ShowInCustomizationForm="True" 
+                                                VisibleIndex="12" Width="80px"></dx1:GridViewDataTextColumn></Columns><settingsbehavior 
+                                            allowdragdrop="False" allowgroup="False" autofilterrowinputdelay="0" /><settingspager 
+                                            mode="ShowAllRecords" pagesize="5" showdefaultimages="False"><allbutton 
+                                            text="All"></allbutton><nextpagebutton text="Next &gt;"></nextpagebutton><prevpagebutton 
+                                            text="&lt; Prev"></prevpagebutton></settingspager><settings 
+                                            showgroupbuttons="False" showheaderfilterblankitems="False" /><settingscookies 
+                                            storefiltering="False" /><settingsdetail showdetailbuttons="False" /><images 
+                                            spritecssfilepath="~/App_Themes/PlasticBlue/{0}/sprite.css"><loadingpanelonstatusbar 
+                                            url="~/App_Themes/PlasticBlue/GridView/gvLoadingOnStatusBar.gif"></loadingpanelonstatusbar><loadingpanel 
+                                            url="~/App_Themes/PlasticBlue/GridView/Loading.gif"></loadingpanel></images><imagesfiltercontrol><loadingpanel 
+                                            url="~/App_Themes/PlasticBlue/Editors/Loading.gif"></loadingpanel></imagesfiltercontrol><styles 
+                                            cssfilepath="~/App_Themes/PlasticBlue/{0}/styles.css" csspostfix="PlasticBlue"><header 
+                                            imagespacing="10px" sortingimagespacing="10px"></header></styles><styleseditors><calendarheader 
+                                            spacing="11px"></calendarheader><progressbar height="25px"></progressbar></styleseditors></dx1:ASPxGridView>
+                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                                            ConnectionString="<%$ ConnectionStrings:PlayConnectionString %>" 
+                                            SelectCommand="BDVETER_Paciente_Listar" SelectCommandType="StoredProcedure">
+                                            <SelectParameters>
+                                                <asp:QueryStringParameter Name="i_IdCliente" QueryStringField="i_IdCliente" 
+                                                    Type="Int32" />
+                                            </SelectParameters>
+                                        </asp:SqlDataSource>
                                     </td>
                                 </tr>
                             </table>

@@ -8,11 +8,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.IO;
+using DevExpress.Web.ASPxGridView;
 
 
 public partial class CrearCliente : System.Web.UI.Page
 {
     SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["conexion"].ConnectionString);
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Page.IsPostBack == false)
@@ -76,11 +78,11 @@ public partial class CrearCliente : System.Web.UI.Page
                 tblFechaVisita.Visible = false;
                 btnModificar.Enabled = false;
                 btnGuardar.Enabled = true;
+                TabContainer1.Tabs[1].Enabled = false;
                 txtNombre.Focus();
             }
         }
     }
-
 
     void ListarTipoCliente()
     {
@@ -239,6 +241,7 @@ public partial class CrearCliente : System.Web.UI.Page
                 cmd.Dispose();
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Cliente registrado satisfactoriamente' });</script>", false);
                 bloquearTodo();
+                TabContainer1.Tabs[1].Enabled = true;
             }
 
            
@@ -295,5 +298,25 @@ public partial class CrearCliente : System.Web.UI.Page
     protected void btnModificar_Click(object sender, EventArgs e)
     {
         DesbloquearTodo();
+    }
+
+    protected void gvPaciente_HtmlRowPrepared(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs e)
+    {
+        if (e.RowType == DevExpress.Web.ASPxGridView.GridViewRowType.Data)
+        {
+            ASPxGridView gvPaciente = (ASPxGridView)sender;
+            string i_IdPaciente = e.GetValue("i_IdPaciente").ToString();
+
+            LinkButton lbPaciente = new LinkButton();
+            lbPaciente = (LinkButton)gvPaciente.FindRowCellTemplateControl(e.VisibleIndex, (GridViewDataColumn)(gvPaciente.Columns[0]), "lbPaciente");
+
+            lbPaciente.PostBackUrl = "CrearPaciente.aspx?i_IdPaciente=" + i_IdPaciente;
+
+        }
+    }
+
+    protected void btnNuevoPaciente_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/CrearPaciente.aspx?i_IdCliente=" + lblCodigo.Text);
     }
 }

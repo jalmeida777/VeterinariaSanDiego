@@ -113,10 +113,6 @@
                     ImageUrl="~/images/Buscar.jpg" onclick="btnConsultar_Click" />
                     </td>
                     <td width="65">
-                        <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="~/images/Nuevo.jpg" 
-                        onclick="btnNuevo_Click" />
-                    </td>
-                    <td width="65">
                         <asp:ImageButton ID="btnExportar" runat="server" 
                             ImageUrl="~/images/Exportar.jpg" onclick="btnExportar_Click" />
                     </td>
@@ -197,7 +193,6 @@
                     <PrevPageButton Text="&lt; Prev">
                     </PrevPageButton>
                 </SettingsPager>
-                <Settings ShowFooter="True" />
                 <SettingsCookies StoreFiltering="False" />
                 <SettingsDetail />
                 <Images SpriteCssFilePath="~/App_Themes/PlasticBlue/{0}/sprite.css">

@@ -146,7 +146,7 @@ public partial class ListarPaciente : System.Web.UI.Page
         consulta = consulta + "from Paciente pac ";
         consulta = consulta + "inner join Cliente cli on pac.i_IdCliente = cli.i_IdCliente ";
         consulta = consulta + "inner join Especie esp on esp.i_IdEspecie = pac.i_IdEspecie ";
-        consulta = consulta + "inner join Raza raz on raz.i_IdRaza = pac.i_IdPaciente ";
+        consulta = consulta + "inner join Raza raz on raz.i_IdRaza = pac.i_IdRaza ";
         consulta = consulta + "inner join Sexo sex on sex.i_IdSexo = pac.i_IdSexo ";
         consulta = consulta + "inner join PacienteEstado pe on pac.i_IdPacienteEstado = pe.i_IdPacienteEstado ";
 
@@ -245,11 +245,6 @@ public partial class ListarPaciente : System.Web.UI.Page
     protected void ddlEspecie_SelectedIndexChanged(object sender, EventArgs e)
     {
         ListarRazas();
-    }
-
-    protected void btnNuevo_Click(object sender, ImageClickEventArgs e)
-    {
-        Response.Redirect("CrearPaciente.aspx");
     }
 
     protected void btnExportar_Click(object sender, ImageClickEventArgs e)
