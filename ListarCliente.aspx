@@ -99,18 +99,24 @@
             <dx:ASPxGridViewExporter ID="ASPxGridViewExporter1" runat="server" 
                 FileName="Clientes" GridViewID="gv" Landscape="True" PaperKind="A4">
             </dx:ASPxGridViewExporter>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:PlayConnectionString %>" 
+                SelectCommand="BDVETER_Paciente_Listar" SelectCommandType="StoredProcedure">
+                <SelectParameters>
+                    <asp:SessionParameter Name="i_IdCliente" SessionField="i_IdCliente" 
+                        Type="Int32" />
+                </SelectParameters>
+            </asp:SqlDataSource>
             <dx1:ASPxGridView ID="gv" runat="server" AutoGenerateColumns="False" 
                 CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" 
                 CssPostfix="PlasticBlue" EnableCallbackCompression="False" 
                 EnableCallBacks="False" EnableRowsCache="False" EnableTheming="False" 
-                EnableViewState="False" KeyFieldName="i_IdCliente" 
+                EnableViewState="False" KeyFieldName="i_IdCliente" SettingsDetail-ShowDetailButtons="true"
                 Width="100%" 
                 onbeforecolumnsortinggrouping="gv_BeforeColumnSortingGrouping" 
                 onhtmlrowprepared="gv_HtmlRowPrepared">
-                <TotalSummary>
-                    <dx1:ASPxSummaryItem DisplayFormat="{0:C}" FieldName="f_Total" 
-                        ShowInColumn="Total" ShowInGroupFooterColumn="Total" SummaryType="Sum" />
-                </TotalSummary>
+                
+
                 <Columns>
                     <dx1:GridViewDataTextColumn Caption="Cliente" FieldName="v_Nombres" 
                         VisibleIndex="0" Width="200px">
@@ -141,9 +147,6 @@
                     </dx1:GridViewDataTextColumn>
                 </Columns>
                 <SettingsBehavior AutoFilterRowInputDelay="0" />
-                <SettingsBehavior AutoFilterRowInputDelay="0" />
-                <SettingsBehavior AutoFilterRowInputDelay="0" />
-                <SettingsBehavior AutoFilterRowInputDelay="0" />
                 <SettingsPager PageSize="5" ShowDefaultImages="False">
                     <AllButton Text="All">
                     </AllButton>
@@ -155,15 +158,6 @@
                 <Settings ShowFooter="True" />
                 <SettingsCookies StoreFiltering="False" />
                 <SettingsDetail ShowDetailRow="True" />
-                <Settings ShowFooter="True" />
-                <SettingsCookies StoreFiltering="False" />
-                <SettingsDetail ShowDetailRow="True" />
-                <Settings ShowFooter="True" />
-                <SettingsCookies StoreFiltering="False" />
-                <SettingsDetail ShowDetailRow="True" />
-                <Settings ShowFooter="True" />
-                <SettingsCookies StoreFiltering="False" />
-                <settingsdetail showdetailbuttons="False" />
                 <Images SpriteCssFilePath="~/App_Themes/PlasticBlue/{0}/sprite.css">
                     <LoadingPanelOnStatusBar Url="~/App_Themes/PlasticBlue/GridView/gvLoadingOnStatusBar.gif">
                     </LoadingPanelOnStatusBar>
@@ -185,6 +179,99 @@
                     <ProgressBar Height="25px">
                     </ProgressBar>
                 </StylesEditors>
+                <Templates>
+                    <DetailRow>
+                        <dx1:ASPxGridView ID="gvPaciente" runat="server" AutoGenerateColumns="False" 
+                            CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" CssPostfix="PlasticBlue" 
+                            EnableCallbackCompression="False" EnableCallBacks="False" 
+                            EnableRowsCache="False" EnableTheming="False" EnableViewState="False" 
+                            KeyFieldName="i_IdPaciente" 
+                            onhtmlrowprepared="gvPaciente_HtmlRowPrepared" Width="100%" 
+                            DataSourceID="SqlDataSource1" 
+                            onbeforeperformdataselect="gvPaciente_BeforePerformDataSelect">
+                            <TotalSummary>
+                                <dx1:ASPxSummaryItem DisplayFormat="{0:C}" FieldName="f_Total" 
+                                    ShowInColumn="Total" ShowInGroupFooterColumn="Total" SummaryType="Sum" />
+                            </TotalSummary>
+                            <Columns>
+                                <dx1:GridViewDataTextColumn Caption="Paciente" FieldName="v_NombrePaciente" 
+                                    VisibleIndex="0" Width="100px">
+                                    <DataItemTemplate>
+                                        <asp:LinkButton ID="lbPaciente" runat="server" 
+                                            Text='<%# Bind("v_NombrePaciente") %>'></asp:LinkButton>
+                                    </DataItemTemplate>
+                                </dx1:GridViewDataTextColumn>
+                                <dx1:GridViewDataTextColumn Caption="Especie" FieldName="Especie" 
+                                    VisibleIndex="2" Width="80px">
+                                </dx1:GridViewDataTextColumn>
+                                <dx1:GridViewDataTextColumn Caption="Raza" FieldName="Raza" VisibleIndex="3" 
+                                    Width="80px">
+                                </dx1:GridViewDataTextColumn>
+                                <dx1:GridViewDataTextColumn Caption="Sexo" FieldName="Sexo" VisibleIndex="4" 
+                                    Width="80px">
+                                </dx1:GridViewDataTextColumn>
+                                <dx1:GridViewDataTextColumn Caption="Fecha de Nacimiento" 
+                                    FieldName="d_FechaNacimiento" VisibleIndex="5" Width="100px">
+                                </dx1:GridViewDataTextColumn>
+                                <dx1:GridViewDataTextColumn Caption="Fecha Ultima Visita" 
+                                    FieldName="d_FechaUltimaVisita" VisibleIndex="6" Width="100px">
+                                </dx1:GridViewDataTextColumn>
+                                <dx1:GridViewDataTextColumn Caption="Fecha Ultimo Baño" 
+                                    FieldName="d_FechaUltimoBaño" VisibleIndex="7" Width="100px">
+                                </dx1:GridViewDataTextColumn>
+                                <dx1:GridViewDataTextColumn Caption="Fecha Ultima Vacuna" 
+                                    FieldName="d_FechaUltimaVacuna" VisibleIndex="8" Width="100px">
+                                </dx1:GridViewDataTextColumn>
+                                <dx1:GridViewDataTextColumn Caption="Fecha Ultima ATP" 
+                                    FieldName="d_FechaUltimaATP" VisibleIndex="9" Width="100px">
+                                </dx1:GridViewDataTextColumn>
+                                <dx1:GridViewDataTextColumn Caption="Fecha Ultima APG" 
+                                    FieldName="d_FechaUltimaAPG" VisibleIndex="10" Width="100px">
+                                </dx1:GridViewDataTextColumn>
+                                <dx1:GridViewDataTextColumn Caption="Microchip" FieldName="v_Microchip" 
+                                    VisibleIndex="11" Width="80px">
+                                </dx1:GridViewDataTextColumn>
+                                <dx1:GridViewDataTextColumn Caption="Estado" FieldName="v_Estado" 
+                                    VisibleIndex="12" Width="80px">
+                                </dx1:GridViewDataTextColumn>
+                            </Columns>
+                            <SettingsBehavior AutoFilterRowInputDelay="0" AllowDragDrop="False" 
+                                AllowGroup="False" />
+                            <SettingsPager PageSize="5" ShowDefaultImages="False" Mode="ShowAllRecords">
+                                <AllButton Text="All">
+                                </AllButton>
+                                <NextPageButton Text="Next &gt;">
+                                </NextPageButton>
+                                <PrevPageButton Text="&lt; Prev">
+                                </PrevPageButton>
+                            </SettingsPager>
+                            <Settings ShowGroupButtons="False" ShowHeaderFilterBlankItems="False" />
+                            <SettingsCookies StoreFiltering="False" />
+                            <SettingsDetail ShowDetailButtons="False" />
+                            <Images SpriteCssFilePath="~/App_Themes/PlasticBlue/{0}/sprite.css">
+                                <LoadingPanelOnStatusBar Url="~/App_Themes/PlasticBlue/GridView/gvLoadingOnStatusBar.gif">
+                                </LoadingPanelOnStatusBar>
+                                <LoadingPanel Url="~/App_Themes/PlasticBlue/GridView/Loading.gif">
+                                </LoadingPanel>
+                            </Images>
+                            <ImagesFilterControl>
+                                <LoadingPanel Url="~/App_Themes/PlasticBlue/Editors/Loading.gif">
+                                </LoadingPanel>
+                            </ImagesFilterControl>
+                            <Styles CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" 
+                                CssPostfix="PlasticBlue">
+                                <Header ImageSpacing="10px" SortingImageSpacing="10px">
+                                </Header>
+                            </Styles>
+                            <StylesEditors>
+                                <CalendarHeader Spacing="11px">
+                                </CalendarHeader>
+                                <ProgressBar Height="25px">
+                                </ProgressBar>
+                            </StylesEditors>
+                        </dx1:ASPxGridView>
+                    </DetailRow>
+                </Templates>
             </dx1:ASPxGridView>
         </asp:Panel>
 
