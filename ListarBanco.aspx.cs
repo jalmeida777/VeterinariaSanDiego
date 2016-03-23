@@ -18,7 +18,7 @@ public partial class ListarBanco : System.Web.UI.Page
             Label lblTitulo = (Label)Master.FindControl("lblTitulo");
             if (lblTitulo != null)
             {
-                lblTitulo.Text = "Administración de Tarjetas";
+                lblTitulo.Text = "Administración de Bancos";
             }
             Listar();
         }
@@ -31,7 +31,7 @@ public partial class ListarBanco : System.Web.UI.Page
         if (chkEstado.Checked) { Estado = "1"; } else { Estado = "0"; }
 
         DataTable dt = new DataTable();
-        SqlDataAdapter da = new SqlDataAdapter("BDVETER_Tarjeta_Listar '" + txtBuscar.Text.Trim() + "'," + Estado, conexion);
+        SqlDataAdapter da = new SqlDataAdapter("BDVETER_Banco_Listar '" + txtBuscar.Text.Trim() + "'," + Estado, conexion);
 
         da.Fill(dt);
 
@@ -65,12 +65,12 @@ public partial class ListarBanco : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            int i_IdTarjeta = int.Parse(gvBanco.DataKeys[e.Row.RowIndex].Value.ToString());
+            int i_IdBanco = int.Parse(gvBanco.DataKeys[e.Row.RowIndex].Value.ToString());
             ImageButton btnEditar = e.Row.FindControl("ibEditar") as ImageButton;
 
             if (btnEditar != null)
             {
-                btnEditar.PostBackUrl = "CrearBanco.aspx?i_IdTarjeta=" + i_IdTarjeta;
+                btnEditar.PostBackUrl = "CrearBanco.aspx?i_IdBanco=" + i_IdBanco;
             }
             
         }

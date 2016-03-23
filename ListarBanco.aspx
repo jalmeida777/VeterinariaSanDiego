@@ -10,7 +10,7 @@
                     <tr>
                         <td colspan="2">
                             <h1 class="label">
-                                Administración de Tarjetas</h1>
+                                Administración de Bancos</h1>
                         </td>
                     </tr>
                     <tr>
@@ -62,10 +62,10 @@
             <asp:Panel ID="Panel1" runat="server" Height="600px" ScrollBars="Vertical" 
                 Width="100%">
                 <asp:GridView ID="gvBanco" runat="server" AutoGenerateColumns="False" 
-                    CssClass="grid" DataKeyNames="i_IdTarjeta" 
+                    CssClass="grid" DataKeyNames="i_IdBanco" 
                     onrowdatabound="gvAlmacen_RowDataBound" Width="100%">
                     <Columns>
-                        <asp:BoundField DataField="i_IdTarjeta" HeaderText="Id" Visible="False">
+                        <asp:BoundField DataField="i_IdBanco" HeaderText="Id" Visible="False">
                         <ItemStyle HorizontalAlign="Center" Width="50px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="v_Descripcion" HeaderText="Descripcion">
