@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ListarBanco.aspx.cs" Inherits="ListarBanco" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ListarPeluquero.aspx.cs" Inherits="ListarPeluquero" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -10,7 +10,7 @@
                     <tr>
                         <td colspan="2">
                             <h1 class="label">
-                                Administración de Tarjetas</h1>
+                                Administración de Peluqueros</h1>
                         </td>
                     </tr>
                     <tr>
@@ -26,9 +26,7 @@
                                         ontextchanged="txtBuscar_TextChanged"></asp:TextBox>
                                     </td>
                                     <td>
-                                        <asp:CheckBox ID="chkEstado" runat="server" AutoPostBack="True" Checked="True" 
-                                            oncheckedchanged="chkEstado_CheckedChanged" Text="Ver Habilitados" />
-                                    </td>
+                                    &nbsp;</td>
                                 </tr>
                             </table>
                         </td>
@@ -44,11 +42,11 @@
                         </td>
                         <td width="65">
                             <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="~/images/Nuevo.jpg" 
-                                onclick="btnNuevo_Click" />
+                        onclick="btnNuevo_Click" />
                         </td>
                         <td>
-                            <asp:ImageButton ID="btnSalir" runat="server" Height="22px" 
-                                ImageUrl="~/images/Salir.jpg" onclick="btnSalir_Click" />
+                            <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
+                                onclick="btnSalir_Click" />
                         </td>
                     </tr>
                 </table>
@@ -61,15 +59,17 @@
             </asp:UpdateProgress>
             <asp:Panel ID="Panel1" runat="server" Height="600px" ScrollBars="Vertical" 
                 Width="100%">
-                <asp:GridView ID="gvBanco" runat="server" AutoGenerateColumns="False" 
-                    CssClass="grid" DataKeyNames="i_IdTarjeta" 
+                <asp:GridView ID="gvPeluquero" runat="server" AutoGenerateColumns="False" 
+                    CssClass="grid" DataKeyNames="i_IdPeluquero" 
                     onrowdatabound="gvAlmacen_RowDataBound" Width="100%">
                     <Columns>
-                        <asp:BoundField DataField="i_IdTarjeta" HeaderText="Id" Visible="False">
+                        <asp:BoundField DataField="i_IdPeluquero" HeaderText="Id" Visible="False">
                         <ItemStyle HorizontalAlign="Center" Width="50px" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="v_Descripcion" HeaderText="Descripcion">
-                        </asp:BoundField>
+                        <asp:BoundField DataField="v_Nombre" HeaderText="Peluquero"></asp:BoundField>
+                        <asp:BoundField DataField="v_Telefono" HeaderText="Telefono" />
+                        <asp:BoundField DataField="v_Celular" HeaderText="Celular" />
+                        <asp:BoundField DataField="v_Direccion" HeaderText="Direccion" />
                         <asp:TemplateField HeaderText="Editar">
                             <ItemTemplate>
                                 <asp:ImageButton ID="ibEditar" runat="server" ImageUrl="~/images/edit.png" 
