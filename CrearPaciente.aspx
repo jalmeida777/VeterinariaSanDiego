@@ -127,6 +127,8 @@
                                     &nbsp;</td>
                                 <td>
                                     &nbsp;</td>
+                                <td>
+                                    &nbsp;</td>
                             </tr>
                             <tr id="filaCodigo" runat="server">
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;" 
@@ -135,6 +137,37 @@
                                 </td>
                                 <td style="padding-left: 5px" runat="server">
                                     <asp:Label ID="lblCodigoPaciente" runat="server"></asp:Label>
+                                </td>
+                                <td runat="server" rowspan="8" style="padding-left: 5px" valign="top">
+                                    <table class="style1">
+                                        <tr>
+                                            <td>
+                                                <asp:Label ID="Label24" runat="server" Text="Foto:"></asp:Label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #B3B3B3">
+                                                <asp:ImageButton ID="ibImagen" runat="server" BorderColor="White" 
+                                                    BorderStyle="Solid" BorderWidth="3px" Height="134px" 
+                                                    ImageUrl="~/images/siluetadog.jpg" Width="164px" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table width="130">
+                                                    <tr>
+                                                        <td width="130">
+                                                            <asp:FileUpload ID="fu1" runat="server" Width="130px" />
+                                                        </td>
+                                                        <td>
+                                                            <asp:ImageButton ID="ibUpload" runat="server" ImageUrl="~/images/upload.png" 
+                                                                OnClick="ibUpload_Click" Width="16px" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                             <tr>
@@ -220,6 +253,9 @@
                                         TargetControlID="txtFechaNacimiento" Enabled="True">
                                     </cc1:CalendarExtender>
                                 </td>
+                                <td style="padding-left: 5px">
+                                    <asp:Label ID="lblRuta" runat="server" Visible="False"></asp:Label>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
@@ -228,6 +264,8 @@
                                 <td style="padding-left: 5px">
                                     <asp:Label ID="lblEdad" runat="server"></asp:Label>
                                 </td>
+                                <td style="padding-left: 5px">
+                                    &nbsp;</td>
                             </tr>
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
@@ -236,6 +274,8 @@
                                 <td style="padding-left: 5px">
                                     <asp:Label ID="lblUltimaVisita" runat="server"></asp:Label>
                                 </td>
+                                <td style="padding-left: 5px">
+                                    &nbsp;</td>
                             </tr>
                             <tr>
                                 <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
@@ -247,6 +287,8 @@
                                     <asp:DropDownList ID="ddlEstado" runat="server" CssClass="combo" Width="200px">
                                     </asp:DropDownList>
                                 </td>
+                                <td style="padding-left: 5px">
+                                    &nbsp;</td>
                             </tr>
                         </table>
 

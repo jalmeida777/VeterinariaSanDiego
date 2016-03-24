@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.IO;
 
 public partial class CrearPaciente : System.Web.UI.Page
 {
@@ -71,10 +72,20 @@ public partial class CrearPaciente : System.Web.UI.Page
         DateTime nacimiento = new DateTime(2000, 1, 25); //Fecha de nacimiento
         int edad = DateTime.Today.AddTicks(-DateTime.Parse(dt.Rows[0]["d_FechaNacimiento"].ToString()).Ticks).Year - 1;
         lblEdad.Text = edad.ToString();
+
         if (dt.Rows[0]["d_FechaUltimaVisita"].ToString() != "")
         {
             lblUltimaVisita.Text = DateTime.Parse(dt.Rows[0]["d_FechaUltimaVisita"].ToString()).ToShortDateString();
         }
+        if (dt.Rows[0]["v_RutaImagen"].ToString() == "")
+        {
+            lblRuta.Text = "~/images/dog-background.jpg";
+        }
+        else 
+        {
+            lblRuta.Text = dt.Rows[0]["v_RutaImagen"].ToString();
+        }
+
         ddlEstado.SelectedValue = dt.Rows[0]["i_IdPacienteEstado"].ToString();
     }
 
@@ -193,7 +204,7 @@ public partial class CrearPaciente : System.Web.UI.Page
             cmd.CommandText = "BDVETER_Paciente_Actualizar";
             cmd.Parameters.AddWithValue("@i_IdPaciente", lblCodigoPaciente.Text);
             cmd.Parameters.AddWithValue("@v_NumeroHistoria", txtHistoria.Text);
-            cmd.Parameters.AddWithValue("@v_RutaImagen", "");
+            cmd.Parameters.AddWithValue("@v_RutaImagen", lblRuta.Text);
             cmd.Parameters.AddWithValue("@v_NombrePaciente", txtNombre.Text.ToUpper());
             cmd.Parameters.AddWithValue("@i_IdEspecie", ddlEspecie.SelectedValue);
             cmd.Parameters.AddWithValue("@i_IdRaza", ddlRaza.SelectedValue);
@@ -216,7 +227,7 @@ public partial class CrearPaciente : System.Web.UI.Page
             cmd.CommandText = "BDVETER_Paciente_Registrar";
             cmd.Parameters.AddWithValue("@i_IdCliente", hfCliente.Value);
             cmd.Parameters.AddWithValue("@v_NumeroHistoria", txtHistoria.Text);
-            cmd.Parameters.AddWithValue("@v_RutaImagen", "");
+            cmd.Parameters.AddWithValue("@v_RutaImagen", lblRuta.Text);
             cmd.Parameters.AddWithValue("@v_NombrePaciente", txtNombre.Text.ToUpper());
             cmd.Parameters.AddWithValue("@i_IdEspecie", ddlEspecie.SelectedValue);
             cmd.Parameters.AddWithValue("@i_IdRaza", ddlRaza.SelectedValue);
@@ -242,5 +253,12 @@ public partial class CrearPaciente : System.Web.UI.Page
     protected void ddlEspecie_SelectedIndexChanged(object sender, EventArgs e)
     {
         ListarRazas();
+    }
+    protected void ibUpload_Click(object sender, ImageClickEventArgs e)
+    {
+        string filename = Path.GetFileName(fu1.FileName);
+        fu1.SaveAs(Server.MapPath("~/Pacientes/Fotos/") + filename);
+        ibImagen.ImageUrl = "~/Pacientes/Fotos/" + filename;
+        lblRuta.Text = "~/Pacientes/Fotos/" + filename;
     }
 }
