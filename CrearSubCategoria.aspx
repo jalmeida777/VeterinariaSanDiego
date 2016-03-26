@@ -15,7 +15,7 @@
                 <tr>
                     <td>
                         <h1 class="label">
-                            SubFamilia</h1>
+                            SubCategoria</h1>
                     </td>
                 </tr>
                 </table>
@@ -80,14 +80,9 @@
             <td height="10" width="20">
                 &nbsp;</td>
             <td width="120">
-                <asp:Label ID="Label5" runat="server" Text="Código Interno:"></asp:Label>
-            </td>
+                &nbsp;</td>
             <td>
-                <asp:TextBox ID="txtCodigoInterno" runat="server" CssClass="inputNormal" 
-                    Width="25px" MaxLength="2" style="text-transform:uppercase"></asp:TextBox>
-                <asp:Label ID="Label15" runat="server" Font-Bold="True" ForeColor="#18AC85" 
-                        Text="*"></asp:Label>
-            </td>
+                &nbsp;</td>
             <td>
                 &nbsp;</td>
             <td>
@@ -103,7 +98,7 @@
             <td height="10" width="20">
                 &nbsp;</td>
             <td>
-                <asp:Label ID="Label4" runat="server" Text="Familia:"></asp:Label>
+                <asp:Label ID="Label4" runat="server" Text="Categoria :"></asp:Label>
             </td>
             <td>
                 <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="combo" 

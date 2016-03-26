@@ -30,7 +30,6 @@ public partial class CrearPaciente : System.Web.UI.Page
             else if (Request.QueryString["i_IdCliente"] != null) 
             {
                 hfCliente.Value = Request.QueryString["i_IdCliente"];
-                filaCodigo.Visible = false;
 
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter("select v_Nombres from Cliente where i_IdCliente = " + hfCliente.Value, conexion);
@@ -69,6 +68,7 @@ public partial class CrearPaciente : System.Web.UI.Page
         txtPelaje.Text = dt.Rows[0]["v_Pelaje"].ToString();
         txtMicrochip.Text = dt.Rows[0]["v_Microchip"].ToString();
         txtFechaNacimiento.Text = DateTime.Parse(dt.Rows[0]["d_FechaNacimiento"].ToString()).ToShortDateString();
+        txtFechaAlta.Text = DateTime.Parse(dt.Rows[0]["d_FechaRegistra"].ToString()).ToShortDateString();
         DateTime nacimiento = new DateTime(2000, 1, 25); //Fecha de nacimiento
         int edad = DateTime.Today.AddTicks(-DateTime.Parse(dt.Rows[0]["d_FechaNacimiento"].ToString()).Ticks).Year - 1;
         lblEdad.Text = edad.ToString();
@@ -84,6 +84,7 @@ public partial class CrearPaciente : System.Web.UI.Page
         else 
         {
             lblRuta.Text = dt.Rows[0]["v_RutaImagen"].ToString();
+            ibImagen.ImageUrl = dt.Rows[0]["v_RutaImagen"].ToString();
         }
 
         ddlEstado.SelectedValue = dt.Rows[0]["i_IdPacienteEstado"].ToString();
@@ -142,11 +143,6 @@ public partial class CrearPaciente : System.Web.UI.Page
         ddlEstado.DataBind();
     }
 
-    protected void btnModificar_Click(object sender, EventArgs e)
-    {
-        Desbloquear();
-    }
-
     void Desbloquear() 
     {
         txtHistoria.Enabled = true;
@@ -159,6 +155,9 @@ public partial class CrearPaciente : System.Web.UI.Page
         ddlEstado.Enabled = true;
         txtNombre.Enabled = true;
         btnGuardar.Enabled = true;
+        fu1.Enabled = true;
+        ibUpload.Enabled = true;
+        txtFechaAlta.Enabled = true;
         btnModificar.Enabled = false;
     }
 
@@ -174,6 +173,9 @@ public partial class CrearPaciente : System.Web.UI.Page
         ddlEstado.Enabled = false;
         txtNombre.Enabled = false;
         btnGuardar.Enabled = false;
+        fu1.Enabled = false;
+        ibUpload.Enabled = false;
+        txtFechaAlta.Enabled = false;
         btnModificar.Enabled = true;
     }
 
@@ -254,11 +256,17 @@ public partial class CrearPaciente : System.Web.UI.Page
     {
         ListarRazas();
     }
+
     protected void ibUpload_Click(object sender, ImageClickEventArgs e)
     {
         string filename = Path.GetFileName(fu1.FileName);
         fu1.SaveAs(Server.MapPath("~/Pacientes/Fotos/") + filename);
         ibImagen.ImageUrl = "~/Pacientes/Fotos/" + filename;
         lblRuta.Text = "~/Pacientes/Fotos/" + filename;
+    }
+
+    protected void btnModificar_Click(object sender, ImageClickEventArgs e)
+    {
+        Desbloquear();
     }
 }

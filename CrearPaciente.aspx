@@ -5,7 +5,7 @@
 
 <script src="js/jquery.growl.js" type="text/javascript"></script>
 <link href="css/jquery.growl.css" rel="stylesheet" type="text/css" />
-
+    <link href="css/tabs.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
@@ -24,8 +24,8 @@
         <table width="100%">
             <tr>
                 <td width="65">
-                    <asp:Button ID="btnModificar" runat="server" Enabled="False" 
-                        onclick="btnModificar_Click" Text="Modificar" />
+                    <asp:ImageButton ID="btnModificar" runat="server" 
+                        ImageUrl="~/images/Modificar.jpg" onclick="btnModificar_Click" />
                 </td>
                 <td width="65">
                     <asp:ImageButton ID="btnGuardar" runat="server" 
@@ -69,6 +69,11 @@
                 &nbsp;</td>
             <td>
                 <asp:HiddenField ID="hfCliente" runat="server" />
+                                    <asp:Label runat="server" ID="lblCodigoPaciente" 
+                    Visible="False"></asp:Label>
+
+                                    <asp:Label runat="server" ID="lblRuta" Visible="False"></asp:Label>
+
             </td>
             <td>
                 &nbsp;</td>
@@ -113,7 +118,7 @@
             <td colspan="2">
 
             <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" 
-                    Width="100%">
+                    Width="100%" CssClass="MyTabStyle">
 
                     <cc1:TabPanel runat="server" HeaderText="Datos Generales" ID="TabPanel1">
                         <HeaderTemplate>
@@ -123,20 +128,16 @@
 
                         <table width="100%" cellpadding="5">
                             <tr>
-                                <td>
-                                    &nbsp;</td>
-                                <td>
-                                    &nbsp;</td>
-                                <td>
-                                    &nbsp;</td>
-                            </tr>
-                            <tr id="filaCodigo" runat="server">
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;" 
-                                    runat="server" >
-                                    <asp:Label ID="Label1" runat="server" Text="Código:"></asp:Label>
+                                <td class="label" >
+                                    <asp:Label ID="Label54" runat="server" Text="Cliente"></asp:Label>
                                 </td>
-                                <td style="padding-left: 5px" runat="server">
-                                    <asp:Label ID="lblCodigoPaciente" runat="server"></asp:Label>
+                                <td style="padding-left: 5px" class="label">
+                                    <asp:Label ID="Label64" runat="server" Text="N° Historia"></asp:Label>
+                                    <asp:Label ID="Label47" runat="server" Font-Bold="True" Font-Size="10pt" 
+                                        ForeColor="#18AC85" Text="*"></asp:Label>
+                                </td>
+                                <td class="label" style="padding-left: 5px">
+                                    <asp:Label ID="Label70" runat="server" Text="Fecha de Alta"></asp:Label>
                                 </td>
                                 <td runat="server" rowspan="8" style="padding-left: 5px" valign="top">
                                     <table class="style1">
@@ -147,9 +148,9 @@
                                         </tr>
                                         <tr>
                                             <td style="border: 1px solid #B3B3B3">
-                                                <asp:ImageButton ID="ibImagen" runat="server" BorderColor="White" 
-                                                    BorderStyle="Solid" BorderWidth="3px" Height="134px" 
-                                                    ImageUrl="~/images/siluetadog.jpg" Width="164px" />
+                                                <asp:Image ID="ibImagen" runat="server" BorderColor="White" BorderStyle="Solid" 
+                                                    BorderWidth="3px" Height="134px" ImageUrl="~/images/siluetadog.jpg" 
+                                                    Width="164px" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -171,52 +172,48 @@
                                 </td>
                             </tr>
                             <tr>
-                            <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                <asp:Label ID="Label54" runat="server" Text="Cliente:"></asp:Label>
-                            </td>
-                            <td style="padding-left: 5px">
-                                <asp:Label ID="lblNombreCliente" runat="server" Font-Bold="True"></asp:Label>
-                            </td>
-                            </tr>
-                            <tr>
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label64" runat="server" Text="N° Historia:"></asp:Label>
-                                    <asp:Label ID="Label47" runat="server" Font-Bold="True" Font-Size="10pt" 
-                                        ForeColor="#18AC85" Text="*"></asp:Label>
+                                <td>
+                                    <asp:Label ID="lblNombreCliente" runat="server" Font-Bold="False"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
                                     <asp:TextBox ID="txtHistoria" runat="server" CssClass="inputNormal" 
                                         Width="200px"></asp:TextBox>
                                 </td>
+                                <td style="padding-left: 5px">
+                                    <asp:TextBox ID="txtFechaAlta" runat="server" CssClass="inputsFecha" 
+                                        MaxLength="10"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="txtFechaAlta_CalendarExtender" runat="server" 
+                                        Enabled="True" Format="dd/MM/yyyy" TargetControlID="txtFechaAlta">
+                                    </cc1:CalendarExtender>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label55" runat="server" Text="Especie:"></asp:Label>
+                                <td class="label">
+                                    <asp:Label ID="Label55" runat="server" Text="Especie"></asp:Label>
                                     <asp:Label ID="Label65" runat="server" Font-Bold="True" Font-Size="10pt" 
                                         ForeColor="#18AC85" Text="*"></asp:Label>
                                 </td>
-                                <td style="padding-left: 5px">
-                                    <asp:DropDownList ID="ddlEspecie" runat="server" CssClass="combo" Width="200px" 
-                                        AutoPostBack="True" onselectedindexchanged="ddlEspecie_SelectedIndexChanged">
-                                    </asp:DropDownList>
+                                <td style="padding-left: 5px" class="label">
+                                    <asp:Label ID="Label56" runat="server" Text="Raza"></asp:Label>
+                                    <asp:Label ID="Label66" runat="server" Font-Bold="True" Font-Size="10pt" 
+                                        ForeColor="#18AC85" Text="*"></asp:Label>
+                                </td>
+                                <td class="label" style="padding-left: 5px">
+                                    <asp:Label ID="Label57" runat="server" Text="Sexo"></asp:Label>
+                                    <asp:Label ID="Label67" runat="server" Font-Bold="True" Font-Size="10pt" 
+                                        ForeColor="#18AC85" Text="*"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label56" runat="server" Text="Raza:"></asp:Label>
-                                    <asp:Label ID="Label66" runat="server" Font-Bold="True" Font-Size="10pt" 
-                                        ForeColor="#18AC85" Text="*"></asp:Label>
+                                <td>
+                                    <asp:DropDownList ID="ddlEspecie" runat="server" AutoPostBack="True" 
+                                        CssClass="combo" OnSelectedIndexChanged="ddlEspecie_SelectedIndexChanged" 
+                                        Width="200px">
+                                    </asp:DropDownList>
                                 </td>
                                 <td style="padding-left: 5px">
                                     <asp:DropDownList ID="ddlRaza" runat="server" CssClass="combo" Width="200px">
                                     </asp:DropDownList>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label57" runat="server" Text="Sexo:"></asp:Label>
-                                    <asp:Label ID="Label67" runat="server" Font-Bold="True" Font-Size="10pt" 
-                                        ForeColor="#18AC85" Text="*"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
                                     <asp:DropDownList ID="ddlSexo" runat="server" CssClass="combo" Width="200px">
@@ -224,69 +221,66 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label58" runat="server" Text="Pelaje:"></asp:Label>
+                                <td class="label">
+                                    <asp:Label ID="Label58" runat="server" Text="Pelaje"></asp:Label>
                                 </td>
-                                <td style="padding-left: 5px">
-                                    <asp:TextBox ID="txtPelaje" runat="server" CssClass="inputNormal" Width="200px"></asp:TextBox>
+                                <td style="padding-left: 5px" class="label">
+                                    <asp:Label ID="Label59" runat="server" Text="Microchip"></asp:Label>
+                                </td>
+                                <td class="label" style="padding-left: 5px">
+                                    <asp:Label ID="Label63" runat="server" Text="Estado"></asp:Label>
+                                    <asp:Label ID="Label69" runat="server" Font-Bold="True" Font-Size="10pt" 
+                                        ForeColor="#18AC85" Text="*"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label59" runat="server" Text="Microchip:"></asp:Label>
+                                <td>
+                                    <asp:TextBox ID="txtPelaje" runat="server" CssClass="inputNormal" Width="200px"></asp:TextBox>
                                 </td>
                                 <td style="padding-left: 5px">
                                     <asp:TextBox ID="txtMicrochip" runat="server" CssClass="inputNormal" 
                                         Width="200px"></asp:TextBox>
                                 </td>
+                                <td style="padding-left: 5px">
+                                    <asp:DropDownList ID="ddlEstado" runat="server" CssClass="combo" Width="200px">
+                                    </asp:DropDownList>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label60" runat="server" Text="Fecha de Nacimiento:"></asp:Label>
+                                <td class="label">
+                                    <asp:Label ID="Label60" runat="server" Text="Fecha de Nacimiento"></asp:Label>
                                     <asp:Label ID="Label68" runat="server" Font-Bold="True" Font-Size="10pt" 
                                         ForeColor="#18AC85" Text="*"></asp:Label>
                                 </td>
-                                <td style="padding-left: 5px">
-                                    <asp:TextBox ID="txtFechaNacimiento" runat="server" CssClass="inputsFecha" 
-                                        MaxLength="10"></asp:TextBox>
-                                    <cc1:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd/MM/yyyy" 
-                                        TargetControlID="txtFechaNacimiento" Enabled="True">
-                                    </cc1:CalendarExtender>
+                                <td style="padding-left: 5px" class="label">
+                                    <asp:Label ID="Label61" runat="server" Text="Edad"></asp:Label>
                                 </td>
-                                <td style="padding-left: 5px">
-                                    <asp:Label ID="lblRuta" runat="server" Visible="False"></asp:Label>
+                                <td class="label" style="padding-left: 5px">
+                                    <asp:Label ID="Label62" runat="server" Text="Ultima Visita"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label61" runat="server" Text="Edad:"></asp:Label>
+                                <td>
+                                    <asp:TextBox ID="txtFechaNacimiento" runat="server" CssClass="inputsFecha" 
+                                        MaxLength="10"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="CalendarExtender1" runat="server" Enabled="True" 
+                                        Format="dd/MM/yyyy" TargetControlID="txtFechaNacimiento">
+                                    </cc1:CalendarExtender>
                                 </td>
                                 <td style="padding-left: 5px">
                                     <asp:Label ID="lblEdad" runat="server"></asp:Label>
                                 </td>
                                 <td style="padding-left: 5px">
-                                    &nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label62" runat="server" Text="Ultima Visita:"></asp:Label>
-                                </td>
-                                <td style="padding-left: 5px">
                                     <asp:Label ID="lblUltimaVisita" runat="server"></asp:Label>
                                 </td>
-                                <td style="padding-left: 5px">
-                                    &nbsp;</td>
                             </tr>
                             <tr>
-                                <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 180px;">
-                                    <asp:Label ID="Label63" runat="server" Text="Estado:"></asp:Label>
-                                    <asp:Label ID="Label69" runat="server" Font-Bold="True" Font-Size="10pt" 
-                                        ForeColor="#18AC85" Text="*"></asp:Label>
-                                </td>
+                                <td>
+                                    &nbsp;</td>
                                 <td style="padding-left: 5px">
-                                    <asp:DropDownList ID="ddlEstado" runat="server" CssClass="combo" Width="200px">
-                                    </asp:DropDownList>
-                                </td>
+                                    &nbsp;</td>
+                                <td style="padding-left: 5px">
+                                    &nbsp;</td>
                                 <td style="padding-left: 5px">
                                     &nbsp;</td>
                             </tr>
@@ -297,7 +291,7 @@
 
                     <cc1:TabPanel ID="TabPanel2" runat="server" HeaderText="Pacientes">
                         <HeaderTemplate>
-                            Vacunas
+                            Historia Clínica
                         </HeaderTemplate>
                         <ContentTemplate>
                             <table width="100%">
@@ -313,15 +307,10 @@
                         </ContentTemplate>
                     </cc1:TabPanel>
 
-                    <cc1:TabPanel ID="TabPanel3" runat="server" HeaderText="Antipulgas">
-                    </cc1:TabPanel>
-                    <cc1:TabPanel ID="TabPanel4" runat="server" HeaderText="Antiparasitarios">
-                    </cc1:TabPanel>
-
-                    <cc1:TabPanel ID="TabPanel5" runat="server" HeaderText="Control Médico">
-                    </cc1:TabPanel>
-
                     <cc1:TabPanel ID="TabPanel6" runat="server" HeaderText="Baño y Peluquería">
+                    </cc1:TabPanel>
+
+                    <cc1:TabPanel ID="TabPanel3" runat="server" HeaderText="Cta.Cte.">
                     </cc1:TabPanel>
 
             </cc1:TabContainer>

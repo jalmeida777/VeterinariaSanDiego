@@ -1,56 +1,69 @@
 ﻿.MyTabStyle .ajax__tab_header
-        {
-            font-family: "Helvetica Neue" , Arial, Sans-Serif;
-            font-size: 14px;
-            font-weight:bold;
-            display: block;
+{
+    font-family: calibri;
+    font-size: 16px;
+    display: block;
+    vertical-align: middle;
+    padding-top: 5px;
+}
 
-        }
-        .MyTabStyle .ajax__tab_header .ajax__tab_outer
-        {
-            border-color: #222;
-            color: #222;
-            padding-left: 10px;
-            margin-right: 3px;
-            border:solid 1px #d7d7d7;
-                -webkit-border-top-left-radius: 7px;
-    -webkit-border-top-right-radius: 7px;
-    -moz-border-radius-topleft: 7px;
-    -moz-border-radius-topright: 7px;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-        }
-        .MyTabStyle .ajax__tab_header .ajax__tab_inner
-        {
-            border-color: #666;
-            color: #666;
-            padding: 3px 10px 2px 0px;
-        }
-        .MyTabStyle .ajax__tab_hover .ajax__tab_outer
+
+.MyTabStyle .ajax__tab_header .ajax__tab_outer
 {
-    background-color: #CCCCCC;
+    border-color: #222;
+    color: #808080;
+    padding-left: 10px;
+    border: solid 1px #d7d7d7;
+    height: 30px;
+    vertical-align: middle;
+    padding-top: 5px;
+    background-color: #F0F0F0;
 }
-        .MyTabStyle .ajax__tab_hover .ajax__tab_inner
-        {
-            color: #fff;
-        }
-        .MyTabStyle .ajax__tab_active .ajax__tab_outer
+.MyTabStyle .ajax__tab_header .ajax__tab_inner
 {
-    border-bottom-color: #ffffff;
-    background-color: #EAEAEA;
+    border-color: #666;
+    color: #808080;
+    padding: 3px 10px 2px 0px;
+    vertical-align: middle;
 }
-        .MyTabStyle .ajax__tab_active .ajax__tab_inner
+
+
+.MyTabStyle .ajax__tab_hover .ajax__tab_outer
+{
+    background-color: #EEEEEE;
+}
+.MyTabStyle .ajax__tab_hover .ajax__tab_inner
+{
+    color: #333333;
+    background-color: #EEEEEE;
+}
+
+
+.MyTabStyle .ajax__tab_active .ajax__tab_outer
+{
+    border-top-style: solid;
+    border-top-width: 3px;
+    border-top-color: #6699FF;
+    vertical-align: middle;
+    padding-top: 5px;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+.MyTabStyle .ajax__tab_active .ajax__tab_inner
 {
     color: #000;
     border-color: #333;
+    background-color: #FFFFFF;
 }
-        .MyTabStyle .ajax__tab_body
+
+
+.MyTabStyle .ajax__tab_body
 {
+    padding: 20px;
     border-style: solid;
     border-width: 1px;
     border-color: #d7d7d7;
-    font-family: verdana,tahoma,helvetica;
-    font-size: 10pt;
-    background-color: #fff;
-
+    font-family: calibri;
+    font-size: 12pt;
+    background-color: #FFFFFF;
 }

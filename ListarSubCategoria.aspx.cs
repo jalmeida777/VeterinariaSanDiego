@@ -19,7 +19,7 @@ public partial class ListarSubCategoria : System.Web.UI.Page
             Label lblTitulo = (Label)Master.FindControl("lblTitulo");
             if (lblTitulo != null)
             {
-                lblTitulo.Text = "Administración de SubFamilias";
+                lblTitulo.Text = "Administración de SubCategorias";
             }
             ListarCategoria();
             Listar();
@@ -34,7 +34,7 @@ public partial class ListarSubCategoria : System.Web.UI.Page
         da.Fill(dt);
         ddlCategoria.DataSource = dt;
         ddlCategoria.DataTextField = "v_Descripcion";
-        ddlCategoria.DataValueField = "n_IdCategoria";
+        ddlCategoria.DataValueField = "i_IdCategoria";
         ddlCategoria.DataBind();
         ddlCategoria.SelectedIndex = 0;
     }
@@ -78,12 +78,12 @@ public partial class ListarSubCategoria : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            int n_IdSubCategoria = int.Parse(gvSubCategoria.DataKeys[e.Row.RowIndex].Value.ToString());
+            int i_IdSubCategoria = int.Parse(gvSubCategoria.DataKeys[e.Row.RowIndex].Value.ToString());
             ImageButton btnEditar = e.Row.FindControl("btnEditar") as ImageButton;
 
             if (btnEditar != null)
             {
-                btnEditar.PostBackUrl = "CrearSubCategoria.aspx?n_IdSubCategoria=" + n_IdSubCategoria;
+                btnEditar.PostBackUrl = "CrearSubCategoria.aspx?i_IdSubCategoria=" + i_IdSubCategoria;
             }
         }
     }

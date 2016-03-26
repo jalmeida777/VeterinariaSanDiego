@@ -120,28 +120,29 @@ font-weight: lighter;
 {
     width: 90px;
     padding: 4px 5px 4px 5px;
-    font-family: "HelveticaNeue-Light" , "Helvetica Neue Light" , "Helvetica Neue" , Helvetica, Arial, "Lucida Grande" , sans-serif;
+    font-family: calibri;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     color: #333333;
     background: #FFF;
     border: 1px solid #999999;
-    border-radius: 3px;
-    background: #fcfcfc url('../images/calendar.png') no-repeat 80px 3px;
+    background: #fcfcfc url('../images/calendar.png') no-repeat 80px 9px;
+    height: 25px;
+    vertical-align: middle;
 }
 
 
 .inputNormal
 {
     padding: 4px 5px 4px 5px;
-    font-family: "HelveticaNeue-Light" , "Helvetica Neue Light" , "Helvetica Neue" , Helvetica, Arial, "Lucida Grande" , sans-serif;
+    font-family: calibri;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     color: #333333;
     background: #FFF;
     border: 1px solid #999999;
-    border-radius: 3px;
     text-transform: uppercase;
+    height: 25px;
 }
 .textboxIngresoDecimal
 {
@@ -215,12 +216,12 @@ font-weight: lighter;
 {
     border: 1px solid #26AEE1;
     padding: 4px 5px 4px 5px;
-    border-radius: 4px;
     background-color: #82D0EE;
     color: #FFFFFF;
-    font-size: 12px;
-    font-family: arial;
+    font-size: 14px;
+    font-family: calibri;
     font-weight: bold;
+    height: 30px;
 }
 
 .comboBusqueda
@@ -286,7 +287,9 @@ padding: 0px;
   }
       .label
 {
-    padding-left: 7px;
+    font-family: calibri;
+    font-size: 16px;
+    font-weight: bold;
 }
           
        
@@ -322,4 +325,10 @@ padding: 0px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: #FFFFFF;
+}
+
+.body
+{
+    font-family: calibri;
+    font-size: 14px;
 }

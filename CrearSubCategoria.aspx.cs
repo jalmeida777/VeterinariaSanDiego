@@ -19,17 +19,16 @@ public partial class CrearSubCategoria : System.Web.UI.Page
 
             ListarCategoria();
 
-            if (Request.QueryString["n_IdSubCategoria"] != null)
+            if (Request.QueryString["i_IdSubCategoria"] != null)
             {
-                int n_IdSubCategoria = int.Parse(Request.QueryString["n_IdSubCategoria"].ToString());
+                int i_IdSubCategoria = int.Parse(Request.QueryString["i_IdSubCategoria"].ToString());
                 DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("Play_SubCategoria_Seleccionar " + n_IdSubCategoria.ToString(), conexion);
+                SqlDataAdapter da = new SqlDataAdapter("Play_SubCategoria_Seleccionar " + i_IdSubCategoria.ToString(), conexion);
                 da.Fill(dt);
-                lblCodigo.Text = n_IdSubCategoria.ToString();
-                txtCodigoInterno.Text = dt.Rows[0]["c_Codigo"].ToString();
+                lblCodigo.Text = i_IdSubCategoria.ToString();
                 txtDescripcion.Text = dt.Rows[0]["v_Descripcion"].ToString();
                 chkEstado.Checked = bool.Parse(dt.Rows[0]["b_Estado"].ToString());
-                ddlCategoria.SelectedValue = dt.Rows[0]["n_IdCategoria"].ToString();
+                ddlCategoria.SelectedValue = dt.Rows[0]["i_IdCategoria"].ToString();
             }
             else
             {
@@ -46,7 +45,7 @@ public partial class CrearSubCategoria : System.Web.UI.Page
         da.Fill(dt);
         ddlCategoria.DataSource = dt;
         ddlCategoria.DataTextField = "v_Descripcion";
-        ddlCategoria.DataValueField = "n_IdCategoria";
+        ddlCategoria.DataValueField = "i_IdCategoria";
         ddlCategoria.DataBind();
         ddlCategoria.SelectedIndex = 0;
     }
@@ -64,12 +63,7 @@ public partial class CrearSubCategoria : System.Web.UI.Page
             txtDescripcion.Focus();
             return;
         }
-        if (txtCodigoInterno.Text == "")
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el código interno' });</script>", false);
-            txtCodigoInterno.Focus();
-            return;
-        }
+      
         try
         {
             if (lblCodigo.Text.Trim() != "")
@@ -78,32 +72,30 @@ public partial class CrearSubCategoria : System.Web.UI.Page
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "Play_SubCategoria_Actualizar";
-                cmd.Parameters.AddWithValue("@n_IdSubCategoria", lblCodigo.Text);
-                cmd.Parameters.AddWithValue("@n_IdCategoria", ddlCategoria.SelectedValue);
-                cmd.Parameters.AddWithValue("@c_Codigo", txtCodigoInterno.Text.Trim().ToUpper());
+                cmd.Parameters.AddWithValue("@i_IdSubCategoria", lblCodigo.Text);
+                cmd.Parameters.AddWithValue("@i_IdCategoria", ddlCategoria.SelectedValue);
                 cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
                 conexion.Close();
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Subfamilia actualizada.' });</script>", false);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'SubCategoria actualizada.' });</script>", false);
             }
             else
             {
-                string n_IdSubCategoria = "";
+                string i_IdSubCategoria = "";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "Play_SubCategoria_Insertar";
-                cmd.Parameters.AddWithValue("@n_IdCategoria", ddlCategoria.SelectedValue);
-                cmd.Parameters.AddWithValue("@c_Codigo", txtCodigoInterno.Text.Trim().ToUpper());
+                cmd.Parameters.AddWithValue("@i_IdCategoria", ddlCategoria.SelectedValue);
                 cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
-                n_IdSubCategoria = cmd.ExecuteScalar().ToString();
+                i_IdSubCategoria = cmd.ExecuteScalar().ToString();
                 conexion.Close();
-                lblCodigo.Text = n_IdSubCategoria;
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Subfamilia registrada.' });</script>", false);
+                lblCodigo.Text = i_IdSubCategoria;
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'SubCategoria registrada.' });</script>", false);
             }
 
         }

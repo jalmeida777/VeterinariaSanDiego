@@ -12,7 +12,7 @@
                 <tr>
                     <td colspan="2">
                         <h1 class="label">
-                            Administración de SubFamilias</h1>
+                            Administración de SubCategorias</h1>
                     </td>
                 </tr>
                 <tr>
@@ -28,7 +28,7 @@
                                         ontextchanged="txtBuscar_TextChanged"></asp:TextBox>
                                 </td>
                                 <td width="60" class="label">
-                                    <asp:Label ID="Label3" runat="server" Text="Familia:"></asp:Label>
+                                    <asp:Label ID="Label3" runat="server" Text="Categoria:"></asp:Label>
                                 </td>
                                 <td width="205">
                                     <asp:DropDownList ID="ddlCategoria" runat="server" Width="200px" 
@@ -82,18 +82,15 @@
             <asp:Panel ID="Panel1" runat="server" Height="600px" ScrollBars="Vertical" 
                 Width="100%">
                 <asp:GridView ID="gvSubCategoria" runat="server" AutoGenerateColumns="False" 
-                    CssClass="grid" DataKeyNames="n_IdSubCategoria" 
+                    CssClass="grid" DataKeyNames="i_IdSubCategoria" 
                     onrowdatabound="gvSubCategoria_RowDataBound" Width="100%">
                     <Columns>
-                        <asp:BoundField DataField="n_IdSubCategoria" HeaderText="Id" Visible="False">
+                        <asp:BoundField DataField="i_IdSubCategoria" HeaderText="Id" Visible="False">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" Width="50px" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="c_Codigo" HeaderText="Código">
-                        <HeaderStyle HorizontalAlign="Center" />
-                        <ItemStyle HorizontalAlign="Center" Width="50px" />
+                        <asp:BoundField DataField="v_Descripcion" HeaderText="Descripción">
                         </asp:BoundField>
-                        <asp:BoundField DataField="v_Descripcion" HeaderText="SubFamilia" />
                         <asp:TemplateField HeaderText="Editar">
                             <ItemTemplate>
                                 <asp:ImageButton ID="btnEditar" runat="server" ImageUrl="~/images/edit.png" 
