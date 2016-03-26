@@ -120,7 +120,7 @@
                                 style="text-align: justify"></asp:Label>
                         </td>
                         <td style="padding-left: 5px">
-                            <asp:DropDownList ID="ddlTipoDocumento0" runat="server" CssClass="combo" 
+                            <asp:DropDownList ID="ddlPersonal" runat="server" CssClass="combo" 
                     Width="180px">
                             </asp:DropDownList>
                         </td>

@@ -10,7 +10,7 @@
             <tr>
                 <td>
                     <h1 class="label">
-                        Banco</h1>
+                        Tarjetas</h1>
                 </td>
             </tr>
         </table>

@@ -16,13 +16,13 @@ public partial class CrearBanco : System.Web.UI.Page
         if (Page.IsPostBack == false)
         {
 
-            if (Request.QueryString["i_IdBanco"] != null)
+            if (Request.QueryString["i_IdTarjeta"] != null)
             {
-                int i_IdBanco = int.Parse(Request.QueryString["i_IdBanco"].ToString());
+                int i_IdTarjeta = int.Parse(Request.QueryString["i_IdTarjeta"].ToString());
                 DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("BDVETER_Banco_Seleccionar " + i_IdBanco.ToString(), conexion);
+                SqlDataAdapter da = new SqlDataAdapter("BDVETER_Tarjeta_Seleccionar " + i_IdTarjeta.ToString(), conexion);
                 da.Fill(dt);
-                lblCodigo.Text = i_IdBanco.ToString();
+                lblCodigo.Text = i_IdTarjeta.ToString();
                 txtDescripcion.Text = dt.Rows[0]["v_Descripcion"].ToString();
                 chkEstado.Checked = bool.Parse(dt.Rows[0]["b_Estado"].ToString());
             }
@@ -51,29 +51,29 @@ public partial class CrearBanco : System.Web.UI.Page
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "BDVETER_Banco_Actualizar";
-                cmd.Parameters.AddWithValue("@i_IdBanco", lblCodigo.Text);
+                cmd.CommandText = "BDVETER_Tarjeta_Actualizar";
+                cmd.Parameters.AddWithValue("@i_IdTarjeta", lblCodigo.Text);
                 cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
                 conexion.Close();
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Banco actualizado.' });</script>", false);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Tarjeta actualizada.' });</script>", false);
             }
             else
             {
-                string i_IdBanco = "";
+                string i_IdTarjeta = "";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "BDVETER_Banco_Registrar";
+                cmd.CommandText = "BDVETER_Tarjeta_Registrar";
                 cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
-                i_IdBanco = cmd.ExecuteScalar().ToString();
+                i_IdTarjeta = cmd.ExecuteScalar().ToString();
                 conexion.Close();
-                lblCodigo.Text = i_IdBanco;
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Banco registrado.' });</script>", false);
+                lblCodigo.Text = i_IdTarjeta;
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Tarjeta registrada.' });</script>", false);
             }
 
         }

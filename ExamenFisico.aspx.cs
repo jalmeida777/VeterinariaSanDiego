@@ -17,6 +17,7 @@ public partial class ExamenFisico : System.Web.UI.Page
         if (Page.IsPostBack == false)
         {
             ListarDiagnostico();
+            ListarMedico();
             txtFechaRegistro.Text = DateTime.Now.ToShortDateString();
            
 
@@ -35,6 +36,20 @@ public partial class ExamenFisico : System.Web.UI.Page
         ddlDiagnostico.DataBind();
         ddlDiagnostico.SelectedIndex = 0;
     }
+
+    void ListarMedico()
+    {
+        DataTable dt = new DataTable();
+        SqlDataAdapter da = new SqlDataAdapter("BDVETER_Medico_Combo", conexion);
+        da.Fill(dt);
+
+        ddlPersonal.DataSource = dt;
+        ddlPersonal.DataTextField = "v_Nombre";
+        ddlPersonal.DataValueField = "i_IdMedico";
+        ddlPersonal.DataBind();
+        ddlPersonal.SelectedIndex = 0;
+    }
+
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)
     {
         Response.Redirect("Principal.aspx");
