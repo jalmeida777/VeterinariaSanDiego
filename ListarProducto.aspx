@@ -44,7 +44,7 @@
                 <tr>
                     <td>
                         <h1 class="label">
-                            Administración de Productos</h1>
+                            Administración de Productos y Servicios</h1>
                     </td>
                 </tr>
                 <tr>
@@ -66,12 +66,7 @@
             </table>
             </div>
                 <div class="toolbar">
-            <table width="100%"><tr><td width="65">
-                
-                <asp:ImageButton ID="btnConsultar" runat="server" ImageUrl="~/images/Buscar.jpg" 
-                    onclick="btnConsultar_Click" />
-                
-                </td>
+            <table width="100%"><tr>
                 <td width="65">
                   
                     <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="~/images/Nuevo.jpg" 
@@ -82,8 +77,6 @@
                    
                     <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
                         onclick="btnSalir_Click" />
-                   
-                    <asp:CheckBox ID="chkEditar" runat="server" Visible="False" />
                    
                 </td>
                 </tr></table>
@@ -154,7 +147,7 @@
             </asp:SqlDataSource>
             <dx:ASPxGridView ID="ASPxGridView1" runat="server" AutoGenerateColumns="False" 
                 CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" CssPostfix="PlasticBlue" 
-                DataSourceID="SqlDataSource1" KeyFieldName="n_IdProducto" 
+                DataSourceID="SqlDataSource1" KeyFieldName="i_IdProducto" 
                 onhtmlrowprepared="ASPxGridView1_HtmlRowPrepared" Width="100%" 
                 EnableRowsCache="False" EnableViewState="False">
                 <Columns>
@@ -200,11 +193,24 @@
                     </dx:GridViewDataTextColumn>
 
                     <dx:GridViewDataTextColumn Caption="Precio" FieldName="f_Precio" 
-                        VisibleIndex="4" Width="100px">
+                        VisibleIndex="6" Width="100px">
                         <PropertiesTextEdit DisplayFormatString="C">
                         </PropertiesTextEdit>
                         <Settings AllowAutoFilter="False" AllowGroup="False" AllowSort="True" />
                         <HeaderStyle HorizontalAlign="Center" />
+                    </dx:GridViewDataTextColumn>
+ 
+
+                    <dx:GridViewDataTextColumn Caption="Sub Categoría" FieldName="SubCategoria" 
+                        VisibleIndex="4" Width="100px">
+                        <Settings AllowAutoFilter="True" AllowAutoFilterTextInputTimer="False" 
+                            AllowGroup="True" AllowSort="True" AutoFilterCondition="Contains" />
+                    </dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn Caption="Costo" FieldName="f_Costo" VisibleIndex="5" 
+                        Width="100px">
+                        <PropertiesTextEdit DisplayFormatString="C">
+                        </PropertiesTextEdit>
+                        <Settings AllowAutoFilter="False" AllowGroup="False" AllowSort="True" />
                     </dx:GridViewDataTextColumn>
  
 

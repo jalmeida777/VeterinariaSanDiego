@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Subcategoría" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearSubCategoria.aspx.cs" Inherits="CrearSubCategoria" %>
+﻿<%@ Page Title="Concepto de Gasto" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearConceptoGasto.aspx.cs" Inherits="CrearConceptoGasto" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
@@ -10,12 +10,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
 
-        <div class="divBusqueda">
+<div class="divBusqueda">
             <table width="100%">
                 <tr>
                     <td>
                         <h1 class="label">
-                            Sub Categoría</h1>
+                            Conceptos de Gasto</h1>
                     </td>
                 </tr>
                 </table>
@@ -27,10 +27,10 @@
                
                             <asp:ImageButton ID="btnGuardar" runat="server" 
                                 ImageUrl="~/images/Guardar.jpg" onclick="btnGuardar_Click" />
-                            <cc1:ConfirmButtonExtender ID="btnGuardar_ConfirmButtonExtender" runat="server" 
+                            <cc1:confirmbuttonextender ID="btnGuardar_ConfirmButtonExtender" runat="server" 
                                 ConfirmText="¿Seguro de guardar los datos?" Enabled="True" 
                                 TargetControlID="btnGuardar">
-                            </cc1:ConfirmButtonExtender>
+                            </cc1:confirmbuttonextender>
                
                 </td>
                 <td width="65">
@@ -67,52 +67,6 @@
                 &nbsp;</td>
             <td>
                 &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td width="20">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td width="120">
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
-                <asp:Label ID="lblCodigo" runat="server" Visible="False"></asp:Label>
-            </td>
-            <td width="20">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td>
-                <asp:Label ID="Label4" runat="server" Text="Categoria :"></asp:Label>
-            </td>
-            <td>
-                <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="combo" 
-                    Width="200px">
-                </asp:DropDownList>
-                <asp:Label ID="Label16" runat="server" Font-Bold="True" ForeColor="#18AC85" 
-                        Text="*"></asp:Label>
-            </td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
             <td width="20">
                 &nbsp;</td>
         </tr>
@@ -124,16 +78,10 @@
             </td>
             <td>
                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="inputNormal" placeholder="Descripción"
-                    Width="300px" style="text-transform:uppercase"></asp:TextBox>
-                <asp:Label ID="Label17" runat="server" Font-Bold="True" ForeColor="#18AC85" 
+                    Width="300px" style="text-transform:uppercase" MaxLength="50"></asp:TextBox>
+                <asp:Label ID="Label16" runat="server" Font-Bold="True" ForeColor="#18AC85" 
                         Text="*"></asp:Label>
             </td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
             <td width="20">
                 &nbsp;</td>
         </tr>
@@ -145,24 +93,14 @@
             </td>
             <td>
                 <asp:CheckBox ID="chkEstado" runat="server" Checked="True" Text="Habilitado" />
+                <asp:Label ID="lblCodigo" runat="server" Visible="False"></asp:Label>
+                <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
             </td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
             <td width="20">
                 &nbsp;</td>
         </tr>
         <tr>
             <td height="10" width="20">
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
                 &nbsp;</td>
             <td>
                 &nbsp;</td>
@@ -177,5 +115,6 @@
                 &nbsp;</td>
             <td>
                 &nbsp;</table>
+
 </asp:Content>
 

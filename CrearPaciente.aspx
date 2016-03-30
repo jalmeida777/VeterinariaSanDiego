@@ -67,7 +67,7 @@
         <tr>
             <td height="10" width="20">
                 &nbsp;</td>
-            <td>
+            <td width="45%">
                 <asp:HiddenField ID="hfCliente" runat="server" />
                                     <asp:Label runat="server" ID="lblCodigoPaciente" 
                     Visible="False"></asp:Label>
@@ -75,7 +75,9 @@
                                     <asp:Label runat="server" ID="lblRuta" Visible="False"></asp:Label>
 
             </td>
-            <td>
+            <td width="10">
+                &nbsp;</td>
+            <td width="45%">
                 &nbsp;</td>
             <td width="20">
                 &nbsp;</td>
@@ -83,22 +85,18 @@
         <tr>
             <td height="10" width="20">
                 &nbsp;</td>
-            <td colspan="2">
+            <td>
 
                 <asp:Label runat="server" Text="Nombre del paciente" ID="Label30"></asp:Label>
                 <asp:Label runat="server" Text="*" Font-Bold="True" Font-Size="10pt" 
                     ForeColor="#18AC85" ID="Label53"></asp:Label>
                 </td>
-            <td width="20">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td colspan="2">
+            <td>
 
-                <asp:TextBox runat="server" MaxLength="50" CssClass="inputNormal" Width="100%" 
-                    ID="txtNombre" Font-Size="20pt" Height="40px"></asp:TextBox>
+                &nbsp;</td>
+            <td>
+
+                <asp:Label runat="server" Text="Cliente:" ID="Label54"></asp:Label>
                 </td>
             <td width="20">
                 &nbsp;</td>
@@ -106,7 +104,26 @@
         <tr>
             <td height="10" width="20">
                 &nbsp;</td>
-            <td colspan="2">
+            <td>
+
+                <asp:TextBox runat="server" MaxLength="50" CssClass="inputNormal" Width="100%" 
+                    ID="txtNombre" Font-Size="20pt" Height="40px"></asp:TextBox>
+                </td>
+            <td>
+
+                &nbsp;</td>
+            <td>
+
+                <asp:TextBox ID="txtCliente" runat="server" CssClass="inputNormal" 
+                    Enabled="False" Font-Size="20pt" Height="40px" Width="100%"></asp:TextBox>
+                </td>
+            <td width="20">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td height="10" width="20">
+                &nbsp;</td>
+            <td colspan="3">
 
                 &nbsp;</td>
             <td width="20">
@@ -115,7 +132,7 @@
         <tr>
             <td height="10" width="20">
                 &nbsp;</td>
-            <td colspan="2">
+            <td colspan="3">
 
             <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" 
                     Width="100%" CssClass="MyTabStyle">
@@ -129,16 +146,15 @@
                         <table width="100%" cellpadding="5">
                             <tr>
                                 <td class="label" >
-                                    <asp:Label ID="Label54" runat="server" Text="Cliente"></asp:Label>
-                                </td>
-                                <td style="padding-left: 5px" class="label">
                                     <asp:Label ID="Label64" runat="server" Text="N° Historia"></asp:Label>
                                     <asp:Label ID="Label47" runat="server" Font-Bold="True" Font-Size="10pt" 
                                         ForeColor="#18AC85" Text="*"></asp:Label>
                                 </td>
-                                <td class="label" style="padding-left: 5px">
+                                <td style="padding-left: 5px" class="label">
                                     <asp:Label ID="Label70" runat="server" Text="Fecha de Alta"></asp:Label>
                                 </td>
+                                <td class="label" style="padding-left: 5px">
+                                    &nbsp;</td>
                                 <td runat="server" rowspan="8" style="padding-left: 5px" valign="top">
                                     <table class="style1">
                                         <tr>
@@ -173,9 +189,6 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:Label ID="lblNombreCliente" runat="server" Font-Bold="False"></asp:Label>
-                                </td>
-                                <td style="padding-left: 5px">
                                     <asp:TextBox ID="txtHistoria" runat="server" CssClass="inputNormal" 
                                         Width="200px"></asp:TextBox>
                                 </td>
@@ -186,6 +199,8 @@
                                         Enabled="True" Format="dd/MM/yyyy" TargetControlID="txtFechaAlta">
                                     </cc1:CalendarExtender>
                                 </td>
+                                <td style="padding-left: 5px">
+                                    &nbsp;</td>
                             </tr>
                             <tr>
                                 <td class="label">
@@ -307,10 +322,34 @@
                         </ContentTemplate>
                     </cc1:TabPanel>
 
-                    <cc1:TabPanel ID="TabPanel6" runat="server" HeaderText="Baño y Peluquería">
+                    <cc1:TabPanel ID="TabPanel6" runat="server" HeaderText="Vacunas">
+                        <HeaderTemplate>
+                            Vacunas
+                        </HeaderTemplate>
+                        <ContentTemplate>
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;</td>
+                                </tr>
+                            </table>
+                        </ContentTemplate>
                     </cc1:TabPanel>
 
-                    <cc1:TabPanel ID="TabPanel3" runat="server" HeaderText="Cta.Cte.">
+                    <cc1:TabPanel ID="TabPanel3" runat="server" HeaderText="Antipulgas">
+                    </cc1:TabPanel>
+
+                    <cc1:TabPanel ID="TabPanel4" runat="server" HeaderText="Antiparasitarios">
+                    </cc1:TabPanel>
+
+                    <cc1:TabPanel ID="TabPanel5" runat="server" HeaderText="Baño y Peluquería">
+                    </cc1:TabPanel>
+
+                    <cc1:TabPanel ID="TabPanel7" runat="server" HeaderText="Historial de Compras">
                     </cc1:TabPanel>
 
             </cc1:TabContainer>
@@ -320,6 +359,8 @@
         </tr>
         <tr>
             <td height="10" width="20">
+                &nbsp;</td>
+            <td>
                 &nbsp;</td>
             <td>
                 &nbsp;</td>

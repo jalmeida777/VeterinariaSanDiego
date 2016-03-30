@@ -19,10 +19,11 @@ public partial class ListarSubCategoria : System.Web.UI.Page
             Label lblTitulo = (Label)Master.FindControl("lblTitulo");
             if (lblTitulo != null)
             {
-                lblTitulo.Text = "Administración de SubCategorias";
+                lblTitulo.Text = "Administración de Sub Categorias";
             }
             ListarCategoria();
             Listar();
+            
         }
         txtBuscar.Focus();
     }
@@ -33,10 +34,12 @@ public partial class ListarSubCategoria : System.Web.UI.Page
         SqlDataAdapter da = new SqlDataAdapter("Play_Categoria_Combo", conexion);
         da.Fill(dt);
         ddlCategoria.DataSource = dt;
-        ddlCategoria.DataTextField = "v_Descripcion";
+        ddlCategoria.DataTextField = "v_Categoria";
         ddlCategoria.DataValueField = "i_IdCategoria";
         ddlCategoria.DataBind();
+        ddlCategoria.Items.Insert(0, "Ver Todos");
         ddlCategoria.SelectedIndex = 0;
+        
     }
 
     void Listar()
@@ -45,13 +48,22 @@ public partial class ListarSubCategoria : System.Web.UI.Page
         if (chkEstado.Checked) { Estado = "1"; } else { Estado = "0"; }
 
         string categoria = "";
-        categoria = ddlCategoria.SelectedValue.ToString();
+        if (ddlCategoria.SelectedIndex == 0)
+        {
+            categoria = "";
+        }
+        else
+        {
+            categoria = ddlCategoria.SelectedItem.Text.Trim();
+        }
 
         DataTable dt = new DataTable();
-        SqlDataAdapter da = new SqlDataAdapter("Play_SubCategoria_Listar " + categoria + ",'" + txtBuscar.Text.Trim() + "'," + Estado, conexion);
-        da.Fill(dt);
-        gvSubCategoria.DataSource = dt;
-        gvSubCategoria.DataBind();
+            SqlDataAdapter da = new SqlDataAdapter("Play_SubCategoria_Listar '" + categoria + "','" + txtBuscar.Text.Trim() + "'," + Estado, conexion);
+            da.Fill(dt);
+            gvSubCategoria.DataSource = dt;
+            gvSubCategoria.DataBind();
+        
+        
     }
 
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)

@@ -16,6 +16,7 @@
 
     <script src="js/jquery.growl.js" type="text/javascript"></script>
 <link href="css/jquery.growl.css" rel="stylesheet" type="text/css" />
+    <link href="css/tabs.css" rel="stylesheet" type="text/css" />
 
     <style>
         .AutoExtender
@@ -98,7 +99,7 @@
                 <tr>
                     <td>
                         <h1 class="label">
-                            Producto</h1>
+                            Producto / Servicio</h1>
                     </td>
                 </tr>
                 </table>
@@ -133,15 +134,7 @@
                    
                     
                    
-                    <asp:ImageButton ID="ibEliminar" runat="server" 
-                        ImageUrl="~/images/Eliminar.jpg" onclick="ibEliminar_Click" />
-                                               <cc1:ConfirmButtonExtender ID="ConfirmButtonExtender1" runat="server" 
-                                ConfirmText="¿Seguro de eliminar el producto?" Enabled="True" 
-                                TargetControlID="ibEliminar">
-                            </cc1:ConfirmButtonExtender>
-                    
-                   
-                </td>
+                    &nbsp;</td>
                 </tr></table>
             </div>
 
@@ -181,8 +174,10 @@
             <td height="10" width="20">
                 &nbsp;</td>
             <td colspan="5">
-                <asp:Label runat="server" Text="Nombre del Producto" ID="Label2" 
+                <asp:Label runat="server" Text="Nombre del Producto o Servicio" ID="Label2" 
                     Font-Bold="False"></asp:Label>
+                <asp:Label runat="server" Text="*" Font-Bold="True" Font-Size="10pt" 
+                    ForeColor="#18AC85" ID="Label25"></asp:Label>
             </td>
             <td width="20">
                 &nbsp;</td>
@@ -205,8 +200,6 @@
                     EnableCaching="False" DelimiterCharacters="" Enabled="True" 
                     TargetControlID="txtDescripcion" ID="txtDescripcion_AutoCompleteExtender">
                 </cc1:AutoCompleteExtender>
-                <asp:Label runat="server" Text="*" Font-Bold="True" ForeColor="#18AC85" 
-                    ID="Label15" Font-Size="16pt"></asp:Label>
                         </td>
                         <td align="right">
                             <asp:ImageButton ID="ibAtras" runat="server" 
@@ -241,269 +234,202 @@
             <td height="10" width="20">
                 &nbsp;</td>
             <td colspan="5">
-                <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" 
-                    Width="100%">
+                <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" 
+                    Width="100%" CssClass="MyTabStyle">
                     <cc1:TabPanel runat="server" HeaderText="Datos Generales" ID="TabPanel1">
                     <ContentTemplate>
                     <table width="100%">
                             <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
             <td>
                     &nbsp;</td>
-            <td colspan="4">
+            <td>
                     &nbsp;</td>
-            <td rowspan="5" align="right">
+                                <td>
+                                    &nbsp;</td>
+            <td rowspan="7" align="right" height="150" style="border: 1px solid #B3B3B3" width="200">
 
                                     
                            
                                 
 <a href="javascript:void(0);" onclick="OnMoreInfoClick(this)">
                 <asp:Image ID="ibImagen" runat="server" Height="150px" 
-                    ImageUrl="~/images/Prev.jpg" Width="200px" />
+                    ImageUrl="~/images/Prev.jpg" Width="200px" BorderColor="White" 
+                    BorderStyle="Solid" BorderWidth="3px" />
                     </a>
 
 
                 </td>
-            <td width="20">
-                &nbsp;</td>
         </tr>
                             <tr>
-                                <td height="10" width="20">
-                                    &nbsp;</td>
-                                <td>
-                                    <asp:Label ID="Label22" runat="server" Text="Código Interno:"></asp:Label>
+                                <td class="label">
+                                    <asp:Label ID="Label26" runat="server" Text="Tipo"></asp:Label>
                                 </td>
-                                <td colspan="2">
-                                    <asp:TextBox ID="txtCodigoInterno" runat="server" CssClass="inputNormal" 
-                                        MaxLength="4" onkeypress="return ValidaEntero(event);" Width="50px"></asp:TextBox>
+                                <td class="label">
+                                    <asp:Label ID="Label22" runat="server" Text="Código Interno"></asp:Label>
                                     <asp:Label ID="Label23" runat="server" Font-Bold="True" Font-Size="10pt" 
                                         ForeColor="#18AC85" Text="*"></asp:Label>
                                 </td>
+                                <td class="label">
+                                    <asp:Label ID="Label4" runat="server" Text="Código de Barras"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>
-                                    <asp:Label ID="Label4" runat="server" Text="Código de Barras:"></asp:Label>
+                                    <asp:RadioButtonList ID="rblTipo" runat="server" 
+                                        RepeatDirection="Horizontal" AutoPostBack="True" 
+                                        onselectedindexchanged="rblTipo_SelectedIndexChanged">
+                                        <asp:ListItem Selected="True" Value="P">Producto</asp:ListItem>
+                                        <asp:ListItem Value="S">Servicio</asp:ListItem>
+                                    </asp:RadioButtonList>
                                 </td>
                                 <td>
-                                    <asp:Label ID="lblCodigoBarras" runat="server" Font-Bold="True"></asp:Label>
+                                    <asp:TextBox ID="txtCodigoInterno" runat="server" CssClass="inputNormal" 
+                                        MaxLength="4" onkeypress="return ValidaEntero(event);" Width="50px"></asp:TextBox>
                                 </td>
-                                <td width="20">
-                                    &nbsp;</td>
+                                <td>
+                                    <asp:Label ID="lblCodigoBarras" runat="server" Font-Bold="False"></asp:Label>
+                                </td>
                             </tr>
         <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td>
-                    <asp:Label ID="Label5" runat="server" Text="Presentación:"></asp:Label>
+            <td class="label">
+                    <asp:Label ID="Label7" runat="server" Text="Precio S/."></asp:Label>
+                    <asp:Label ID="Label16" runat="server" Font-Bold="True" Font-Size="10pt" 
+                        ForeColor="#18AC85" Text="*"></asp:Label>
                 </td>
-            <td colspan="4">
-                    <asp:TextBox ID="txtPresentacion" runat="server" CssClass="inputNormal" placeholder="Presentación" style="text-transform:uppercase"
-                        Width="300px"></asp:TextBox>
+            <td class="label">
+                    <asp:Label ID="Label8" runat="server" Text="Costo S/."></asp:Label>
                 </td>
-            <td width="20">
-                &nbsp;</td>
+            <td class="label">
+                <asp:Label ID="Label9" runat="server" Text="Stock Mínimo"></asp:Label>
+            </td>
         </tr>
+                            <tr>
+                                <td>
+                                    <asp:TextBox ID="txtPrecio" runat="server" CssClass="inputNormalMoneda" 
+                                        onkeypress="return ValidaNumeros(event);" placeholder="Precio"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtCosto" runat="server" CssClass="inputNormalMoneda" 
+                                        onkeypress="return ValidaNumeros(event);" placeholder="Costo"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtStockMinimo" runat="server" CssClass="inputNormalMoneda" 
+                                        placeholder="Stock" style="text-transform:uppercase"></asp:TextBox>
+                                </td>
+                            </tr>
         <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td>
-                    <asp:Label ID="Label6" runat="server" Text="Edad:"></asp:Label>
+            <td class="label">
+                    <asp:Label ID="Label10" runat="server" Text="Marca"></asp:Label>
                 </td>
-            <td colspan="4">
-                    <asp:DropDownList ID="ddlEdad" runat="server" CssClass="combo" Width="150px">
-                    </asp:DropDownList>
+            <td class="label">
+                    <asp:Label ID="Label11" runat="server" Text="Modelo"></asp:Label>
                 </td>
-            <td width="20">
-                &nbsp;</td>
+            <td class="label">
+                <asp:Label ID="Label24" runat="server" Text="Vencimiento"></asp:Label>
+            </td>
         </tr>
+                            <tr>
+                                <td>
+                                    <asp:DropDownList ID="ddlMarca" runat="server" AutoPostBack="True" 
+                                        CssClass="combo" OnSelectedIndexChanged="ddlMarca_SelectedIndexChanged" 
+                                        Width="200px">
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="ddlModelo" runat="server" CssClass="combo" 
+                                        Enabled="False" Width="200px">
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="txtVencimiento" runat="server" CssClass="inputsFecha" 
+                                        MaxLength="10"></asp:TextBox>
+                                    <cc1:CalendarExtender ID="txtVencimiento_CalendarExtender" runat="server" 
+                                        Enabled="True" Format="dd/MM/yyyy" TargetControlID="txtVencimiento">
+                                    </cc1:CalendarExtender>
+                                </td>
+                            </tr>
         <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td>
-                    <asp:Label ID="Label18" runat="server" Text="Genero:"></asp:Label>
+            <td class="label">
+                    <asp:Label ID="Label12" runat="server" Text="Categoría"></asp:Label>
                 </td>
-            <td colspan="4">
-                    <asp:RadioButtonList ID="rblSexo" runat="server" RepeatDirection="Horizontal" 
-                        Width="215px">
-                        <asp:ListItem Selected="True" Value="O">Niño</asp:ListItem>
-                        <asp:ListItem Value="A">Niña</asp:ListItem>
-                        <asp:ListItem Value="U">Ambos</asp:ListItem>
-                    </asp:RadioButtonList>
+            <td class="label">
+                    <asp:Label ID="Label13" runat="server" Text="Sub Categoría"></asp:Label>
                 </td>
-            <td width="20">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
+            <td class="label">
+                <asp:Label ID="Label14" runat="server" Text="Proveedor"></asp:Label>
+            </td>
             <td>
-                    <asp:Label ID="Label19" runat="server" Text="Baterías:"></asp:Label>
-                </td>
-            <td>
-                                <asp:DropDownList ID="ddlBateria" runat="server" AutoPostBack="True" 
-                                    CssClass="combo" onselectedindexchanged="ddlBateria_SelectedIndexChanged" 
-                                    Width="150px">
-                                </asp:DropDownList>
-                            </td>
-            <td colspan="2">
-                                <asp:Label ID="Label20" runat="server" Text="Cantidad:"></asp:Label>
-                            </td>
-            <td>
-                                <asp:TextBox ID="txtCantidadBaterias" runat="server" CssClass="inputNormal" 
-                                    Enabled="False" Width="30px">0</asp:TextBox>
-                            </td>
-            <td align="right">
-                <table class="style1">
-                    <tr>
-                        <td align="right">
+                    <table width="100%">
+                        <tr>
+                            <td align="right">
                                 <asp:FileUpload ID="fu1" runat="server" Width="130px" />
                             </td>
-                        <td align="right">
-                            <asp:ImageButton ID="ibUpload" runat="server" ImageUrl="~/images/upload.png" 
-                                onclick="ibUpload_Click" style="height: 16px" />
-                        </td>
-                    </tr>
-                </table>
-            </td>
-            <td width="20">
-                &nbsp;</td>
+                            <td align="right">
+                                <asp:ImageButton ID="ibUpload" runat="server" ImageUrl="~/images/upload.png" 
+                                    OnClick="ibUpload_Click" style="height: 16px" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
         </tr>
+                            <tr>
+                                <td>
+                                    <asp:DropDownList ID="ddlCategoria" runat="server" AutoPostBack="True" 
+                                        CssClass="combo" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" 
+                                        Width="200px">
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="ddlSubCategoria" runat="server" CssClass="combo" 
+                                        Enabled="False" Width="200px">
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="combo" 
+                                        Width="200px">
+                                    </asp:DropDownList>
+                                </td>
+                                <td>
+                                    <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
+                                    <asp:Label ID="lblCodigo" runat="server" Font-Bold="True" Visible="False"></asp:Label>
+                                </td>
+                            </tr>
         <tr>
-            <td height="10" width="20">
+            <td class="label">
+                    <asp:Label ID="Label3" runat="server" Text="Estado"></asp:Label>
+                </td>
+            <td class="label">
+                    &nbsp;</td>
+            <td class="label">
                 &nbsp;</td>
             <td>
-                    <asp:Label ID="Label7" runat="server" Text="Precio S/.:"></asp:Label>
-                </td>
-            <td>
-                    <asp:TextBox ID="txtPrecio" runat="server" CssClass="inputNormalMoneda" 
-                        placeholder="Precio" onkeypress="return ValidaNumeros(event);"></asp:TextBox>
-                <asp:Label ID="Label16" runat="server" Font-Bold="True" ForeColor="#18AC85" 
-                        Text="*" Font-Size="10pt"></asp:Label>
-                </td>
-            <td colspan="2">
-                    <asp:Label ID="Label8" runat="server" Text="Costo S/.:" ></asp:Label>
-                </td>
-            <td>
-                    <asp:TextBox ID="txtCosto" runat="server" CssClass="inputNormalMoneda" 
-                        placeholder="Costo" onkeypress="return ValidaNumeros(event);"></asp:TextBox>
-                </td>
-            <td>
-                    <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
-                    <asp:Label ID="lblCodigo" runat="server" Font-Bold="True" Visible="False"></asp:Label>
-                </td>
-            <td width="20">
                 &nbsp;</td>
         </tr>
-        <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td>
-                    <asp:Label ID="Label9" runat="server" Text="Stock Mínimo:"></asp:Label>
-                </td>
-            <td>
-                    <asp:TextBox ID="txtStockMinimo" runat="server" CssClass="inputNormalMoneda" 
-                        placeholder="Stock" style="text-transform:uppercase"></asp:TextBox>
-                </td>
-            <td colspan="2">
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                    <asp:Label ID="lblRuta" runat="server" Visible="False"></asp:Label>
-                </td>
-            <td width="20">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td>
-                    <asp:Label ID="Label10" runat="server" Text="Marca:"></asp:Label>
-                </td>
-            <td>
-                    <asp:DropDownList ID="ddlMarca" runat="server" Width="150px" 
-                        AutoPostBack="True" onselectedindexchanged="ddlMarca_SelectedIndexChanged" 
-                        CssClass="combo">
-                    </asp:DropDownList>
-                </td>
-            <td colspan="2">
-                    <asp:Label ID="Label11" runat="server" Text="Modelo:"></asp:Label>
-                </td>
-            <td>
-                    <asp:DropDownList ID="ddlModelo" runat="server" Width="150px" CssClass="combo" 
-                        Enabled="False">
-                    </asp:DropDownList>
-                </td>
-            <td>
-                    <asp:Label ID="lblExtension" runat="server" Visible="False"></asp:Label>
-                </td>
-            <td width="20">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td>
-                    <asp:Label ID="Label12" runat="server" Text="Familia:"></asp:Label>
-                </td>
-            <td>
-                    <asp:DropDownList ID="ddlCategoria" runat="server" Width="150px" 
-                        AutoPostBack="True" 
-                        onselectedindexchanged="ddlCategoria_SelectedIndexChanged" CssClass="combo">
-                    </asp:DropDownList>
-                </td>
-            <td colspan="2">
-                    <asp:Label ID="Label13" runat="server" Text="Sub Familia:"></asp:Label>
-                </td>
-            <td>
-                    <asp:DropDownList ID="ddlSubCategoria" runat="server" Width="150px" 
-                        CssClass="combo" Enabled="False">
-                    </asp:DropDownList>
-                </td>
-            <td>
-                &nbsp;</td>
-            <td width="20">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td height="10" width="20">
-                &nbsp;</td>
-            <td>
-                    <asp:Label ID="Label14" runat="server" Text="Proveedor:"></asp:Label>
-                </td>
-            <td>
-                    <asp:DropDownList ID="ddlProveedor" runat="server" Width="150px" 
-                        CssClass="combo">
-                    </asp:DropDownList>
-                </td>
-            <td colspan="2">
-                    <asp:Label ID="Label3" runat="server" Text="Estado:"></asp:Label>
-                </td>
-            <td>
-                    <asp:CheckBox ID="chkEstado" runat="server" Checked="True" Text="Habilitado" />
-                </td>
-            <td>
-                &nbsp;</td>
-            <td width="20">
-                &nbsp;</td>
-        </tr>
+                            <tr>
+                                <td>
+                                    <asp:CheckBox ID="chkEstado" runat="server" Checked="True" Text="Habilitado" />
+                                </td>
+                                <td>
+                                    &nbsp;</td>
+                                <td>
+                                    &nbsp;</td>
+                                <td>
+                                    &nbsp;</td>
+                            </tr>
 
                             <tr>
-                                <td height="10" width="20">
-                                    &nbsp;</td>
                                 <td>
-                                    &nbsp;</td>
+                                    <asp:Label ID="lblRuta" runat="server" Visible="False"></asp:Label>
+                                </td>
                                 <td>
-                                    &nbsp;</td>
-                                <td colspan="2">
-                                    &nbsp;</td>
+                                    <asp:Label ID="lblExtension" runat="server" Visible="False"></asp:Label>
+                                </td>
                                 <td>
                                     &nbsp;</td>
                                 <td align="right">
                                     <asp:Label ID="Label17" runat="server" Font-Bold="False" Font-Size="10pt" 
                                         ForeColor="#18AC85" Text="* Campos obligatorios"></asp:Label>
                                 </td>
-                                <td width="20">
-                                    &nbsp;</td>
                             </tr>
 
                     </table>
@@ -522,7 +448,7 @@
                         <tr>
                         <td>
                             <asp:GridView ID="gvStock" runat="server" CssClass="grid" 
-                                AutoGenerateColumns="False" DataKeyNames="n_IdAlmacen" 
+                                AutoGenerateColumns="False" DataKeyNames="i_IdAlmacen" 
                                 onselectedindexchanged="gvStock_SelectedIndexChanged">
                                 <Columns>
                                     <asp:BoundField DataField="v_Descripcion" HeaderText="Almacén" />

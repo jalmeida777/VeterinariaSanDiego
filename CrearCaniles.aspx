@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearBanco.aspx.cs" Inherits="CrearBanco" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearCaniles.aspx.cs" Inherits="CrearCaniles" %>
 
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 
@@ -14,7 +14,7 @@
             <tr>
                 <td>
                     <h1 class="label">
-                        Tarjetas</h1>
+                        Caniles</h1>
                 </td>
             </tr>
         </table>
@@ -31,8 +31,8 @@
                     </cc1:ConfirmButtonExtender>
                 </td>
                 <td width="65">
-                    <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" onclick="btnSalir_Click" 
-                                />
+                    <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
+                                onclick="btnSalir_Click" />
                 </td>
                 <td>
                 </td>
@@ -68,12 +68,12 @@
                         <tr>
                             <td height="10" width="20">
                 &nbsp;</td>
-                            <td width="100">
+                            <td>
                                 <asp:Label ID="Label2" runat="server" Text="Descripción:"></asp:Label>
                             </td>
                             <td>
                                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="inputNormal" placeholder="Descripción"
-                    Width="300px" style="text-transform:uppercase" MaxLength="100"></asp:TextBox>
+                    Width="300px" style="text-transform:uppercase"></asp:TextBox>
                             </td>
                             <td width="20">
                                 &nbsp;</td>

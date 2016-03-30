@@ -8,41 +8,36 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-public partial class CrearCategoria : System.Web.UI.Page
+
+public partial class CrearCaniles : System.Web.UI.Page
 {
     SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["conexion"].ConnectionString);
-
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Page.IsPostBack == false)
         {
 
-            if (Request.QueryString["i_IdCategoria"] != null)
+            if (Request.QueryString["i_IdCaniles"] != null)
             {
-                int i_IdCategoria = int.Parse(Request.QueryString["i_IdCategoria"].ToString());
+                int i_IdCaniles = int.Parse(Request.QueryString["i_IdCaniles"].ToString());
                 DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("Play_Categoria_Seleccionar " + i_IdCategoria.ToString(), conexion);
+                SqlDataAdapter da = new SqlDataAdapter("BDVETER_Caniles_Seleccionar " + i_IdCaniles.ToString(), conexion);
                 da.Fill(dt);
-                lblCodigo.Text = i_IdCategoria.ToString();
-                txtDescripcion.Text = dt.Rows[0]["v_Categoria"].ToString();
+                lblCodigo.Text = i_IdCaniles.ToString();
+                txtDescripcion.Text = dt.Rows[0]["v_Nombre"].ToString();
                 chkEstado.Checked = bool.Parse(dt.Rows[0]["b_Estado"].ToString());
+                
             }
-            else 
+            else
             {
             }
 
             txtDescripcion.Focus();
         }
     }
-
-    protected void btnSalir_Click(object sender, ImageClickEventArgs e)
-    {
-        Response.Redirect("ListarCategoria.aspx");
-    }
-
     protected void btnGuardar_Click(object sender, ImageClickEventArgs e)
     {
-        if (txtDescripcion.Text == "") 
+        if (txtDescripcion.Text == "")
         {
             ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar la descripción' });</script>", false);
             txtDescripcion.Focus();
@@ -51,39 +46,46 @@ public partial class CrearCategoria : System.Web.UI.Page
 
         try
         {
+
+
             if (lblCodigo.Text.Trim() != "")
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Play_Categoria_Actualizar";
-                cmd.Parameters.AddWithValue("@i_IdCategoria", lblCodigo.Text);
-                cmd.Parameters.AddWithValue("@v_Categoria", txtDescripcion.Text.Trim().ToUpper());
+                cmd.CommandText = "BDVETER_Caniles_Actualizar";
+                cmd.Parameters.AddWithValue("@i_IdCaniles", lblCodigo.Text);
+                cmd.Parameters.AddWithValue("@v_Nombre", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
                 conexion.Close();
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Categoría actualizada.' });</script>", false);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Canil actualizado.' });</script>", false);
             }
             else
             {
-                string n_IdCategoria = "";
+                string i_IdCaniles = "";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Play_Categoria_Registrar";
-                cmd.Parameters.AddWithValue("@v_Categoria", txtDescripcion.Text.Trim().ToUpper());
+                cmd.CommandText = "BDVETER_Caniles_Registrar";
+                cmd.Parameters.AddWithValue("@v_Nombre", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
-                n_IdCategoria = cmd.ExecuteScalar().ToString();
+                i_IdCaniles = cmd.ExecuteScalar().ToString();
                 conexion.Close();
-                lblCodigo.Text = n_IdCategoria;
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Categoría registrada.' });</script>", false);
+                lblCodigo.Text = i_IdCaniles;
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Canil registrado.' });</script>", false);
             }
+
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: '" + ex.Message + "' });</script>", false);
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: 'El código interno ya se encuentra en uso!' });</script>", false);
         }
+    }
+    protected void btnSalir_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("ListarCaniles.aspx");
     }
 }

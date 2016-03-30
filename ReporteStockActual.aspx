@@ -60,8 +60,8 @@
     ConnectionString="<%$ ConnectionStrings:PlayConnectionString %>" SelectCommand="Play_Stock_Reporte" 
     SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="ddlAlmacen" Name="n_IdAlmacen" 
-                PropertyName="SelectedValue" Type="Decimal" />
+            <asp:ControlParameter ControlID="ddlAlmacen" Name="i_IdAlmacen" 
+                PropertyName="SelectedValue" Type="Int32" />
         </SelectParameters>
         </asp:SqlDataSource>
                          <table width="100%" 

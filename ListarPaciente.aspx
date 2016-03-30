@@ -26,7 +26,7 @@
                         <asp:DropDownList ID="ddlBusqueda" runat="server" Width="190px" 
                             AutoPostBack="True" 
                             onselectedindexchanged="ddlBusqueda_SelectedIndexChanged" CssClass="combo">
-                            <asp:ListItem Selected="True">Nombre</asp:ListItem>
+                            <asp:ListItem Selected="True">Nombre del Paciente</asp:ListItem>
                             <asp:ListItem>Fecha de Nacimiento</asp:ListItem>
                             <asp:ListItem>Fecha de Ultima Visita</asp:ListItem>
                             <asp:ListItem>Especie</asp:ListItem>
@@ -37,7 +37,7 @@
                     </td>
                     <td>
                         <asp:TextBox ID="txtBuscar" runat="server"
-                            CssClass="inputs" placeholder="Nombre del Cliente" 
+                            CssClass="inputs" placeholder="Nombre del Paciente" 
                             Width="200px" MaxLength="100"></asp:TextBox>
                         <table cellpadding="0" cellspacing="0" width="100%" id="tblFiltroFecha" runat="server" visible="false">
                             <tr>
@@ -125,7 +125,7 @@
         </div>
 
             <dx:ASPxGridViewExporter ID="ASPxGridViewExporter1" runat="server" 
-                FileName="Clientes" GridViewID="gv" Landscape="True" PaperKind="A4">
+                FileName="Pacientes" GridViewID="gv" Landscape="True" PaperKind="A4">
             </dx:ASPxGridViewExporter>
             <dx1:ASPxGridView ID="gv" runat="server" AutoGenerateColumns="False" 
                 CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" 

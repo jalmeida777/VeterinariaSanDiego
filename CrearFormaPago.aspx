@@ -1,39 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearProductos.aspx.cs" Inherits="CrearProductos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearFormaPago.aspx.cs" Inherits="CrearFormaPago" %>
 
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 
-
 <script src="js/jquery.growl.js" type="text/javascript"></script>
 <link href="css/jquery.growl.css" rel="stylesheet" type="text/css" />
-
-<script language="javascript">
-    $(function () {
-
-        $('.textboxIngresoDecimal').keypress(function (e) {
-            var character = String.fromCharCode(e.keyCode)
-            var newValue = this.value + character;
-            if (isNaN(newValue) || hasDecimalPlace(newValue, 2)) {
-                e.preventDefault();
-                return false;
-            }
-        });
-        
-        function hasDecimalPlace(value, x) {
-            var pointIndex = value.indexOf('.');
-            return pointIndex >= 0 && pointIndex < value.length - x;
-        }
-
-    });
-
-    function ValidaDecimal(e) {
-        var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
-        if (tecla > 31 && (tecla < 48 || tecla > 57) && tecla != 46)
-            return false;
-    }
-
-</script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -42,7 +14,7 @@
             <tr>
                 <td>
                     <h1 class="label">
-                        Servicio</h1>
+                        Forma de Pago</h1>
                 </td>
             </tr>
         </table>
@@ -87,29 +59,15 @@
                             <td height="10" width="20">
                 &nbsp;</td>
                             <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                &nbsp;</td>
-                            <td width="20">
-                &nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td height="10" width="20">
                 &nbsp;</td>
                             <td>
-                                <asp:Label ID="Label18" runat="server" Text="Empresa:"></asp:Label>
-                            </td>
+                &nbsp;</td>
                             <td>
-                                <asp:DropDownList ID="ddlEmpresa" runat="server" CssClass="combo" 
-                    Width="280px">
-                                </asp:DropDownList>
-                            </td>
+                &nbsp;</td>
                             <td>
-                                <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
-                                <asp:Label ID="lblCodigo" runat="server" Visible="False"></asp:Label>
-                            </td>
+                &nbsp;</td>
+                            <td>
+                &nbsp;</td>
                             <td width="20">
                 &nbsp;</td>
                         </tr>
@@ -121,31 +79,18 @@
                             </td>
                             <td>
                                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="inputNormal" placeholder="Descripción"
-                    Width="400px" style="text-transform:uppercase" MaxLength="200"></asp:TextBox>
-                                <asp:Label ID="Label17" runat="server" Font-Bold="True" ForeColor="#18AC85" 
+                    Width="300px" style="text-transform:uppercase" MaxLength="50"></asp:TextBox>
+                                <asp:Label ID="Label16" runat="server" Font-Bold="True" ForeColor="#18AC85" 
                         Text="*"></asp:Label>
                             </td>
                             <td>
-                                &nbsp;</td>
+                &nbsp;</td>
+                            <td>
+                &nbsp;</td>
+                            <td>
+                &nbsp;</td>
                             <td width="20">
                 &nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td height="10" width="20">
-                                &nbsp;</td>
-                            <td>
-                                <asp:Label ID="Label19" runat="server" Text="Precio:"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="inputNormalMoneda" 
-                                    MaxLength="6" Width="120px" onkeypress="return ValidaDecimal(event);"></asp:TextBox>
-                                <asp:Label ID="Label20" runat="server" Font-Bold="True" ForeColor="#18AC85" 
-                        Text="*"></asp:Label>
-                            </td>
-                            <td>
-                                &nbsp;</td>
-                            <td width="20">
-                                &nbsp;</td>
                         </tr>
                         <tr>
                             <td height="10" width="20">
@@ -155,7 +100,13 @@
                             </td>
                             <td>
                                 <asp:CheckBox ID="chkEstado" runat="server" Checked="True" Text="Habilitado" />
+                                <asp:Label ID="lblCodigo" runat="server" Visible="False"></asp:Label>
+                                <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
                             </td>
+                            <td>
+                &nbsp;</td>
+                            <td>
+                &nbsp;</td>
                             <td>
                 &nbsp;</td>
                             <td width="20">
@@ -163,6 +114,10 @@
                         </tr>
                         <tr>
                             <td height="10" width="20">
+                &nbsp;</td>
+                            <td>
+                &nbsp;</td>
+                            <td>
                 &nbsp;</td>
                             <td>
                 &nbsp;</td>

@@ -8,27 +8,23 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-public partial class CrearSubCategoria : System.Web.UI.Page
+public partial class CrearMotivoInternamiento : System.Web.UI.Page
 {
     SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["conexion"].ConnectionString);
-
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Page.IsPostBack == false)
         {
 
-            ListarCategoria();
-
-            if (Request.QueryString["i_IdSubCategoria"] != null)
+            if (Request.QueryString["i_IdMotivoInternamiento"] != null)
             {
-                int i_IdSubCategoria = int.Parse(Request.QueryString["i_IdSubCategoria"].ToString());
+                int i_IdMotivoInternamiento = int.Parse(Request.QueryString["i_IdMotivoInternamiento"].ToString());
                 DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("Play_SubCategoria_Seleccionar " + i_IdSubCategoria.ToString(), conexion);
+                SqlDataAdapter da = new SqlDataAdapter("BDVETER_MotivoInternamiento_Seleccionar " + i_IdMotivoInternamiento.ToString(), conexion);
                 da.Fill(dt);
-                lblCodigo.Text = i_IdSubCategoria.ToString();
+                lblCodigo.Text = i_IdMotivoInternamiento.ToString();
                 txtDescripcion.Text = dt.Rows[0]["v_Descripcion"].ToString();
                 chkEstado.Checked = bool.Parse(dt.Rows[0]["b_Estado"].ToString());
-                ddlCategoria.SelectedValue = dt.Rows[0]["i_IdCategoria"].ToString();
             }
             else
             {
@@ -38,23 +34,10 @@ public partial class CrearSubCategoria : System.Web.UI.Page
         }
     }
 
-    void ListarCategoria()
-    {
-        DataTable dt = new DataTable();
-        SqlDataAdapter da = new SqlDataAdapter("Play_Categoria_Combo", conexion);
-        da.Fill(dt);
-        ddlCategoria.DataSource = dt;
-        ddlCategoria.DataTextField = "v_Categoria";
-        ddlCategoria.DataValueField = "i_IdCategoria";
-        ddlCategoria.DataBind();
-        ddlCategoria.SelectedIndex = 0;
-    }
-
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("ListarSubCategoria.aspx");
+        Response.Redirect("ListarMotivoInternamiento.aspx");
     }
-
     protected void btnGuardar_Click(object sender, ImageClickEventArgs e)
     {
         if (txtDescripcion.Text == "")
@@ -63,7 +46,9 @@ public partial class CrearSubCategoria : System.Web.UI.Page
             txtDescripcion.Focus();
             return;
         }
-      
+
+       
+
         try
         {
             if (lblCodigo.Text.Trim() != "")
@@ -71,37 +56,34 @@ public partial class CrearSubCategoria : System.Web.UI.Page
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Play_SubCategoria_Actualizar";
-                cmd.Parameters.AddWithValue("@i_IdSubCategoria", lblCodigo.Text);
-                cmd.Parameters.AddWithValue("@i_IdCategoria", ddlCategoria.SelectedValue);
+                cmd.CommandText = "BDVETER_MotivoInternamiento_Actualizar";
+                cmd.Parameters.AddWithValue("@i_IdMotivoInternamiento", lblCodigo.Text);
                 cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
                 conexion.Close();
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Sub Categoria actualizada.' });</script>", false);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Motivo de Internamiento actualizado.' });</script>", false);
             }
             else
             {
-                string i_IdSubCategoria = "";
+                string i_IdMotivoInternamiento = "";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Play_SubCategoria_Insertar";
-                cmd.Parameters.AddWithValue("@i_IdCategoria", ddlCategoria.SelectedValue);
+                cmd.CommandText = "BDVETER_MotivoInternamiento_Registrar";
                 cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
-                i_IdSubCategoria = cmd.ExecuteScalar().ToString();
+                i_IdMotivoInternamiento = cmd.ExecuteScalar().ToString();
                 conexion.Close();
-                lblCodigo.Text = i_IdSubCategoria;
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Sub Categoria registrada.' });</script>", false);
+                lblCodigo.Text = i_IdMotivoInternamiento;
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Motivo de Internamiento registrado.' });</script>", false);
             }
-
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: 'El código interno ya se encuentra en uso!' });</script>", false);
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: '" + ex.Message + "' });</script>", false);
         }
     }
 }

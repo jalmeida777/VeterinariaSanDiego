@@ -70,12 +70,6 @@
                 &nbsp;</td>
             <td>
                 &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
             <td width="20">
                 &nbsp;</td>
         </tr>
@@ -87,16 +81,10 @@
             </td>
             <td>
                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="inputNormal" placeholder="Descripción"
-                    Width="300px" style="text-transform:uppercase" MaxLength="10"></asp:TextBox>
+                    Width="300px" style="text-transform:uppercase" MaxLength="20"></asp:TextBox>
                 <asp:Label ID="Label16" runat="server" Font-Bold="True" ForeColor="#18AC85" 
                         Text="*"></asp:Label>
             </td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
             <td width="20">
                 &nbsp;</td>
         </tr>
@@ -111,23 +99,11 @@
                 <asp:Label ID="lblCodigo" runat="server" Visible="False"></asp:Label>
                 <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
             </td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
             <td width="20">
                 &nbsp;</td>
         </tr>
         <tr>
             <td height="10" width="20">
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
-                &nbsp;</td>
-            <td>
                 &nbsp;</td>
             <td>
                 &nbsp;</td>

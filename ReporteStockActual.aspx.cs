@@ -29,7 +29,7 @@ public partial class Reportes_ReporteStockActual : System.Web.UI.Page
             dtAlmacen = (DataTable)Session["dtAlmacenes"];
             ddlAlmacen.DataSource = dtAlmacen;
             ddlAlmacen.DataTextField = "v_Descripcion";
-            ddlAlmacen.DataValueField = "n_IdAlmacen";
+            ddlAlmacen.DataValueField = "i_IdAlmacen";
             ddlAlmacen.DataBind();
             ddlAlmacen.SelectedIndex = 0;
         }

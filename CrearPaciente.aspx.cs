@@ -35,7 +35,7 @@ public partial class CrearPaciente : System.Web.UI.Page
                 SqlDataAdapter da = new SqlDataAdapter("select v_Nombres from Cliente where i_IdCliente = " + hfCliente.Value, conexion);
                 da.Fill(dt);
 
-                lblNombreCliente.Text = dt.Rows[0]["v_Nombres"].ToString();
+                txtCliente.Text = dt.Rows[0]["v_Nombres"].ToString();
                 lblUltimaVisita.Text = DateTime.Now.ToShortDateString();
                 txtFechaNacimiento.Text = DateTime.Now.ToShortDateString();
                 TabContainer1.Tabs[1].Enabled = false;
@@ -59,7 +59,7 @@ public partial class CrearPaciente : System.Web.UI.Page
         da.Fill(dt);
         txtNombre.Text = dt.Rows[0]["v_NombrePaciente"].ToString();
         lblCodigoPaciente.Text = dt.Rows[0]["i_IdPaciente"].ToString();
-        lblNombreCliente.Text = dt.Rows[0]["NombreCliente"].ToString();
+        txtCliente.Text = dt.Rows[0]["NombreCliente"].ToString();
         txtHistoria.Text = dt.Rows[0]["v_NumeroHistoria"].ToString();
         ddlEspecie.SelectedValue = dt.Rows[0]["i_IdEspecie"].ToString();
         ddlEspecie_SelectedIndexChanged(null, null);

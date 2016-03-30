@@ -71,10 +71,10 @@
             <asp:Panel ID="Panel1" runat="server" Height="600px" ScrollBars="Vertical" 
                 Width="100%">
                 <asp:GridView ID="gvProveedor" runat="server" AutoGenerateColumns="False" 
-                    CssClass="grid" DataKeyNames="n_IdProveedor" 
+                    CssClass="grid" DataKeyNames="i_IdProveedor" 
                     onrowdatabound="gvProveedor_RowDataBound" Width="100%">
                     <Columns>
-                        <asp:BoundField DataField="n_IdAlmacen" HeaderText="Id" Visible="False">
+                        <asp:BoundField DataField="i_IdProveedor" HeaderText="Id" Visible="False">
                         <ItemStyle HorizontalAlign="Center" Width="50px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="v_Nombre" HeaderText="Nombre">

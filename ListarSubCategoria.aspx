@@ -12,7 +12,7 @@
                 <tr>
                     <td colspan="2">
                         <h1 class="label">
-                            Administración de SubCategorias</h1>
+                            Administración de Sub Categorías</h1>
                     </td>
                 </tr>
                 <tr>
@@ -27,8 +27,8 @@
                                         placeholder="Buscar" Width="200px" AutoPostBack="True" 
                                         ontextchanged="txtBuscar_TextChanged"></asp:TextBox>
                                 </td>
-                                <td width="60" class="label">
-                                    <asp:Label ID="Label3" runat="server" Text="Categoria:"></asp:Label>
+                                <td width="80" class="label">
+                                    <asp:Label ID="Label3" runat="server" Text="Categoría:"></asp:Label>
                                 </td>
                                 <td width="205">
                                     <asp:DropDownList ID="ddlCategoria" runat="server" Width="200px" 

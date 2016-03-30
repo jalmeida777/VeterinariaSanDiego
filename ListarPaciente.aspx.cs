@@ -32,7 +32,7 @@ public partial class ListarPaciente : System.Web.UI.Page
 
     protected void ddlBusqueda_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (ddlBusqueda.SelectedValue == "Nombre")
+        if (ddlBusqueda.SelectedValue == "Nombre del Paciente")
         {
             txtBuscar.Visible = true;
             tblFiltroFecha.Visible = false;
@@ -89,6 +89,7 @@ public partial class ListarPaciente : System.Web.UI.Page
                 ListarRazas();
             }
             ddlEspecie.SelectedIndex = 0;
+            ListarRazas();
             if (ddlRaza.Items.Count == 0)
             {
                 ddlRaza.Enabled = false;
@@ -127,6 +128,7 @@ public partial class ListarPaciente : System.Web.UI.Page
             }
             ddlEstado.SelectedIndex = 0;
         }
+        Listar();
     }
 
     protected void btnConsultar_Click(object sender, ImageClickEventArgs e)
@@ -150,7 +152,7 @@ public partial class ListarPaciente : System.Web.UI.Page
         consulta = consulta + "inner join Sexo sex on sex.i_IdSexo = pac.i_IdSexo ";
         consulta = consulta + "inner join PacienteEstado pe on pac.i_IdPacienteEstado = pe.i_IdPacienteEstado ";
 
-        if (ddlBusqueda.SelectedValue == "Nombre")
+        if (ddlBusqueda.SelectedValue == "Nombre del Paciente")
         {
             consulta = consulta + " where pac.v_NombrePaciente like '%" + txtBuscar.Text + "%' ";
         }
@@ -168,7 +170,14 @@ public partial class ListarPaciente : System.Web.UI.Page
         }
         else if (ddlBusqueda.SelectedValue == "Raza") 
         {
-            consulta = consulta + "and raz.v_Descripcion like '" + ddlRaza.SelectedItem.Text + "' + '%'";
+            if (ddlRaza.Items.Count == 0)
+            {
+                return;
+            }
+            else
+            {
+                consulta = consulta + "and raz.v_Descripcion like '" + ddlRaza.SelectedItem.Text + "' + '%'";
+            }
         }
         else if (ddlBusqueda.SelectedValue == "Sexo") 
         {
@@ -176,7 +185,14 @@ public partial class ListarPaciente : System.Web.UI.Page
         }
         else if (ddlBusqueda.SelectedValue == "Estado") 
         {
-            consulta = consulta + "and pe.v_Estado like '" + ddlEstado.SelectedItem.Text + "' + '%'";
+            if (ddlEstado.SelectedIndex == 0) 
+            {
+                consulta = consulta + "and pe.v_Estado like '%'";
+            }
+            else
+            {
+                consulta = consulta + "and pe.v_Estado like '" + ddlEstado.SelectedItem.Text + "' + '%'";
+            }
         }
 
         consulta = consulta + " order by pac.v_NombrePaciente";

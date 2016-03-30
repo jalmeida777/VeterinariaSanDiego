@@ -370,7 +370,7 @@
         <Top>0.29104cm</Top>
         <Left>0.46498cm</Left>
         <Height>1.2cm</Height>
-        <Width>17.20983cm</Width>
+        <Width>17.20982cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -388,20 +388,6 @@
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Image Name="Image2">
-          <Source>Embedded</Source>
-          <Value>logoPlay</Value>
-          <Sizing>FitProportional</Sizing>
-          <Top>0.30833cm</Top>
-          <Left>0.46497cm</Left>
-          <Height>1.39417cm</Height>
-          <Width>3.77542cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </Image>
         <Textbox Name="Textbox1">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
@@ -426,7 +412,6 @@
           <Left>4.63953cm</Left>
           <Height>1.36702cm</Height>
           <Width>9.70632cm</Width>
-          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -469,7 +454,7 @@
           <Left>14.75139cm</Left>
           <Height>0.6cm</Height>
           <Width>2.92342cm</Width>
-          <ZIndex>2</ZIndex>
+          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -512,7 +497,7 @@
           <Left>14.75139cm</Left>
           <Height>0.6cm</Height>
           <Width>2.92342cm</Width>
-          <ZIndex>3</ZIndex>
+          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -528,7 +513,7 @@
           <Left>0.46498cm</Left>
           <Height>0cm</Height>
           <Width>17.20984cm</Width>
-          <ZIndex>4</ZIndex>
+          <ZIndex>3</ZIndex>
           <Style>
             <Border>
               <Color>Silver</Color>

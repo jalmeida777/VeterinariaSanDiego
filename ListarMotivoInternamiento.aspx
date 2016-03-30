@@ -1,6 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ListarMedico.aspx.cs" Inherits="ListarMedico" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ListarMotivoInternamiento.aspx.cs" Inherits="ListarMotivoInternamiento" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -10,11 +13,11 @@
                     <tr>
                         <td colspan="2">
                             <h1 class="label">
-                                Administración de Medicos</h1>
+                                Administración de Motivo de Internamiento</h1>
                         </td>
                     </tr>
                     <tr>
-                        <td width="50" class="label">
+                        <td width="55" class="label">
                             <asp:Label ID="Label2" runat="server" Text="Buscar:"></asp:Label>
                         </td>
                         <td>
@@ -26,6 +29,12 @@
                                         ontextchanged="txtBuscar_TextChanged"></asp:TextBox>
                                     </td>
                                     <td>
+                                        <asp:CheckBox ID="chkEstado" runat="server" AutoPostBack="True" Checked="True" 
+                                        oncheckedchanged="chkEstado_CheckedChanged" Text="Ver Habilitados" />
+                                    </td>
+                                    <td align="right" width="70">
+                                    &nbsp;</td>
+                                    <td align="right" width="70">
                                     &nbsp;</td>
                                 </tr>
                             </table>
@@ -46,7 +55,7 @@
                         </td>
                         <td>
                             <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
-                                onclick="btnSalir_Click" />
+                        onclick="btnSalir_Click" />
                         </td>
                     </tr>
                 </table>
@@ -59,20 +68,20 @@
             </asp:UpdateProgress>
             <asp:Panel ID="Panel1" runat="server" Height="600px" ScrollBars="Vertical" 
                 Width="100%">
-                <asp:GridView ID="gvMedico" runat="server" AutoGenerateColumns="False" 
-                    CssClass="grid" DataKeyNames="i_IdMedico" 
-                    onrowdatabound="gvAlmacen_RowDataBound" Width="100%">
+                <asp:GridView ID="gvInternamiento" runat="server" AutoGenerateColumns="False" 
+                    CssClass="grid" DataKeyNames="i_IdMotivoInternamiento" 
+                    onrowdatabound="gvCategoria_RowDataBound" Width="100%">
                     <Columns>
-                        <asp:BoundField DataField="i_IdMedico" HeaderText="Id" Visible="False">
+                        <asp:BoundField DataField="i_IdMotivoInternamiento" HeaderText="Id" 
+                            Visible="False">
+                        <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" Width="50px" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="v_Nombre" HeaderText="Medico"></asp:BoundField>
-                        <asp:BoundField DataField="v_Telefono" HeaderText="Telefono" />
-                        <asp:BoundField DataField="v_Celular" HeaderText="Celular" />
-                        <asp:BoundField DataField="v_Email" HeaderText="Email" />
+                        <asp:BoundField DataField="v_Descripcion" HeaderText="Descripción">
+                        </asp:BoundField>
                         <asp:TemplateField HeaderText="Editar">
                             <ItemTemplate>
-                                <asp:ImageButton ID="ibEditar" runat="server" ImageUrl="~/images/edit.png" 
+                                <asp:ImageButton ID="btnEditar" runat="server" ImageUrl="~/images/edit.png" 
                                     ToolTip="Editar" />
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Center" />
@@ -81,6 +90,16 @@
                     </Columns>
                 </asp:GridView>
             </asp:Panel>
+            <table width="100%">
+                <tr>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+            </table>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

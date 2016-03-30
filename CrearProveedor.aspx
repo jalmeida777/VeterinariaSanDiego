@@ -160,6 +160,47 @@
             <td height="10" width="20">
                 &nbsp;</td>
             <td>
+                <asp:Label ID="Label22" runat="server" Text="Provincia:"></asp:Label>
+            </td>
+            <td>
+                                    <asp:DropDownList runat="server" AutoPostBack="True" 
+                    CssClass="combo" Width="300px" ID="ddlProvincia" 
+                    OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
+
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td width="20">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td height="10" width="20">
+                &nbsp;</td>
+            <td>
+                <asp:Label ID="Label23" runat="server" Text="Distrito:"></asp:Label>
+            </td>
+            <td>
+                                    <asp:DropDownList runat="server" CssClass="combo" 
+                    Width="300px" ID="ddlDistrito"></asp:DropDownList>
+
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td width="20">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td height="10" width="20">
+                &nbsp;</td>
+            <td>
                 <asp:Label ID="Label20" runat="server" Text="Contacto:"></asp:Label>
             </td>
             <td>

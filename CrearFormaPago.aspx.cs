@@ -8,26 +8,25 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-public partial class CrearCategoria : System.Web.UI.Page
+public partial class CrearFormaPago : System.Web.UI.Page
 {
     SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["conexion"].ConnectionString);
-
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Page.IsPostBack == false)
         {
 
-            if (Request.QueryString["i_IdCategoria"] != null)
+            if (Request.QueryString["n_IdFormaPago"] != null)
             {
-                int i_IdCategoria = int.Parse(Request.QueryString["i_IdCategoria"].ToString());
+                Double n_IdFormaPago = Double.Parse(Request.QueryString["n_IdFormaPago"].ToString());
                 DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("Play_Categoria_Seleccionar " + i_IdCategoria.ToString(), conexion);
+                SqlDataAdapter da = new SqlDataAdapter("BDVETER_FormaPago_Seleccionar " + n_IdFormaPago.ToString(), conexion);
                 da.Fill(dt);
-                lblCodigo.Text = i_IdCategoria.ToString();
-                txtDescripcion.Text = dt.Rows[0]["v_Categoria"].ToString();
+                lblCodigo.Text = n_IdFormaPago.ToString();
+                txtDescripcion.Text = dt.Rows[0]["v_FormaPago"].ToString();
                 chkEstado.Checked = bool.Parse(dt.Rows[0]["b_Estado"].ToString());
             }
-            else 
+            else
             {
             }
 
@@ -37,12 +36,11 @@ public partial class CrearCategoria : System.Web.UI.Page
 
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("ListarCategoria.aspx");
+        Response.Redirect("ListarFormaPago.aspx");
     }
-
     protected void btnGuardar_Click(object sender, ImageClickEventArgs e)
     {
-        if (txtDescripcion.Text == "") 
+        if (txtDescripcion.Text == "")
         {
             ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar la descripción' });</script>", false);
             txtDescripcion.Focus();
@@ -56,29 +54,29 @@ public partial class CrearCategoria : System.Web.UI.Page
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Play_Categoria_Actualizar";
-                cmd.Parameters.AddWithValue("@i_IdCategoria", lblCodigo.Text);
-                cmd.Parameters.AddWithValue("@v_Categoria", txtDescripcion.Text.Trim().ToUpper());
+                cmd.CommandText = "BDVETER_FormaPago_Actualizar";
+                cmd.Parameters.AddWithValue("@n_IdFormaPago", lblCodigo.Text);
+                cmd.Parameters.AddWithValue("@v_FormaPago", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
                 conexion.Close();
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Categoría actualizada.' });</script>", false);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Forma de Pago actualizada.' });</script>", false);
             }
             else
             {
-                string n_IdCategoria = "";
+                string n_IdFormaPago = "";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Play_Categoria_Registrar";
-                cmd.Parameters.AddWithValue("@v_Categoria", txtDescripcion.Text.Trim().ToUpper());
+                cmd.CommandText = "BDVETER_FormaPago_Registrar";
+                cmd.Parameters.AddWithValue("@v_FormaPago", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
-                n_IdCategoria = cmd.ExecuteScalar().ToString();
+                n_IdFormaPago = cmd.ExecuteScalar().ToString();
                 conexion.Close();
-                lblCodigo.Text = n_IdCategoria;
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Categoría registrada.' });</script>", false);
+                lblCodigo.Text = n_IdFormaPago;
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Forma de pago registrada.' });</script>", false);
             }
         }
         catch (Exception ex)

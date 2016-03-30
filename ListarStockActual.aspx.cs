@@ -22,7 +22,6 @@ public partial class Procesos_ListarStockActual : System.Web.UI.Page
         if (Page.IsPostBack == false)
         {
             ListarSucursal();
-            Permisos();
         }
     }
 
@@ -34,7 +33,7 @@ public partial class Procesos_ListarStockActual : System.Web.UI.Page
             dtAlmacen = (DataTable)Session["dtAlmacenes"];
             ddlAlmacen.DataSource = dtAlmacen;
             ddlAlmacen.DataTextField = "v_Descripcion";
-            ddlAlmacen.DataValueField = "n_IdAlmacen";
+            ddlAlmacen.DataValueField = "i_IdAlmacen";
             ddlAlmacen.DataBind();
             ddlAlmacen.SelectedIndex = 0;
             if (dtAlmacen.Rows.Count >= 1)
@@ -70,40 +69,25 @@ public partial class Procesos_ListarStockActual : System.Web.UI.Page
     {
         if (e.RowType == DevExpress.Web.ASPxGridView.GridViewRowType.Data)
         {
-            string n_IdProducto = e.GetValue("n_IdProducto").ToString();
-            int i_IdMenu = int.Parse(Request.QueryString["IdMenu"]);
+            string i_IdProducto = e.GetValue("i_IdProducto").ToString();
 
             LinkButton LinkButton1 = new LinkButton();
             LinkButton1 = (LinkButton)ASPxGridView1.FindRowCellTemplateControl(e.VisibleIndex, (GridViewDataColumn)(ASPxGridView1.Columns[4]), "LinkButton1");
 
-            LinkButton1.PostBackUrl = "ListarKardex.aspx?n_IdProducto=" + n_IdProducto + "&n_IdAlmacen=" + ddlAlmacen.SelectedValue + "&origen=sucursal&IdMenu=" + i_IdMenu;
+            LinkButton1.PostBackUrl = "ListarKardex.aspx?i_IdProducto=" + i_IdProducto + "&i_IdAlmacen=" + ddlAlmacen.SelectedValue + "&origen=sucursal";
 
             LinkButton lbProducto = new LinkButton();
             lbProducto = (LinkButton)ASPxGridView1.FindRowCellTemplateControl(e.VisibleIndex, (GridViewDataColumn)(ASPxGridView1.Columns[2]), "lbProducto");
-            lbProducto.PostBackUrl = "CrearProducto.aspx?n_IdProducto=" + n_IdProducto + "&IdMenu=30";
-            lbProducto.Enabled = chkEditar.Checked;
+            lbProducto.PostBackUrl = "CrearProducto.aspx?i_IdProducto=" + i_IdProducto + "&IdMenu=30";
         }
     }
 
-    void Permisos()
-    {
-        DataTable dtUsuario = new DataTable();
-        dtUsuario = (DataTable)Session["dtUsuario"];
-        int i_IdRol = int.Parse(dtUsuario.Rows[0]["i_IdRol"].ToString());
-        int i_IdMenu = int.Parse(Request.QueryString["IdMenu"]);
-
-        DataTable dtPermisos = new DataTable();
-        SqlDataAdapter daPermisos = new SqlDataAdapter("Play_Permisos_Select " + i_IdRol + "," + i_IdMenu, conexion);
-        daPermisos.Fill(dtPermisos);
-
-        chkEditar.Checked = bool.Parse(dtPermisos.Rows[0]["b_Estado"].ToString());
-
-    }
+    
     protected void callbackPanel_Callback(object sender, DevExpress.Web.ASPxClasses.CallbackEventArgsBase e)
     {
-        int n_IdProducto = Convert.ToInt32(e.Parameter);
+        int i_IdProducto = Convert.ToInt32(e.Parameter);
         DataTable dt = new DataTable();
-        SqlDataAdapter da = new SqlDataAdapter("select v_RutaImagen,v_CodigoInterno,v_Descripcion from producto where n_IdProducto=" + n_IdProducto, conexion);
+        SqlDataAdapter da = new SqlDataAdapter("select v_RutaImagen,v_CodigoInterno,v_Descripcion from producto where i_IdProducto=" + i_IdProducto, conexion);
         da.Fill(dt);
         lblCodigo.Text = dt.Rows[0]["v_CodigoInterno"].ToString();
         lblProducto.Text = dt.Rows[0]["v_Descripcion"].ToString();

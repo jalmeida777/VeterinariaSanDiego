@@ -91,7 +91,7 @@
 
         <dx:ASPxGridView ID="ASPxGridView1" runat="server" AutoGenerateColumns="False" 
             CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" CssPostfix="PlasticBlue" 
-            DataSourceID="SqlDataSource1" KeyFieldName="n_IdProducto" Width="100%" 
+            DataSourceID="SqlDataSource1" KeyFieldName="i_IdProducto" Width="100%" 
             onhtmlrowprepared="ASPxGridView1_HtmlRowPrepared" 
         EnableCallbackCompression="False" EnableCallBacks="False" 
         EnableRowsCache="False" EnableTheming="False" EnableViewState="False">
@@ -186,7 +186,7 @@
             ConnectionString="<%$ ConnectionStrings:PlayConnectionString %>" 
             SelectCommand="Play_Stock_Listar" SelectCommandType="StoredProcedure">
             <SelectParameters>
-                <asp:ControlParameter ControlID="ddlAlmacen" Name="n_IdAlmacen" 
+                <asp:ControlParameter ControlID="ddlAlmacen" Name="i_IdAlmacen" 
                     PropertyName="SelectedValue" Type="Int32" />
                 <asp:ControlParameter ControlID="chkStockCero" Name="b_stockCero" 
                     PropertyName="Checked" Type="Boolean" />
