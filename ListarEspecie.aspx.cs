@@ -27,8 +27,10 @@ public partial class ListarEspecie : System.Web.UI.Page
 
     void Listar()
     {
+        string Estado = "";
+        if (chkEstado.Checked) { Estado = "1"; } else { Estado = "0"; }
         DataTable dt = new DataTable();
-        SqlDataAdapter da = new SqlDataAdapter("BDVETER_Especie_Listar '" + txtBuscar.Text.Trim() + "'", conexion);
+        SqlDataAdapter da = new SqlDataAdapter("BDVETER_Especie_Listar '" + txtBuscar.Text.Trim() + "'," + Estado, conexion);
         da.Fill(dt);
         gvAlmacen.DataSource = dt;
         gvAlmacen.DataBind();
@@ -43,6 +45,10 @@ public partial class ListarEspecie : System.Web.UI.Page
     }
 
     protected void txtBuscar_TextChanged(object sender, EventArgs e)
+    {
+        Listar();
+    }
+    protected void chkEstado_CheckedChanged(object sender, EventArgs e)
     {
         Listar();
     }

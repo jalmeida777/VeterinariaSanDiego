@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Marca" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearMarca.aspx.cs" Inherits="CrearMarca" %>
+﻿<%@ Page Title="Crear Unidad Equivalencia" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="CrearUnidadEquivalencia.aspx.cs" Inherits="CrearUnidadEquivalencia" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
@@ -6,16 +6,24 @@
 <script src="js/jquery.growl.js" type="text/javascript"></script>
 <link href="css/jquery.growl.css" rel="stylesheet" type="text/css" />
 
+<script type="text/javascript">
+
+    function ValidaDecimal(e) {
+        var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+        if (tecla > 31 && (tecla < 48 || tecla > 57) && tecla != 46)
+            return false;
+    }
+    </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-
-        <div class="divBusqueda">
+<div class="divBusqueda">
             <table width="100%">
                 <tr>
                     <td>
                         <h1 class="label">
-                            Marca</h1>
+                            Crear Unidad Equivalencia</h1>
                     </td>
                 </tr>
                 </table>
@@ -66,7 +74,7 @@
         <tr>
             <td height="10" width="20">
                 &nbsp;</td>
-            <td>
+            <td width="170">
                 &nbsp;</td>
             <td>
                 &nbsp;</td>
@@ -83,24 +91,60 @@
             <td height="10" width="20">
                 &nbsp;</td>
             <td>
-                <asp:Label ID="Label2" runat="server" Text="Descripción:"></asp:Label>
+                <asp:Label ID="Label17" runat="server" Text="Unidad Base:"></asp:Label>
             </td>
             <td>
-                <asp:TextBox ID="txtDescripcion" runat="server" CssClass="inputNormal" placeholder="Descripción"
-                    Width="300px" style="text-transform:uppercase"></asp:TextBox>
+                <asp:DropDownList ID="ddlUnidadBase" runat="server" CssClass="combo" 
+                    Width="200px">
+                </asp:DropDownList>
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td width="20">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td height="10" width="20">
+                &nbsp;</td>
+            <td>
+                <asp:Label ID="Label2" runat="server" Text="Factor de Equivalencia:"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="txtFactor" runat="server" CssClass="inputNormal" placeholder="Factor"
+                    Width="80px"  onkeypress="return ValidaDecimal(event);" ></asp:TextBox>
                 <asp:Label ID="Label16" runat="server" Font-Bold="True" ForeColor="#18AC85" 
                         Text="*"></asp:Label>
-                <asp:Label ID="Label15" runat="server" Font-Bold="True" ForeColor="#18AC85" 
-                        Text="*"></asp:Label>
             </td>
             <td>
                 &nbsp;</td>
             <td>
                 &nbsp;</td>
             <td>
-                <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
-                <asp:Label ID="lblCodigo" runat="server" Visible="False"></asp:Label>
+                &nbsp;</td>
+            <td width="20">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td height="10" width="20">
+                &nbsp;</td>
+            <td>
+                <asp:Label ID="Label18" runat="server" Text="Unidad Equivalencia:"></asp:Label>
             </td>
+            <td>
+                <asp:DropDownList ID="ddlUnidadEquivalencia" runat="server" CssClass="combo" 
+                    Width="200px">
+                </asp:DropDownList>
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
             <td width="20">
                 &nbsp;</td>
         </tr>
@@ -112,6 +156,8 @@
             </td>
             <td>
                 <asp:CheckBox ID="chkEstado" runat="server" Checked="True" Text="Habilitado" />
+                <asp:Label ID="lblCodigo" runat="server" Visible="False"></asp:Label>
+                <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
             </td>
             <td>
                 &nbsp;</td>
@@ -144,5 +190,6 @@
                 &nbsp;</td>
             <td>
                 &nbsp;</table>
+
 </asp:Content>
 

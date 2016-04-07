@@ -88,4 +88,8 @@ public partial class CrearTipoDocumentoCliente : System.Web.UI.Page
     {
         Response.Redirect("ListarTipoDocumentoCliente.aspx");
     }
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
+        txtDescripcion.Text = "";
+    }
 }

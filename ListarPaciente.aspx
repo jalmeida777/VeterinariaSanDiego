@@ -27,6 +27,7 @@
                             AutoPostBack="True" 
                             onselectedindexchanged="ddlBusqueda_SelectedIndexChanged" CssClass="combo">
                             <asp:ListItem Selected="True">Nombre del Paciente</asp:ListItem>
+                            <asp:ListItem>Nombre del Cliente</asp:ListItem>
                             <asp:ListItem>Fecha de Nacimiento</asp:ListItem>
                             <asp:ListItem>Fecha de Ultima Visita</asp:ListItem>
                             <asp:ListItem>Especie</asp:ListItem>
@@ -39,6 +40,9 @@
                         <asp:TextBox ID="txtBuscar" runat="server"
                             CssClass="inputs" placeholder="Nombre del Paciente" 
                             Width="200px" MaxLength="100"></asp:TextBox>
+                        <asp:TextBox ID="txtBuscarCliente" runat="server"
+                            CssClass="inputs" placeholder="Nombre del Cliente" 
+                            Width="200px" MaxLength="100" Visible="False"></asp:TextBox>
                         <table cellpadding="0" cellspacing="0" width="100%" id="tblFiltroFecha" runat="server" visible="false">
                             <tr>
                                 <td width="110">

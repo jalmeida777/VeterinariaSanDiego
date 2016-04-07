@@ -32,10 +32,12 @@
                     </cc1:ConfirmButtonExtender>
                 </td>
                 <td width="65">
-                    <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
-                                onclick="btnSalir_Click" />
+                    <asp:Button ID="btnCancelar" runat="server" onclick="btnCancelar_Click" 
+                        Text="Cancelar" />
                 </td>
                 <td>
+                    <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
+                                onclick="btnSalir_Click" />
                 </td>
             </tr>
         </table>

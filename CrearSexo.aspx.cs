@@ -86,4 +86,8 @@ public partial class CrearSexo : System.Web.UI.Page
     {
         Response.Redirect("ListarSexo.aspx");
     }
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
+        txtDescripcion.Text = "";
+    }
 }

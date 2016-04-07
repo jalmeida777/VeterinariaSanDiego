@@ -39,7 +39,7 @@ public partial class CrearProducto : System.Web.UI.Page
                 rblTipo_SelectedIndexChanged(null, null);
                 lblCodigo.Text = n_IdProducto;
                 txtCodigoInterno.Text = dt.Rows[0]["v_CodigoInterno"].ToString();
-                lblCodigoBarras.Text = dt.Rows[0]["v_CodigoBarras"].ToString();
+                txtCodigoBarras.Text = dt.Rows[0]["v_CodigoBarras"].ToString();
                 txtDescripcion.Text = dt.Rows[0]["v_Descripcion"].ToString();
 
                 if (dt.Rows[0]["v_RutaImagen"].ToString().Trim() == "")
@@ -227,6 +227,7 @@ public partial class CrearProducto : System.Web.UI.Page
                     cmd.CommandText = "Play_Producto_Insertar";
                     cmd.Parameters.AddWithValue("@c_Tipo", rblTipo.SelectedValue);
                     cmd.Parameters.AddWithValue("@v_CodigoInterno", txtCodigoInterno.Text);
+                    cmd.Parameters.AddWithValue("@v_CodigoBarras", txtCodigoBarras.Text);
                     cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                     if (lblRuta.Text.Trim() == "") 
                     {
@@ -252,11 +253,6 @@ public partial class CrearProducto : System.Web.UI.Page
                     conexion.Close();
                     lblCodigo.Text = resultado;
 
-                    //Obtener código de barras
-                    DataTable dt = new DataTable();
-                    SqlDataAdapter da = new SqlDataAdapter("select v_CodigoBarras from Producto where i_IdProducto=" + resultado, conexion);
-                    da.Fill(dt);
-                    lblCodigoBarras.Text = dt.Rows[0]["v_CodigoBarras"].ToString();
 
                     //Guardar imagen con id del producto
                     if (lblRuta.Text.Trim() != "")
@@ -314,6 +310,7 @@ public partial class CrearProducto : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@i_IdProducto", lblCodigo.Text.Trim());
                 cmd.Parameters.AddWithValue("@c_Tipo", rblTipo.SelectedValue);
                 cmd.Parameters.AddWithValue("@v_CodigoInterno", txtCodigoInterno.Text);
+                cmd.Parameters.AddWithValue("@v_CodigoBarras", txtCodigoBarras.Text);
                 cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_RutaImagen", lblRuta.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@f_Precio", txtPrecio.Text);
@@ -331,12 +328,6 @@ public partial class CrearProducto : System.Web.UI.Page
                 resultado = cmd.ExecuteScalar().ToString();
                 conexion.Close();
                 lblCodigo.Text = resultado;
-
-                //Obtener código de barras
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("select v_CodigoBarras from Producto where i_IdProducto=" + resultado, conexion);
-                da.Fill(dt);
-                lblCodigoBarras.Text = dt.Rows[0]["v_CodigoBarras"].ToString();
 
                 //Crear imagen redimensionada
                 string path = HttpContext.Current.Server.MapPath(lblRuta.Text.Trim().ToUpper());

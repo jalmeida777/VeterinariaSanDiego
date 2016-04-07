@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-public partial class ListarConceptoGastos : System.Web.UI.Page
+public partial class ListarUnidadMedida : System.Web.UI.Page
 {
     SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["conexion"].ConnectionString);
     protected void Page_Load(object sender, EventArgs e)
@@ -18,7 +18,7 @@ public partial class ListarConceptoGastos : System.Web.UI.Page
             Label lblTitulo = (Label)Master.FindControl("lblTitulo");
             if (lblTitulo != null)
             {
-                lblTitulo.Text = "Administración de Conceptos de Caja";
+                lblTitulo.Text = "Administración de Unidad de Medida";
             }
             Listar();
         }
@@ -30,11 +30,11 @@ public partial class ListarConceptoGastos : System.Web.UI.Page
         string Estado = "";
         if (chkEstado.Checked) { Estado = "1"; } else { Estado = "0"; }
         DataTable dt = new DataTable();
-        SqlDataAdapter da = new SqlDataAdapter("BDVETER_CajaConcepto_Listar '" + txtBuscar.Text.Trim() + "'," + Estado, conexion);
+        SqlDataAdapter da = new SqlDataAdapter("BDVETER_Unidad_Listar '" + txtBuscar.Text.Trim() + "'," + Estado, conexion);
         da.Fill(dt);
 
-        gvConceptoGastos.DataSource = dt;
-        gvConceptoGastos.DataBind();
+        gvUnidad.DataSource = dt;
+        gvUnidad.DataBind();
     }
 
     protected void btnConsultar_Click(object sender, ImageClickEventArgs e)
@@ -44,7 +44,7 @@ public partial class ListarConceptoGastos : System.Web.UI.Page
 
     protected void btnNuevo_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("CrearConceptoGasto.aspx");
+        Response.Redirect("CrearUnidadMedida.aspx");
     }
 
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)
@@ -56,12 +56,12 @@ public partial class ListarConceptoGastos : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            int i_IdCajaConcepto = int.Parse(gvConceptoGastos.DataKeys[e.Row.RowIndex].Value.ToString());
+            int i_IdUnidad = int.Parse(gvUnidad.DataKeys[e.Row.RowIndex].Value.ToString());
             ImageButton btnEditar = e.Row.FindControl("btnEditar") as ImageButton;
 
             if (btnEditar != null)
             {
-                btnEditar.PostBackUrl = "CrearConceptoGasto.aspx?i_IdCajaConcepto=" + i_IdCajaConcepto;
+                btnEditar.PostBackUrl = "CrearUnidadMedida.aspx?i_IdUnidad=" + i_IdUnidad;
             }
         }
     }

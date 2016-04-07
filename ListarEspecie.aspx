@@ -26,7 +26,9 @@
                                         ontextchanged="txtBuscar_TextChanged"></asp:TextBox>
                                     </td>
                                     <td>
-                                    &nbsp;</td>
+                                        <asp:CheckBox ID="chkEstado" runat="server" AutoPostBack="True" Checked="True" 
+                                            oncheckedchanged="chkEstado_CheckedChanged" Text="Ver Habilitados" />
+                                    </td>
                                 </tr>
                             </table>
                         </td>

@@ -35,6 +35,17 @@ public partial class ListarPaciente : System.Web.UI.Page
         if (ddlBusqueda.SelectedValue == "Nombre del Paciente")
         {
             txtBuscar.Visible = true;
+            txtBuscarCliente.Visible = false;
+            tblFiltroFecha.Visible = false;
+            tblEspecie.Visible = false;
+            tblRaza.Visible = false;
+            tblSexo.Visible = false;
+            tblEstado.Visible = false;
+        }
+        else if (ddlBusqueda.SelectedValue == "Nombre del Cliente")
+        {
+            txtBuscar.Visible = false;
+            txtBuscarCliente.Visible = true;
             tblFiltroFecha.Visible = false;
             tblEspecie.Visible = false;
             tblRaza.Visible = false;
@@ -44,6 +55,7 @@ public partial class ListarPaciente : System.Web.UI.Page
         else if (ddlBusqueda.SelectedValue == "Fecha de Nacimiento")
         {
             txtBuscar.Visible = false;
+            txtBuscarCliente.Visible = false;
             tblFiltroFecha.Visible = true;
             tblEspecie.Visible = false;
             tblRaza.Visible = false;
@@ -53,6 +65,7 @@ public partial class ListarPaciente : System.Web.UI.Page
         else if (ddlBusqueda.SelectedValue == "Fecha de Ultima Visita")
         {
             txtBuscar.Visible = false;
+            txtBuscarCliente.Visible = false;
             tblFiltroFecha.Visible = true;
             tblEspecie.Visible = false;
             tblRaza.Visible = false;
@@ -62,6 +75,7 @@ public partial class ListarPaciente : System.Web.UI.Page
         else if (ddlBusqueda.SelectedValue == "Especie")
         {
             txtBuscar.Visible = false;
+            txtBuscarCliente.Visible = false;
             tblFiltroFecha.Visible = false;
             tblEspecie.Visible = true;
             tblRaza.Visible = false;
@@ -77,6 +91,7 @@ public partial class ListarPaciente : System.Web.UI.Page
         else if (ddlBusqueda.SelectedValue == "Raza")
         {
             txtBuscar.Visible = false;
+            txtBuscarCliente.Visible = false;
             tblFiltroFecha.Visible = false;
             tblEspecie.Visible = true;
             tblRaza.Visible = true;
@@ -103,6 +118,7 @@ public partial class ListarPaciente : System.Web.UI.Page
         else if (ddlBusqueda.SelectedValue == "Sexo")
         {
             txtBuscar.Visible = false;
+            txtBuscarCliente.Visible = false;
             tblFiltroFecha.Visible = false;
             tblEspecie.Visible = false;
             tblRaza.Visible = false;
@@ -117,6 +133,7 @@ public partial class ListarPaciente : System.Web.UI.Page
         else if (ddlBusqueda.SelectedValue == "Estado")
         {
             txtBuscar.Visible = false;
+            txtBuscarCliente.Visible = false;
             tblFiltroFecha.Visible = false;
             tblEspecie.Visible = false;
             tblRaza.Visible = false;
@@ -155,6 +172,10 @@ public partial class ListarPaciente : System.Web.UI.Page
         if (ddlBusqueda.SelectedValue == "Nombre del Paciente")
         {
             consulta = consulta + " where pac.v_NombrePaciente like '%" + txtBuscar.Text + "%' ";
+        }
+        else if (ddlBusqueda.SelectedValue == "Nombre del Cliente")
+        {
+            consulta = consulta + " where cli.v_Nombres like '%" + txtBuscarCliente.Text + "%' ";
         }
         else if (ddlBusqueda.SelectedValue == "Fecha de Nacimiento")
         {

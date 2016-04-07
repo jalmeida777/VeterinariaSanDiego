@@ -287,7 +287,8 @@
                                         MaxLength="4" onkeypress="return ValidaEntero(event);" Width="50px"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:Label ID="lblCodigoBarras" runat="server" Font-Bold="False"></asp:Label>
+                                    <asp:TextBox ID="txtCodigoBarras" runat="server" CssClass="inputNormal" 
+                                        MaxLength="50"></asp:TextBox>
                                 </td>
                             </tr>
         <tr>

@@ -87,4 +87,8 @@ public partial class CrearEspecie : System.Web.UI.Page
     {
         Response.Redirect("ListarEspecie.aspx");
     }
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
+        txtDescripcion.Text = "";
+    }
 }

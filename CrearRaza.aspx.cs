@@ -109,4 +109,9 @@ public partial class CrearRaza : System.Web.UI.Page
         }
       
     }
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
+        txtDescripcion.Text = "";
+        ddlEspecie.Text = "";
+    }
 }

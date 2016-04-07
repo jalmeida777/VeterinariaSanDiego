@@ -131,4 +131,14 @@ public partial class CrearCorrelativo : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: 'El código interno ya se encuentra en uso!' });</script>", false);
         }
     }
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
+        txtAutorizacion.Text = "";
+        txtCorrActual.Text = "";
+        txtCorrFinal.Text = "";
+        txtCorrInicial.Text = "";
+        txtSerie.Text = "";
+        ddlDocumento.Text = "";
+        ddlEmpresa.Text = "";
+    }
 }

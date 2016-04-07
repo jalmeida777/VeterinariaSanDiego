@@ -86,4 +86,8 @@ public partial class CrearFormaAviso : System.Web.UI.Page
     {
         Response.Redirect("ListarFormaAviso.aspx");
     }
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
+        txtDescripcion.Text = "";
+    }
 }

@@ -128,7 +128,7 @@
                     </CellStyle>
                 </dx:GridViewDataTextColumn>
    
-                <dx:GridViewDataHyperLinkColumn Caption="Ver Kardex" VisibleIndex="6" 
+                <dx:GridViewDataHyperLinkColumn Caption="Ver Kardex" VisibleIndex="7" 
                     Width="100px">
                     <Settings AllowSort="False" />
                     <DataItemTemplate>
@@ -139,7 +139,7 @@
                     </CellStyle>
                 </dx:GridViewDataHyperLinkColumn>
                 <dx:GridViewDataTextColumn Caption="Precio" FieldName="f_Precio" 
-                    VisibleIndex="4" Width="100px">
+                    VisibleIndex="5" Width="100px">
                     <PropertiesTextEdit DisplayFormatString="C">
                     </PropertiesTextEdit>
                     <Settings AllowAutoFilter="True" AllowAutoFilterTextInputTimer="False" 
@@ -147,6 +147,10 @@
                         AutoFilterCondition="Equals" />
                     <CellStyle HorizontalAlign="Right">
                     </CellStyle>
+                </dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn Caption="Stock Total" FieldName="StockTotal" 
+                    VisibleIndex="4" Width="60px">
+                    <Settings AllowAutoFilter="False" />
                 </dx:GridViewDataTextColumn>
             </Columns>
             <SettingsBehavior AllowGroup="False" AutoFilterRowInputDelay="0" />

@@ -17,14 +17,15 @@ public partial class CrearConceptoGasto : System.Web.UI.Page
         if (Page.IsPostBack == false)
         {
 
-            if (Request.QueryString["i_IdConceptoGastos"] != null)
+            if (Request.QueryString["i_IdCajaConcepto"] != null)
             {
-                int i_IdConceptoGastos = int.Parse(Request.QueryString["i_IdConceptoGastos"].ToString());
+                int i_IdCajaConcepto = int.Parse(Request.QueryString["i_IdCajaConcepto"].ToString());
                 DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("BDVETER_ConceptoGastos_Seleccionar " + i_IdConceptoGastos.ToString(), conexion);
+                SqlDataAdapter da = new SqlDataAdapter("BDVETER_CajaConcepto_Seleccionar " + i_IdCajaConcepto.ToString(), conexion);
                 da.Fill(dt);
-                lblCodigo.Text = i_IdConceptoGastos.ToString();
+                lblCodigo.Text = i_IdCajaConcepto.ToString();
                 txtDescripcion.Text = dt.Rows[0]["v_Descripcion"].ToString();
+                txtMovimiento.Text = dt.Rows[0]["c_TipoMovimiento"].ToString();
                 chkEstado.Checked = bool.Parse(dt.Rows[0]["b_Estado"].ToString());
             }
             else
@@ -51,29 +52,31 @@ public partial class CrearConceptoGasto : System.Web.UI.Page
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "BDVETER_ConceptoGastos_Actualizar";
-                cmd.Parameters.AddWithValue("@i_IdConceptoGastos", lblCodigo.Text);
+                cmd.CommandText = "BDVETER_CajaConcepto_Actualizar";
+                cmd.Parameters.AddWithValue("@i_IdCajaConcepto", lblCodigo.Text);
                 cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
+                cmd.Parameters.AddWithValue("@c_TipoMovimiento", txtMovimiento.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
                 conexion.Close();
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Concepto de gasto actualizado.' });</script>", false);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Concepto de caja actualizado.' });</script>", false);
             }
             else
             {
-                string n_IdCategoria = "";
+                string i_IdCajaConcepto = "";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "BDVETER_ConceptoPago_Registrar";
+                cmd.CommandText = "BDVETER_CajaConcepto_Registrar";
                 cmd.Parameters.AddWithValue("@v_Descripcion", txtDescripcion.Text.Trim().ToUpper());
+                cmd.Parameters.AddWithValue("@c_TipoMovimiento", txtMovimiento.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
-                n_IdCategoria = cmd.ExecuteScalar().ToString();
+                i_IdCajaConcepto = cmd.ExecuteScalar().ToString();
                 conexion.Close();
-                lblCodigo.Text = n_IdCategoria;
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Concepto de gasto registrado.' });</script>", false);
+                lblCodigo.Text = i_IdCajaConcepto;
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Concepto de caja registrado.' });</script>", false);
             }
         }
         catch (Exception ex)
@@ -85,5 +88,10 @@ public partial class CrearConceptoGasto : System.Web.UI.Page
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)
     {
         Response.Redirect("ListarConceptoGastos.aspx");
+    }
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
+        txtDescripcion.Text = "";
+        txtMovimiento.Text = "";
     }
 }

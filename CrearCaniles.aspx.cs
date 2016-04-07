@@ -25,6 +25,7 @@ public partial class CrearCaniles : System.Web.UI.Page
                 da.Fill(dt);
                 lblCodigo.Text = i_IdCaniles.ToString();
                 txtDescripcion.Text = dt.Rows[0]["v_Nombre"].ToString();
+                txtUbicacion.Text = dt.Rows[0]["v_Ubicacion"].ToString();
                 chkEstado.Checked = bool.Parse(dt.Rows[0]["b_Estado"].ToString());
                 
             }
@@ -56,6 +57,7 @@ public partial class CrearCaniles : System.Web.UI.Page
                 cmd.CommandText = "BDVETER_Caniles_Actualizar";
                 cmd.Parameters.AddWithValue("@i_IdCaniles", lblCodigo.Text);
                 cmd.Parameters.AddWithValue("@v_Nombre", txtDescripcion.Text.Trim().ToUpper());
+                cmd.Parameters.AddWithValue("@v_Ubicacion", txtUbicacion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
                 cmd.ExecuteNonQuery();
@@ -70,6 +72,7 @@ public partial class CrearCaniles : System.Web.UI.Page
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "BDVETER_Caniles_Registrar";
                 cmd.Parameters.AddWithValue("@v_Nombre", txtDescripcion.Text.Trim().ToUpper());
+                cmd.Parameters.AddWithValue("@v_Ubicacion", txtUbicacion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@b_Estado", chkEstado.Checked);
                 conexion.Open();
                 i_IdCaniles = cmd.ExecuteScalar().ToString();
@@ -87,5 +90,10 @@ public partial class CrearCaniles : System.Web.UI.Page
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)
     {
         Response.Redirect("ListarCaniles.aspx");
+    }
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
+        txtDescripcion.Text = "";
+        txtUbicacion.Text = "";
     }
 }

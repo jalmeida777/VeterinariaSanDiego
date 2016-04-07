@@ -86,4 +86,9 @@ public partial class CrearCiaCelular : System.Web.UI.Page
     {
         Response.Redirect("ListarCiaCelular.aspx");
     }
+
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
+        txtDescripcion.Text = "";
+    }
 }

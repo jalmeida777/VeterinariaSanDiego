@@ -141,4 +141,15 @@ public partial class CrearProveedor : System.Web.UI.Page
     {
         ListarDistrito();
     }
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
+        txtRuc.Text = "";
+        txtTelefono.Text = "";
+        txtNombre.Text = "";
+        txtEmail.Text = "";
+        txtDireccion.Text = "";
+        txtContacto.Text = "";
+        ddlDistrito.Text = "";
+        ddlProvincia.Text = "";
+    }
 }

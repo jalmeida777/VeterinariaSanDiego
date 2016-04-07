@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ListarCaniles.aspx.cs" Inherits="ListarCaniles" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ListarUnidadEquivalencia.aspx.cs" Inherits="ListarUnidadEquivalencia" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -10,22 +10,23 @@
                     <tr>
                         <td colspan="2">
                             <h1 class="label">
-                                Administración de Caniles</h1>
+                                Administración de Equivalencia</h1>
                         </td>
                     </tr>
                     <tr>
-                        <td width="50" class="label">
-                            <asp:Label ID="Label2" runat="server" Text="Buscar:"></asp:Label>
+                        <td width="55" class="label">
+                            <asp:Label ID="Label2" runat="server" Text="Estado:"></asp:Label>
                         </td>
                         <td>
                             <table cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
-                                    <td width="225">
-                                        <asp:TextBox ID="txtBuscar" runat="server" CssClass="inputs" 
-                                        placeholder="Buscar" Width="200px" AutoPostBack="True" 
-                                        ontextchanged="txtBuscar_TextChanged"></asp:TextBox>
-                                    </td>
                                     <td>
+                                        <asp:CheckBox ID="chkEstado" runat="server" AutoPostBack="True" Checked="True" 
+                                        oncheckedchanged="chkEstado_CheckedChanged" Text="Ver Habilitados" />
+                                    </td>
+                                    <td align="right" width="70">
+                                    &nbsp;</td>
+                                    <td align="right" width="70">
                                     &nbsp;</td>
                                 </tr>
                             </table>
@@ -46,7 +47,7 @@
                         </td>
                         <td>
                             <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
-                                onclick="btnSalir_Click" />
+                        onclick="btnSalir_Click" />
                         </td>
                     </tr>
                 </table>
@@ -59,28 +60,23 @@
             </asp:UpdateProgress>
             <asp:Panel ID="Panel1" runat="server" Height="600px" ScrollBars="Vertical" 
                 Width="100%">
-                <asp:GridView ID="gvCaniles" runat="server" AutoGenerateColumns="False" 
-                    CssClass="grid" DataKeyNames="i_IdCaniles" 
-                    onrowdatabound="gvAlmacen_RowDataBound" Width="100%">
+                <asp:GridView ID="gv" runat="server" AutoGenerateColumns="False" 
+                    CssClass="grid" DataKeyNames="i_IdUnidadEquivalencia" 
+                    onrowdatabound="gv_RowDataBound" Width="100%">
                     <Columns>
-                        <asp:BoundField DataField="i_IdCaniles" HeaderText="Id" Visible="False">
+                        <asp:BoundField DataField="i_IdUnidadEquivalencia" HeaderText="Id" 
+                            Visible="False">
+                        <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" Width="50px" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="v_Nombre" HeaderText="Descripcion"></asp:BoundField>
-                        <asp:BoundField DataField="v_Ubicacion" HeaderText="Ubicación/Area" />
-                        <asp:TemplateField HeaderText="Estado">
-                            <EditItemTemplate>
-                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("b_Estado") %>'></asp:TextBox>
-                            </EditItemTemplate>
-                            <ItemTemplate>
-                                <asp:CheckBox ID="chkEstado" runat="server" Checked='<%# Bind("b_Estado") %>' 
-                                    Enabled="False" />
-                            </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Center" Width="50px" />
-                        </asp:TemplateField>
+                        <asp:BoundField DataField="UnidadInicial" HeaderText="Unidad Base">
+                        </asp:BoundField>
+                        <asp:BoundField DataField="f_FactorEquivalencia" 
+                            HeaderText="Factor de Equivalencia" />
+                        <asp:BoundField DataField="UnidadFinal" HeaderText="Unidad Equivalencia" />
                         <asp:TemplateField HeaderText="Editar">
                             <ItemTemplate>
-                                <asp:ImageButton ID="ibEditar" runat="server" ImageUrl="~/images/edit.png" 
+                                <asp:ImageButton ID="btnEditar" runat="server" ImageUrl="~/images/edit.png" 
                                     ToolTip="Editar" />
                             </ItemTemplate>
                             <HeaderStyle HorizontalAlign="Center" />
@@ -89,6 +85,16 @@
                     </Columns>
                 </asp:GridView>
             </asp:Panel>
+            <table width="100%">
+                <tr>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+            </table>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

@@ -35,14 +35,13 @@
   border-spacing: 0px;   padding: 0;
   border-collapse: collapse;">
       <tr>
-      <td style="background: #433F93; border-right: 1px solid #afafb6;vertical-align: top; height: 34px; border-color: #080808 #080808 #336699 #080808; padding-left: 20px; border-bottom-style: solid; border-right-width: 1px; border-bottom-width: 3px; background-image: url('/VETERINARIASANDIEGO/images/dog-background.jpg'); background-repeat: repeat-x;">
+      <td style="border-right: 1px solid #afafb6;vertical-align: top; height: 34px; border-color: #080808 #080808 #336699 #080808; padding-left: 20px; border-bottom-style: solid; border-right-width: 1px; border-bottom-width: 3px; ">
           
           <table width="100%">
               <tr>
                   <td width="160">
                       <asp:Image ID="imgEmpresa" runat="server" Height="40px" 
-                          Width="160px" BorderColor="#6CBBDA" BorderStyle="Solid" 
-                          BorderWidth="1px" />
+                          Width="160px" ImageUrl="~/images/Logo_Sisgevet.png" />
                   </td>
                   <td style="text-align: center; bottom: 0px;">
                       <table align="center" border="0" cellpadding="0" cellspacing="0" 

@@ -89,4 +89,8 @@ public partial class CrearMarca : System.Web.UI.Page
     {
         Response.Redirect("ListarMarca.aspx");
     }
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
+        txtDescripcion.Text = "";
+    }
 }

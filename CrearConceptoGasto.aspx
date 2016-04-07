@@ -15,7 +15,7 @@
                 <tr>
                     <td>
                         <h1 class="label">
-                            Conceptos de Gasto</h1>
+                            Conceptos de Caja</h1>
                     </td>
                 </tr>
                 </table>
@@ -35,12 +35,15 @@
                 </td>
                 <td width="65">
                     
-                            <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
-                                onclick="btnSalir_Click" />
+                            <asp:Button ID="btnCancelar" runat="server" onclick="btnCancelar_Click" 
+                                Text="Cancelar" />
                     
                 </td>
                 <td>
                    
+                            <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
+                                onclick="btnSalir_Click" />
+                    
                 </td>
                 </tr></table>
             </div>
@@ -81,6 +84,19 @@
                     Width="300px" style="text-transform:uppercase" MaxLength="50"></asp:TextBox>
                 <asp:Label ID="Label16" runat="server" Font-Bold="True" ForeColor="#18AC85" 
                         Text="*"></asp:Label>
+            </td>
+            <td width="20">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td height="10" width="20">
+                &nbsp;</td>
+            <td>
+                <asp:Label ID="Label17" runat="server" Text="Tipo Movimiento:"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="txtMovimiento" runat="server" CssClass="inputNormal" 
+                    Width="20px" style="text-transform:uppercase" MaxLength="1"></asp:TextBox>
             </td>
             <td width="20">
                 &nbsp;</td>

@@ -44,6 +44,9 @@ public partial class CrearPaciente : System.Web.UI.Page
                 TabContainer1.Tabs[4].Enabled = false;
                 TabContainer1.Tabs[5].Enabled = false;
                 Desbloquear();
+
+                txtFechaVacunacion.Text = DateTime.Now.ToShortDateString();
+
                 txtNombre.Focus();
 
             }

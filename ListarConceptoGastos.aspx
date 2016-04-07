@@ -10,7 +10,7 @@
                     <tr>
                         <td colspan="2">
                             <h1 class="label">
-                                Administración de Concepto de Gastos</h1>
+                                Administración de Conceptos de Caja</h1>
                         </td>
                     </tr>
                     <tr>
@@ -66,16 +66,17 @@
             <asp:Panel ID="Panel1" runat="server" Height="600px" ScrollBars="Vertical" 
                 Width="100%">
                 <asp:GridView ID="gvConceptoGastos" runat="server" AutoGenerateColumns="False" 
-                    CssClass="grid" DataKeyNames="i_IdConceptoGastos" 
+                    CssClass="grid" DataKeyNames="i_IdCajaConcepto" 
                     onrowdatabound="gvCategoria_RowDataBound" Width="100%">
                     <Columns>
-                        <asp:BoundField DataField="i_IdConceptoGastos" HeaderText="Id" 
+                        <asp:BoundField DataField="i_IdCajaConcepto" HeaderText="Id" 
                             Visible="False">
                         <HeaderStyle HorizontalAlign="Center" />
                         <ItemStyle HorizontalAlign="Center" Width="50px" />
                         </asp:BoundField>
                         <asp:BoundField DataField="v_Descripcion" HeaderText="Descripción">
                         </asp:BoundField>
+                        <asp:BoundField DataField="c_TipoMovimiento" HeaderText="Movimiento" />
                         <asp:TemplateField HeaderText="Editar">
                             <ItemTemplate>
                                 <asp:ImageButton ID="btnEditar" runat="server" ImageUrl="~/images/edit.png" 

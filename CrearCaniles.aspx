@@ -31,10 +31,12 @@
                     </cc1:ConfirmButtonExtender>
                 </td>
                 <td width="65">
-                    <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
-                                onclick="btnSalir_Click" />
+                    <asp:Button ID="btnCancelar" runat="server" onclick="btnCancelar_Click" 
+                        Text="Cancelar" />
                 </td>
                 <td>
+                    <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
+                                onclick="btnSalir_Click" />
                 </td>
             </tr>
         </table>
@@ -80,7 +82,20 @@
                         </tr>
                         <tr>
                             <td height="10" width="20">
-                &nbsp;</td>
+                                &nbsp;</td>
+                            <td>
+                                <asp:Label ID="Label4" runat="server" Text="Ubicación/Area:"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtUbicacion" runat="server" CssClass="inputNormal" placeholder="Descripción"
+                    Width="300px" style="text-transform:uppercase"></asp:TextBox>
+                            </td>
+                            <td width="20">
+                                &nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="10" width="20">
+                                &nbsp;</td>
                             <td>
                                 <asp:Label ID="Label3" runat="server" Text="Estado:"></asp:Label>
                             </td>
@@ -88,7 +103,7 @@
                                 <asp:CheckBox ID="chkEstado" runat="server" Checked="True" Text="Habilitado" />
                             </td>
                             <td width="20">
-                &nbsp;</td>
+                                &nbsp;</td>
                         </tr>
                         <tr>
                             <td height="10" width="20">

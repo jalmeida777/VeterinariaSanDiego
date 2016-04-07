@@ -8,9 +8,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-public partial class ListarConceptoGastos : System.Web.UI.Page
+
+public partial class ListarUnidadEquivalencia : System.Web.UI.Page
 {
     SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["conexion"].ConnectionString);
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Page.IsPostBack == false)
@@ -18,23 +20,21 @@ public partial class ListarConceptoGastos : System.Web.UI.Page
             Label lblTitulo = (Label)Master.FindControl("lblTitulo");
             if (lblTitulo != null)
             {
-                lblTitulo.Text = "Administración de Conceptos de Caja";
+                lblTitulo.Text = "Administración de Equivalencias";
             }
             Listar();
         }
-        txtBuscar.Focus();
     }
 
     void Listar()
     {
-        string Estado = "";
-        if (chkEstado.Checked) { Estado = "1"; } else { Estado = "0"; }
+        string Estado;
+        if(chkEstado.Checked==true){Estado = "1";} else{Estado = "0";}
         DataTable dt = new DataTable();
-        SqlDataAdapter da = new SqlDataAdapter("BDVETER_CajaConcepto_Listar '" + txtBuscar.Text.Trim() + "'," + Estado, conexion);
+        SqlDataAdapter da = new SqlDataAdapter("SISGEVET_UnidadEquivalencia_Listar " + Estado, conexion);
         da.Fill(dt);
-
-        gvConceptoGastos.DataSource = dt;
-        gvConceptoGastos.DataBind();
+        gv.DataSource = dt;
+        gv.DataBind();
     }
 
     protected void btnConsultar_Click(object sender, ImageClickEventArgs e)
@@ -44,7 +44,7 @@ public partial class ListarConceptoGastos : System.Web.UI.Page
 
     protected void btnNuevo_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("CrearConceptoGasto.aspx");
+        Response.Redirect("CrearUnidadEquivalencia.aspx");
     }
 
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)
@@ -52,27 +52,22 @@ public partial class ListarConceptoGastos : System.Web.UI.Page
         Response.Redirect("Principal.aspx");
     }
 
-    protected void gvCategoria_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            int i_IdCajaConcepto = int.Parse(gvConceptoGastos.DataKeys[e.Row.RowIndex].Value.ToString());
-            ImageButton btnEditar = e.Row.FindControl("btnEditar") as ImageButton;
-
-            if (btnEditar != null)
-            {
-                btnEditar.PostBackUrl = "CrearConceptoGasto.aspx?i_IdCajaConcepto=" + i_IdCajaConcepto;
-            }
-        }
-    }
-
     protected void chkEstado_CheckedChanged(object sender, EventArgs e)
     {
         Listar();
     }
 
-    protected void txtBuscar_TextChanged(object sender, EventArgs e)
+    protected void gv_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        Listar();
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            int i_IdUnidadEquivalencia = int.Parse(gv.DataKeys[e.Row.RowIndex].Value.ToString());
+            ImageButton btnEditar = e.Row.FindControl("btnEditar") as ImageButton;
+
+            if (btnEditar != null)
+            {
+                btnEditar.PostBackUrl = "CrearUnidadEquivalencia.aspx?i_IdUnidadEquivalencia=" + i_IdUnidadEquivalencia;
+            }
+        }
     }
 }

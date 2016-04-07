@@ -86,4 +86,8 @@ public partial class CrearDiagnostico : System.Web.UI.Page
     {
         Response.Redirect("ListarDiagnostico.aspx");
     }
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
+        txtDescripcion.Text = "";
+    }
 }

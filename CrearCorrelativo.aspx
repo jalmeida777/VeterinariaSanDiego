@@ -31,10 +31,12 @@
                     </cc1:ConfirmButtonExtender>
                 </td>
                 <td width="65">
-                    <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
-                                onclick="btnSalir_Click" />
+                    <asp:Button ID="btnCancelar" runat="server" onclick="btnCancelar_Click" 
+                        Text="Cancelar" />
                 </td>
                 <td>
+                    <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
+                                onclick="btnSalir_Click" />
                 </td>
             </tr>
         </table>
@@ -58,16 +60,12 @@
                         <tr>
                             <td height="10" width="20">
                                 &nbsp;</td>
-                            <td>
+                            <td width="140">
                                 &nbsp;</td>
                             <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
+                                <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
+                                <asp:Label ID="lblCodigo" runat="server" Visible="False"></asp:Label>
+                            </td>
                             <td width="20">
                                 &nbsp;</td>
                         </tr>
@@ -82,14 +80,8 @@
                     Width="200px" Enabled="False">
                                 </asp:DropDownList>
                             </td>
-                            <td>
-                &nbsp;</td>
-                            <td>
-                &nbsp;</td>
-                            <td>
-                &nbsp;</td>
                             <td width="20">
-                &nbsp;</td>
+                                &nbsp;</td>
                         </tr>
                         <tr>
                             <td height="10" width="20">
@@ -101,14 +93,6 @@
                                 <asp:DropDownList ID="ddlEmpresa" runat="server" CssClass="combo" 
                     Width="280px" Enabled="False">
                                 </asp:DropDownList>
-                            </td>
-                            <td>
-                &nbsp;</td>
-                            <td>
-                &nbsp;</td>
-                            <td>
-                                <asp:Label ID="Label1" runat="server" Text="Código:" Visible="False"></asp:Label>
-                                <asp:Label ID="lblCodigo" runat="server" Visible="False"></asp:Label>
                             </td>
                             <td width="20">
                 &nbsp;</td>
@@ -125,12 +109,6 @@
                                 <asp:Label ID="Label17" runat="server" Font-Bold="True" ForeColor="#18AC85" 
                         Text="*"></asp:Label>
                             </td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
                             <td width="20">
                                 &nbsp;</td>
                         </tr>
@@ -146,12 +124,6 @@
                                 <asp:Label ID="Label24" runat="server" Font-Bold="True" ForeColor="#18AC85" 
                         Text="*"></asp:Label>
                             </td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
                             <td width="20">
                                 &nbsp;</td>
                         </tr>
@@ -167,12 +139,6 @@
                                 <asp:Label ID="Label25" runat="server" Font-Bold="True" ForeColor="#18AC85" 
                         Text="*"></asp:Label>
                             </td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
                             <td width="20">
                                 &nbsp;</td>
                         </tr>
@@ -188,12 +154,6 @@
                                 <asp:Label ID="Label26" runat="server" Font-Bold="True" ForeColor="#18AC85" 
                         Text="*"></asp:Label>
                             </td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
                             <td width="20">
                                 &nbsp;</td>
                         </tr>
@@ -207,39 +167,11 @@
                                 <asp:TextBox ID="txtAutorizacion" runat="server" CssClass="inputNormal" placeholder="Descripción"
                     Width="200px" style="text-transform:uppercase" MaxLength="50"></asp:TextBox>
                             </td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
                             <td width="20">
                                 &nbsp;</td>
                         </tr>
                         <tr>
                             <td height="10" width="20">
-                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                                &nbsp;</td>
-                            <td>
-                &nbsp;</td>
-                            <td>
-                &nbsp;</td>
-                            <td>
-                &nbsp;</td>
-                            <td width="20">
-                &nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td height="10" width="20">
-                &nbsp;</td>
-                            <td>
-                &nbsp;</td>
-                            <td>
-                &nbsp;</td>
-                            <td>
                 &nbsp;</td>
                             <td>
                 &nbsp;</td>
