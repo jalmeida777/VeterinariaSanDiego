@@ -234,7 +234,7 @@
             <td height="10" width="20">
                 &nbsp;</td>
             <td colspan="5">
-                <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" 
+                <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" 
                     Width="100%" CssClass="MyTabStyle">
                     <cc1:TabPanel runat="server" HeaderText="Datos Generales" ID="TabPanel1">
                     <ContentTemplate>

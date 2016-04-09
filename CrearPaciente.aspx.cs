@@ -21,6 +21,8 @@ public partial class CrearPaciente : System.Web.UI.Page
             ListarEspecies();
             ListarRazas();
             ListarSexo();
+            ListarAlmacen();
+            ListarAlmacenAntip();
             PacienteEstado();
             if (Request.QueryString["i_IdPaciente"] != null) 
             {
@@ -51,6 +53,60 @@ public partial class CrearPaciente : System.Web.UI.Page
 
             }
             
+        }
+    }
+
+    public void ListarAlmacen()
+    {
+        if (Session["dtAlmacenes"] != null)
+        {
+            DataTable dtAlmacen = new DataTable();
+            dtAlmacen = (DataTable)Session["dtAlmacenes"];
+            ddlAlmacen.DataSource = dtAlmacen;
+            ddlAlmacen.DataTextField = "v_Descripcion";
+            ddlAlmacen.DataValueField = "i_IdAlmacen";
+            ddlAlmacen.DataBind();
+            ddlAlmacen.SelectedIndex = 0;
+            if (dtAlmacen.Rows.Count > 1)
+            {
+                ddlAlmacen.Enabled = true;
+            }
+            else
+            {
+                ddlAlmacen.Enabled = false;
+            }
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Su sesión ha caducado. Vuelva a ingresar al sistema.' });</script>", false);
+            Bloquear();
+        }
+    }
+
+    public void ListarAlmacenAntip()
+    {
+        if (Session["dtAlmacenes"] != null)
+        {
+            DataTable dtAlmacen1 = new DataTable();
+            dtAlmacen1 = (DataTable)Session["dtAlmacenes"];
+            ddlAlmacenAntip.DataSource = dtAlmacen1;
+            ddlAlmacenAntip.DataTextField = "v_Descripcion";
+            ddlAlmacenAntip.DataValueField = "i_IdAlmacen";
+            ddlAlmacenAntip.DataBind();
+            ddlAlmacenAntip.SelectedIndex = 0;
+            if (dtAlmacen1.Rows.Count > 1)
+            {
+                ddlAlmacenAntip.Enabled = true;
+            }
+            else
+            {
+                ddlAlmacenAntip.Enabled = false;
+            }
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Su sesión ha caducado. Vuelva a ingresar al sistema.' });</script>", false);
+            Bloquear();
         }
     }
 
@@ -182,6 +238,67 @@ public partial class CrearPaciente : System.Web.UI.Page
         btnModificar.Enabled = true;
     }
 
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
+    public static List<string> BuscarVacunas(string prefixText, int count, string contextKey)
+    {
+        using (SqlConnection conn = new SqlConnection())
+        {
+            conn.ConnectionString = ConfigurationManager
+                .ConnectionStrings["conexion"].ConnectionString;
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "SISGEVET_Vacunas_Filtrar";
+                cmd.Parameters.AddWithValue("@v_Descripcion", prefixText);
+                cmd.Parameters.AddWithValue("@i_IdAlmacen", contextKey);
+                cmd.Connection = conn;
+                conn.Open();
+                List<string> productos = new List<string>();
+                using (SqlDataReader sdr = cmd.ExecuteReader())
+                {
+                    while (sdr.Read())
+                    {
+                        productos.Add(AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(sdr["Nombre"].ToString(), Convert.ToString(sdr["i_IdProducto"].ToString())));
+                    }
+                }
+                conn.Close();
+                return productos;
+            }
+        }
+    }
+    
+    //-------
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
+    public static List<string> BuscarAntipulgas(string prefixText, int count, string contextKey)
+    {
+        using (SqlConnection conn = new SqlConnection())
+        {
+            conn.ConnectionString = ConfigurationManager
+                .ConnectionStrings["conexion"].ConnectionString;
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "SISGEVET_Antipulgas_Filtrar";
+                cmd.Parameters.AddWithValue("@v_Descripcion", prefixText);
+                cmd.Parameters.AddWithValue("@i_IdAlmacen", contextKey);
+                cmd.Connection = conn;
+                conn.Open();
+                List<string> productos2 = new List<string>();
+                using (SqlDataReader sdr = cmd.ExecuteReader())
+                {
+                    while (sdr.Read())
+                    {
+                        productos2.Add(AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(sdr["Nombre"].ToString(), Convert.ToString(sdr["i_IdProducto"].ToString())));
+                    }
+                }
+                conn.Close();
+                return productos2;
+            }
+        }
+    }
+
     protected void btnGuardar_Click(object sender, ImageClickEventArgs e)
     {
         if (txtHistoria.Text == "") 
@@ -271,5 +388,23 @@ public partial class CrearPaciente : System.Web.UI.Page
     protected void btnModificar_Click(object sender, ImageClickEventArgs e)
     {
         Desbloquear();
+    }
+
+    protected void ibSucursal_Click(object sender, ImageClickEventArgs e)
+    {
+        ddlAlmacen.Enabled = false;
+       
+        ibSucursal.Visible = false;
+        string IdAlmacen = ddlAlmacen.SelectedValue;
+        
+        txtVacuna_AutoCompleteExtender.ContextKey = IdAlmacen;
+        
+    }
+    protected void ibSucursal1_Click(object sender, ImageClickEventArgs e)
+    {
+        ddlAlmacenAntip.Enabled = false;
+        ibSucursal1.Visible = false;
+        string IdAlmacenAntip = ddlAlmacenAntip.SelectedValue;
+        txtAntipulgas_AutoCompleteExtender.ContextKey = IdAlmacenAntip;
     }
 }
