@@ -39,35 +39,36 @@
        {
         width: 150px !important;   
        }
+            .style1
+            {
+                width: 100%;
+            }
  </style>
 
-             <script type="text/javascript">
-
-                 function OnClienteSeleccionado(source, eventArgs) {
-
-                     if (source) {
-                         var hiddenfieldID = source.get_id().replace("txtVacuna_AutoCompleteExtender", "hfIdProducto");
-                         $get(hiddenfieldID).value = eventArgs.get_value();
-
-                         __doPostBack(hiddenfieldID, "");
-
-                     }
-
-                 }
-
- </script>
 
  <script type="text/javascript">
 
-     function OnClienteSeleccionado2(source, eventArgs) {
+     function OnClienteSeleccionado(source, eventArgs) {
 
-         if (source) {
-             var hiddenfieldID = source.get_id().replace("txtAntipulgas_AutoCompleteExtender", "hfIdProducto");
-             $get(hiddenfieldID).value = eventArgs.get_value();
+         var hdnValueID = "<%= hfIdProducto.ClientID %>";
+         document.getElementById(hdnValueID).value = eventArgs.get_value();
+         __doPostBack(hdnValueID, "");
 
-             __doPostBack(hiddenfieldID, "");
+     }
 
-         }
+     function OnAntipulga(source, eventArgs) {
+
+         var hdnValueID = "<%= hfAntipulga.ClientID %>";
+         document.getElementById(hdnValueID).value = eventArgs.get_value();
+         __doPostBack(hdnValueID, "");
+
+     }
+
+     function OnAntiparasito(source, eventArgs) {
+
+         var hdnValueID = "<%= hfAntiparasito.ClientID %>";
+         document.getElementById(hdnValueID).value = eventArgs.get_value();
+         __doPostBack(hdnValueID, "");
 
      }
 
@@ -145,7 +146,12 @@
             <td width="10">
                 </td>
             <td width="45%">
-                <asp:HiddenField ID="hfIdProducto" runat="server" />
+                <asp:HiddenField ID="hfIdProducto" runat="server" 
+                    onvaluechanged="hfIdProducto_ValueChanged" Value="0" />
+                <asp:HiddenField ID="hfAntipulga" runat="server" 
+                    onvaluechanged="hfAntipulga_ValueChanged" />
+                <asp:HiddenField ID="hfAntiparasito" runat="server" 
+                    onvaluechanged="hfAntiparasito_ValueChanged" />
                 </td>
             <td width="20">
                 </td>
@@ -155,9 +161,7 @@
                 </td>
             <td>
 
-                <asp:Label runat="server" Text="Nombre del paciente" ID="Label30"></asp:Label>
-                <asp:Label runat="server" Text="*" Font-Bold="True" Font-Size="10pt" 
-                    ForeColor="#18AC85" ID="Label53"></asp:Label>
+                <asp:Label runat="server" Text="Paciente:" ID="Label96"></asp:Label>
                 </td>
             <td>
 
@@ -202,7 +206,7 @@
                 </td>
             <td colspan="3">
 
-            <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="3" 
+            <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="2" 
                     Width="100%" CssClass="MyTabStyle">
 
                     <cc1:TabPanel runat="server" HeaderText="Datos Generales" ID="TabPanel1">
@@ -723,153 +727,223 @@
                         <ContentTemplate>
                             
 
-                            <table width="100%">
-                                
-
+                            <table width="100%" style="margin-top: 0px">
                                 <tr>
-                                    
-
                                     <td>
-                                        
-
                                         </td>
-                                    
-
-
-                                </tr>
-                                
-
-                                <tr>
-                                    
-
-                                    <td>
-                                        
-
-                                        <div class="divDocumento">
-                                            <table width="100%" cellpadding="5">
-                                                <tr>
-                                                    <td class="label">
-                                                        <asp:Label ID="Label52" runat="server" Text="Fecha de Vacunación"></asp:Label>
-                                                    </td>
-                                                    <td class="label">
-                                                        <asp:Label ID="Label78" runat="server" Text="Sucursal"></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <tr ID="filaCodigo1" runat="server">
-                                                    <td runat="server">
-                                                        <asp:TextBox ID="txtFechaVacunacion" runat="server" CssClass="inputsFecha" 
-                                                            MaxLength="15" placeholder="Inicio"></asp:TextBox>
-                                                        <cc1:CalendarExtender ID="CalendarExtender2" runat="server" Enabled="True" 
-                                                            Format="dd/MM/yyyy" TargetControlID="txtFechaVacunacion">
-                                                        </cc1:CalendarExtender>
-                                                    </td>
-                                                    <td runat="server">
-                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                            <tr>
-                                                                <td width="155">
-                                                                    <asp:DropDownList ID="ddlAlmacen" runat="server" CssClass="combo" Width="200px">
-                                                                    </asp:DropDownList>
-                                                                </td>
-                                                                <td>
-                                                                    <asp:ImageButton ID="ibSucursal" runat="server" ImageUrl="~/images/auth_ok.png" 
-                                                                        onclick="ibSucursal_Click" />
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="label">
-                                                        <asp:Label ID="Label73" runat="server" Text="Vacuna"></asp:Label>
-                                                    </td>
-                                                    <td class="label">
-                                                        <asp:Label ID="Label76" runat="server" Text="Precio S/."></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:TextBox ID="txtVacuna" runat="server" CssClass="inputNormal" 
-                                                            Font-Size="20pt" Height="40px" MaxLength="50" Width="100%"></asp:TextBox>
-
-                                                            <cc1:AutoCompleteExtender ID="txtVacuna_AutoCompleteExtender" 
-                                            runat="server" CompletionInterval="100" CompletionListCssClass="AutoExtender" 
-                                            CompletionListHighlightedItemCssClass="AutoExtenderHighlight" 
-                                            CompletionListItemCssClass="AutoExtenderList" DelimiterCharacters="" 
-                                            Enabled="True" OnClientItemSelected="OnClienteSeleccionado" 
-                                            ServiceMethod="BuscarVacunas" ServicePath="" 
-                                            ShowOnlyCurrentWordInCompletionListItem="True" TargetControlID="txtVacuna" 
-                                            UseContextKey="True">
-                                        </cc1:AutoCompleteExtender>
-
-                                                    </td>
-                                                    <td class="label">
-                                                        <asp:Label ID="lblPrecio" runat="server"></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="label">
-                                                        <asp:Label ID="Label75" runat="server" Text="Observación"></asp:Label>
-                                                    </td>
-                                                    <td class="label">
-                                                        <asp:Label ID="Label77" runat="server" Text="Médico"></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:TextBox ID="txtComentario" runat="server" CssClass="inputNormal" 
-                                                            Height="50px" TextMode="MultiLine" Width="100%"></asp:TextBox>
-                                                    </td>
-                                                    <td class="label">
-                                                        <asp:Label ID="lblMedico" runat="server"></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                            <tr>
-                                                                <td width="70">
-                                                                    <asp:ImageButton ID="ibAgregar" runat="server" 
-                                                                        ImageUrl="~/images/Agregar.jpg" />
-                                                                </td>
-                                                                <td>
-                                                                    <asp:ImageButton ID="btnCancelar" runat="server" 
-                                                                        ImageUrl="~/images/Cancelar.jpg" />
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        
-
-                                    
                                 </tr>
                                 
                                 <tr>
                                     <td>
-                                        &nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:GridView ID="gv" runat="server" AutoGenerateColumns="False" 
-                                            CssClass="grid" DataKeyNames="i_IdVacunacion" Width="100%">
-                                            <Columns>
-                                                <asp:BoundField DataField="v_Descripcion" HeaderText="Vacuna">
-                                                <HeaderStyle HorizontalAlign="Center" />
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="d_FechaVacunacion" HeaderText="Fecha Aplicación" />
-                                                <asp:BoundField HeaderText="Médico" />
-                                                <asp:TemplateField HeaderText="Editar">
-                                                    <ItemTemplate>
-                                                        <asp:ImageButton ID="btnEditar" runat="server" ImageUrl="~/images/edit.png" 
-                                                            ToolTip="Editar" />
-                                                    </ItemTemplate>
-                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                    <ItemStyle HorizontalAlign="Center" Width="50px" />
-                                                </asp:TemplateField>
-                                            </Columns>
-                                        </asp:GridView>
+
+                   <cc1:TabContainer ID="tabVacunas" runat="server" Width="100%" CssClass="MyTabStyle" 
+                                            ActiveTabIndex="0">
+
+                    <cc1:TabPanel runat="server" HeaderText="Aplicar" ID="TabPanel8">
+                        <HeaderTemplate>
+                            Aplicar
+                        </HeaderTemplate>
+                        
+                    <ContentTemplate>
+                    <table cellpadding="5" width="100%">
+                                            <tr runat="server">
+                                                <td class="label" width="355" runat="server">
+                                                    <asp:Label ID="Label78" runat="server" Text="Sucursal"></asp:Label>
+                                                </td>
+                                                <td class="label" width="160" runat="server">
+                                                    <asp:Label ID="Label52" runat="server" Text="Fecha de Aplicación"></asp:Label>
+                                                </td>
+                                                <td class="label" runat="server">
+                                                    <asp:Label ID="Label77" runat="server" Text="Médico"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td class="label" runat="server">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="350px">
+                                                        <tr>
+                                                            <td width="305px">
+                                                                <asp:DropDownList ID="ddlAlmacen" runat="server" CssClass="combo" Width="300px">
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                            <td>
+                                                                <asp:ImageButton ID="ibSucursal" runat="server" ImageUrl="~/images/auth_ok.png" 
+                                                                    OnClick="ibSucursal_Click" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td runat="server">
+                                                    <asp:TextBox ID="txtFechaVacunacion" runat="server" CssClass="inputsFecha" 
+                                                        Enabled="False" MaxLength="15" placeholder="Inicio"></asp:TextBox>
+                                                    <cc1:CalendarExtender ID="CalendarExtender2" runat="server" Enabled="True" 
+                                                        Format="dd/MM/yyyy" TargetControlID="txtFechaVacunacion">
+                                                    </cc1:CalendarExtender>
+                                                </td>
+                                                <td runat="server">
+                                                    <asp:Label ID="lblMedicoVacuna" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td class="label" runat="server" colspan="3">
+                                                    <asp:Label ID="Label73" runat="server" Text="Vacuna"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td runat="server" colspan="3">
+                                                    <asp:TextBox ID="txtVacuna" runat="server" CssClass="inputNormal" 
+                                                        Enabled="False" Font-Size="20pt" Height="40px" MaxLength="50" 
+                                                        Width="100%"></asp:TextBox>
+                                                    <cc1:AutoCompleteExtender ID="txtVacuna_AutoCompleteExtender" runat="server" 
+                                                        CompletionInterval="100" CompletionListCssClass="AutoExtender" 
+                                                        CompletionListHighlightedItemCssClass="AutoExtenderHighlight" 
+                                                        CompletionListItemCssClass="AutoExtenderList" DelimiterCharacters="" 
+                                                        Enabled="True" MinimumPrefixLength="1" 
+                                                        OnClientItemSelected="OnClienteSeleccionado" ServiceMethod="BuscarVacunas" 
+                                                        ServicePath="" ShowOnlyCurrentWordInCompletionListItem="True" 
+                                                        TargetControlID="txtVacuna" UseContextKey="True">
+                                                    </cc1:AutoCompleteExtender>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td runat="server" class="label" colspan="3">
+                                                    <asp:Label ID="Label76" runat="server" Text="Precio S/."></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td runat="server" colspan="3">
+                                                    <asp:Label ID="lblPrecioVacuna" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td class="label" runat="server" colspan="3">
+                                                    <asp:Label ID="Label75" runat="server" Text="Observación"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td colspan="3" runat="server">
+                                                    <asp:TextBox ID="txtComentarioVacunacion" runat="server" CssClass="inputNormal" 
+                                                        Enabled="False" Height="50px" TextMode="MultiLine" Width="100%"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td colspan="3" runat="server">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td width="70">
+                                                                <asp:ImageButton ID="ibAceptarAplicaVacuna" runat="server" Enabled="False" 
+                                                                    ImageUrl="~/images/Guardar.jpg" onclick="ibAceptarAplicaVacuna_Click" />
+                                                                    <cc1:ConfirmButtonExtender ID="ConfirmButtonExtender12" runat="server" 
+                                ConfirmText="¿Seguro de guardar los datos?" Enabled="True" 
+                                TargetControlID="ibAceptarAplicaVacuna">
+                    </cc1:ConfirmButtonExtender>
+                                                            </td>
+                                                            <td>
+                                                                &nbsp;</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                        <br />
+                        <asp:GridView ID="gv" runat="server" AutoGenerateColumns="False" 
+                            Caption="Vacunas (Aplicadas)" CssClass="grid" DataKeyNames="i_IdVacunacion" 
+                            Width="100%">
+                            <Columns>
+                                <asp:BoundField DataField="v_Descripcion" HeaderText="Vacuna">
+                                <HeaderStyle HorizontalAlign="Center" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="d_FechaVacunacion" HeaderText="Fecha Aplicación" />
+                                <asp:BoundField DataField="v_Nombre" HeaderText="Médico" />
+                                <asp:TemplateField HeaderText="Editar">
+                                    <ItemTemplate>
+                                        <asp:ImageButton ID="btnEditar" runat="server" ImageUrl="~/images/edit.png" 
+                                            ToolTip="Editar" />
+                                    </ItemTemplate>
+                                    <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" Width="50px" />
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Quitar">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:ImageButton ID="btnQuitar" runat="server" ImageUrl="~/images/delete.gif" 
+                                            ToolTip="Quitar" />
+                                    </ItemTemplate>
+                                    <ItemStyle HorizontalAlign="Center" Width="50px" />
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
+                    </ContentTemplate>
+                    </cc1:TabPanel>
+
+                       <cc1:TabPanel ID="tabProgramar" runat="server" HeaderText="Programar">
+                           <ContentTemplate>
+                               <table border="0" cellpadding="5" cellspacing="0" width="100%">
+                                   <tr>
+                                       <td class="label">
+                                           <asp:Label ID="Label85" runat="server" Text="Fecha Programada"></asp:Label>
+                                       </td>
+                                   </tr>
+                                   <tr>
+                                       <td>
+                                           <asp:TextBox ID="txtFechaVacunacionProg" runat="server" CssClass="inputsFecha" 
+                                               MaxLength="15" placeholder="Inicio"></asp:TextBox>
+                                           <cc1:CalendarExtender ID="txtFechaVacunacionProg_CalendarExtender" 
+                                               runat="server" Enabled="True" Format="dd/MM/yyyy" 
+                                               TargetControlID="txtFechaVacunacionProg">
+                                           </cc1:CalendarExtender>
+                                       </td>
+                                   </tr>
+                                   <tr>
+                                       <td class="label">
+                                           <asp:Label ID="Label86" runat="server" Text="Vacuna"></asp:Label>
+                                       </td>
+                                   </tr>
+                                   <tr>
+                                       <td>
+                                           <asp:TextBox ID="txtVacunaProg" runat="server" CssClass="inputNormal" 
+                                               Font-Size="20pt" Height="40px" MaxLength="50" Width="100%"></asp:TextBox>
+                                           <cc1:AutoCompleteExtender ID="txtVacunaProg_AutoCompleteExtender" 
+                                               runat="server" CompletionInterval="100" CompletionListCssClass="AutoExtender" 
+                                               CompletionListHighlightedItemCssClass="AutoExtenderHighlight" 
+                                               CompletionListItemCssClass="AutoExtenderList" DelimiterCharacters="" 
+                                               Enabled="True" MinimumPrefixLength="1" 
+                                               OnClientItemSelected="OnClienteSeleccionado" ServiceMethod="BuscarVacunas" 
+                                               ServicePath="" ShowOnlyCurrentWordInCompletionListItem="True" 
+                                               TargetControlID="txtVacunaProg" UseContextKey="True">
+                                           </cc1:AutoCompleteExtender>
+                                       </td>
+                                   </tr>
+                                   <tr>
+                                       <td>
+                                           <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                               <tr>
+                                                   <td width="70">
+                                                       <asp:ImageButton ID="ibAceptarVacunaProg" runat="server" 
+                                                           ImageUrl="~/images/Guardar.jpg" onclick="ibAceptarVacunaProg_Click" />
+                                                       <cc1:ConfirmButtonExtender ID="ibAceptarVacunaProg_ConfirmButtonExtender" 
+                                                           runat="server" ConfirmText="¿Seguro de guardar los datos?" Enabled="True" 
+                                                           TargetControlID="ibAceptarVacunaProg">
+                                                       </cc1:ConfirmButtonExtender>
+                                                   </td>
+                                                   <td>
+                                                       &nbsp;</td>
+                                               </tr>
+                                           </table>
+                                       </td>
+                                   </tr>
+                               </table>
+                               <br />
+                               <asp:GridView ID="gvProgVacuna" runat="server" Caption="Vacunas (Programación)" 
+                                   CssClass="grid">
+                               </asp:GridView>
+                           </ContentTemplate>
+                       </cc1:TabPanel>
+
+                    </cc1:TabContainer>
+
+                                        
                                     </td>
                                 </tr>
                                 
@@ -882,116 +956,483 @@
                     </cc1:TabPanel>
 
                     <cc1:TabPanel ID="TabPanel3" runat="server" HeaderText="Antipulgas">
+
                         <ContentTemplate>
-                            <table cellpadding="5" width="100%">
+                            <table style="margin-top: 0px" width="100%">
                                 <tr>
-                                    <td class="label">
-                                        &nbsp;</td>
-                                    <td class="label">
-                                        &nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td class="label">
-                                        <asp:Label ID="Label79" runat="server" Text="Fecha de Antipulgas:"></asp:Label>
-                                    </td>
-                                    <td class="label">
-                                        <asp:Label ID="Label80" runat="server" Text="Sucursal"></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr ID="filaCodigo2" runat="server">
-                                    <td runat="server">
-                                        <asp:TextBox ID="txtFechaAntipulgas" runat="server" CssClass="inputsFecha" 
-                                            MaxLength="15" placeholder="Inicio"></asp:TextBox>
-                                        <cc1:CalendarExtender ID="txtFechaAntipulgas_CalendarExtender" runat="server" 
-                                            Enabled="True" Format="dd/MM/yyyy" TargetControlID="txtFechaAntipulgas">
-                                        </cc1:CalendarExtender>
-                                    </td>
-                                    <td runat="server">
-                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                            <tr>
-                                                <td width="155">
-                                                    <asp:DropDownList ID="ddlAlmacenAntip" runat="server" CssClass="combo" 
-                                                        Width="150px">
-                                                    </asp:DropDownList>
-                                                </td>
-                                                <td>
-                                                    <asp:ImageButton ID="ibSucursal1" runat="server" 
-                                                        ImageUrl="~/images/auth_ok.png" OnClick="ibSucursal1_Click" />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="label">
-                                        <asp:Label ID="Label81" runat="server" Text="Antipulgas"></asp:Label>
-                                    </td>
-                                    <td class="label">
-                                        <asp:Label ID="Label82" runat="server" Text="Precio S/."></asp:Label>
+                                    <td>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:TextBox ID="txtAntipulgas" runat="server" CssClass="inputNormal" 
-                                            Font-Size="20pt" Height="40px" MaxLength="50" Width="100%"></asp:TextBox>
-                                        <cc1:AutoCompleteExtender ID="txtAntipulgas_AutoCompleteExtender" 
-                                            runat="server" CompletionInterval="100" CompletionListCssClass="AutoExtender" 
-                                            CompletionListHighlightedItemCssClass="AutoExtenderHighlight" 
-                                            CompletionListItemCssClass="AutoExtenderList" DelimiterCharacters="" 
-                                            Enabled="True" OnClientItemSelected="OnClienteSeleccionado2" 
-                                            ServiceMethod="BuscarAntipulgas" ServicePath="" 
-                                            ShowOnlyCurrentWordInCompletionListItem="True" TargetControlID="txtAntipulgas" 
-                                            UseContextKey="True" MinimumPrefixLength="1">
-                                        </cc1:AutoCompleteExtender>
-                                    </td>
-                                    <td class="label">
-                                        <asp:Label ID="lblPrecioAntip" runat="server"></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="label">
-                                        <asp:Label ID="Label83" runat="server" Text="Observación"></asp:Label>
-                                    </td>
-                                    <td class="label">
-                                        <asp:Label ID="Label84" runat="server" Text="Médico"></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:TextBox ID="txtComentarioAntip" runat="server" CssClass="inputNormal" 
-                                            Height="50px" TextMode="MultiLine" Width="100%"></asp:TextBox>
-                                    </td>
-                                    <td class="label">
-                                        <asp:Label ID="lblMedico1" runat="server"></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                            <tr>
-                                                <td width="70">
-                                                    <asp:ImageButton ID="ibAgregar0" runat="server" 
-                                                        ImageUrl="~/images/Agregar.jpg" />
-                                                </td>
-                                                <td>
-                                                    <asp:ImageButton ID="btnCancelar0" runat="server" 
-                                                        ImageUrl="~/images/Cancelar.jpg" />
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <cc1:TabContainer ID="tabAntipulga" runat="server" ActiveTabIndex="0" 
+                                            CssClass="MyTabStyle" Width="100%">
+                                            <cc1:TabPanel ID="TabPanel9" runat="server" HeaderText="Aplicar">
+                                                <HeaderTemplate>
+                                                    Aplicar
+                                                </HeaderTemplate>
+                                                <ContentTemplate>
+                                                    <table cellpadding="5" width="100%">
+                                                        <tr runat="server">
+                                                            <td runat="server" class="label" width="355">
+                                                                <asp:Label ID="Label88" runat="server" Text="Sucursal"></asp:Label>
+                                                            </td>
+                                                            <td runat="server" class="label" width="160">
+                                                                <asp:Label ID="Label89" runat="server" Text="Fecha de Aplicación"></asp:Label>
+                                                            </td>
+                                                            <td runat="server" class="label">
+                                                                <asp:Label ID="Label90" runat="server" Text="Médico"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr runat="server">
+                                                            <td runat="server" class="label">
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="350px">
+                                                                    <tr>
+                                                                        <td width="305px">
+                                                                            <asp:DropDownList ID="ddlSucursalAntipulgas" runat="server" CssClass="combo" 
+                                                                                Width="300px">
+                                                                            </asp:DropDownList>
+                                                                        </td>
+                                                                        <td>
+                                                                            <asp:ImageButton ID="ibSucursalAntipulga" runat="server" 
+                                                                                ImageUrl="~/images/auth_ok.png" OnClick="ibSucursalAntipulga_Click" />
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td runat="server">
+                                                                <asp:TextBox ID="txtFechaAntipulga" runat="server" CssClass="inputsFecha" 
+                                                                    Enabled="False" MaxLength="15" placeholder="Inicio"></asp:TextBox>
+                                                                <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Enabled="True" 
+                                                                    Format="dd/MM/yyyy" TargetControlID="txtFechaAntipulga">
+                                                                </cc1:CalendarExtender>
+                                                            </td>
+                                                            <td runat="server">
+                                                                <asp:Label ID="lblMedicoAntipulga" runat="server"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr runat="server">
+                                                            <td runat="server" class="label" colspan="3">
+                                                                <asp:Label ID="Label91" runat="server" Text="Antipulga"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr runat="server">
+                                                            <td runat="server" colspan="3">
+                                                                <asp:TextBox ID="txtAntipulga" runat="server" CssClass="inputNormal" 
+                                                                    Enabled="False" Font-Size="20pt" Height="40px" MaxLength="50" Width="100%"></asp:TextBox>
+                                                                <cc1:AutoCompleteExtender ID="txtAntipulga_AutoCompleteExtender" runat="server" 
+                                                                    BehaviorID="txtAntipulga_AutoCompleteExtender" CompletionInterval="100" 
+                                                                    CompletionListCssClass="AutoExtender" 
+                                                                    CompletionListHighlightedItemCssClass="AutoExtenderHighlight" 
+                                                                    CompletionListItemCssClass="AutoExtenderList" DelimiterCharacters="" 
+                                                                    Enabled="True" MinimumPrefixLength="1" 
+                                                                    OnClientItemSelected="OnAntipulga" ServiceMethod="BuscarAntipulgas" 
+                                                                    ServicePath="" ShowOnlyCurrentWordInCompletionListItem="True" 
+                                                                    TargetControlID="txtAntipulga" UseContextKey="True">
+                                                                </cc1:AutoCompleteExtender>
+                                                            </td>
+                                                        </tr>
+                                                        <tr runat="server">
+                                                            <td runat="server" class="label" colspan="3">
+                                                                <asp:Label ID="Label92" runat="server" Text="Precio S/."></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr runat="server">
+                                                            <td runat="server" colspan="3">
+                                                                <asp:Label ID="lblPrecioAntipulga" runat="server"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr runat="server">
+                                                            <td runat="server" class="label" colspan="3">
+                                                                <asp:Label ID="Label93" runat="server" Text="Observación"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr runat="server">
+                                                            <td runat="server" colspan="3">
+                                                                <asp:TextBox ID="txtComentarioAntipulga" runat="server" CssClass="inputNormal" 
+                                                                    Enabled="False" Height="50px" TextMode="MultiLine" Width="100%"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr runat="server">
+                                                            <td runat="server" colspan="3">
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                    <tr>
+                                                                        <td width="70">
+                                                                            <asp:ImageButton ID="ibAceptarAplicaAntipulga" runat="server" Enabled="False" 
+                                                                                ImageUrl="~/images/Guardar.jpg" onclick="ibAceptarAplicaAntipulga_Click" />
+                                                                            <cc1:ConfirmButtonExtender ID="ConfirmButtonExtender13" runat="server" 
+                                                                                ConfirmText="¿Seguro de guardar los datos?" Enabled="True" 
+                                                                                TargetControlID="ibAceptarAplicaAntipulga">
+                                                                            </cc1:ConfirmButtonExtender>
+                                                                        </td>
+                                                                        <td>
+                                                                            &nbsp;</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <br />
+                                                    <asp:GridView ID="gvAntipulgaAplicada" runat="server" 
+                                                        AutoGenerateColumns="False" Caption="Antipulga (Aplicados)" CssClass="grid" 
+                                                        DataKeyNames="i_IdAntipulga" Width="100%">
+                                                        <Columns>
+                                                            <asp:BoundField DataField="v_Descripcion" HeaderText="Antipulga">
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            </asp:BoundField>
+                                                            <asp:BoundField DataField="d_FechaAntipulga" HeaderText="Fecha Aplicación" />
+                                                            <asp:BoundField DataField="v_Nombre" HeaderText="Médico" />
+                                                            <asp:TemplateField HeaderText="Editar">
+                                                                <ItemTemplate>
+                                                                    <asp:ImageButton ID="btnEditar0" runat="server" ImageUrl="~/images/edit.png" 
+                                                                        ToolTip="Editar" />
+                                                                </ItemTemplate>
+                                                                <HeaderStyle HorizontalAlign="Center" />
+                                                                <ItemStyle HorizontalAlign="Center" Width="50px" />
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Quitar">
+                                                                <EditItemTemplate>
+                                                                    <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                                                                </EditItemTemplate>
+                                                                <ItemTemplate>
+                                                                    <asp:ImageButton ID="btnQuitar0" runat="server" ImageUrl="~/images/delete.gif" 
+                                                                        ToolTip="Quitar" />
+                                                                </ItemTemplate>
+                                                                <ItemStyle HorizontalAlign="Center" Width="50px" />
+                                                            </asp:TemplateField>
+                                                        </Columns>
+                                                    </asp:GridView>
+                                                </ContentTemplate>
+                                            </cc1:TabPanel>
+                                            <cc1:TabPanel ID="tabProgramar0" runat="server" HeaderText="Programar">
+                                                <ContentTemplate>
+                                                    <table border="0" cellpadding="5" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td class="label">
+                                                                <asp:Label ID="Label94" runat="server" Text="Fecha Programada"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:TextBox ID="txtFechaAntipulgaProg" runat="server" CssClass="inputsFecha" 
+                                                                    MaxLength="15" placeholder="Inicio"></asp:TextBox>
+                                                                <cc1:CalendarExtender ID="txtFechaAntipulgaProg_CalendarExtender" 
+                                                                    runat="server" Enabled="True" Format="dd/MM/yyyy" 
+                                                                    TargetControlID="txtFechaAntipulgaProg">
+                                                                </cc1:CalendarExtender>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="label">
+                                                                <asp:Label ID="Label95" runat="server" Text="Vacuna"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:TextBox ID="txtAntipulgaProg" runat="server" CssClass="inputNormal" 
+                                                                    Font-Size="20pt" Height="40px" MaxLength="50" Width="100%"></asp:TextBox>
+                                                                <cc1:AutoCompleteExtender ID="txtAntipulgaProg_AutoCompleteExtender" 
+                                                                    runat="server" CompletionInterval="100" CompletionListCssClass="AutoExtender" 
+                                                                    CompletionListHighlightedItemCssClass="AutoExtenderHighlight" 
+                                                                    CompletionListItemCssClass="AutoExtenderList" DelimiterCharacters="" 
+                                                                    Enabled="True" MinimumPrefixLength="1" 
+                                                                    OnClientItemSelected="OnClienteSeleccionado" ServiceMethod="BuscarAntipulgas" 
+                                                                    ServicePath="" ShowOnlyCurrentWordInCompletionListItem="True" 
+                                                                    TargetControlID="txtAntipulgaProg" UseContextKey="True">
+                                                                </cc1:AutoCompleteExtender>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                    <tr>
+                                                                        <td width="70">
+                                                                            <asp:ImageButton ID="ibAceptarAntipulgaProg" runat="server" 
+                                                                                ImageUrl="~/images/Guardar.jpg" />
+                                                                            <cc1:ConfirmButtonExtender ID="ibAceptarVacunaProg_ConfirmButtonExtender0" 
+                                                                                runat="server" BehaviorID="ibAceptarAntipulgasProg_ConfirmButtonExtender" 
+                                                                                ConfirmText="¿Seguro de guardar los datos?" Enabled="True" 
+                                                                                TargetControlID="ibAceptarAntipulgaProg">
+                                                                            </cc1:ConfirmButtonExtender>
+                                                                        </td>
+                                                                        <td>
+                                                                            &nbsp;</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <br />
+                                                    <asp:GridView ID="gvProgAntipulga" runat="server" 
+                                                        Caption="Antipulga (Programación)" CssClass="grid">
+                                                    </asp:GridView>
+                                                </ContentTemplate>
+                                            </cc1:TabPanel>
+                                        </cc1:TabContainer>
                                     </td>
                                 </tr>
                             </table>
                         </ContentTemplate>
+
                     </cc1:TabPanel>
 
                     <cc1:TabPanel ID="TabPanel4" runat="server" HeaderText="Antiparasitarios">
+                        <ContentTemplate>
+                            <cc1:TabContainer ID="tabAntiparasito" runat="server" ActiveTabIndex="0" 
+                                CssClass="MyTabStyle" Width="100%">
+                                <cc1:TabPanel ID="TabPanel10" runat="server" HeaderText="Aplicar">
+                                    <HeaderTemplate>
+                                        Aplicar
+                                    </HeaderTemplate>
+                                    <ContentTemplate>
+                                        <table cellpadding="5" width="100%">
+                                            <tr runat="server">
+                                                <td runat="server" class="label" width="355">
+                                                    <asp:Label ID="Label97" runat="server" Text="Sucursal"></asp:Label>
+                                                </td>
+                                                <td runat="server" class="label" width="160">
+                                                    <asp:Label ID="Label98" runat="server" Text="Fecha de Aplicación"></asp:Label>
+                                                </td>
+                                                <td runat="server" class="label">
+                                                    <asp:Label ID="Label99" runat="server" Text="Médico"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td runat="server" class="label">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="350px">
+                                                        <tr>
+                                                            <td width="305px">
+                                                                <asp:DropDownList ID="ddlAlmacenAntiparasito" runat="server" CssClass="combo" 
+                                                                    Width="300px">
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                            <td>
+                                                                <asp:ImageButton ID="ibSucursalAntiparasito" runat="server" 
+                                                                    ImageUrl="~/images/auth_ok.png" OnClick="ibSucursalAntiparasito_Click" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td runat="server">
+                                                    <asp:TextBox ID="txtFechaAntiparasito" runat="server" CssClass="inputsFecha" 
+                                                        Enabled="False" MaxLength="15" placeholder="Inicio"></asp:TextBox>
+                                                    <cc1:CalendarExtender ID="CalendarExtender4" runat="server" Enabled="True" 
+                                                        Format="dd/MM/yyyy" TargetControlID="txtFechaAntiparasito">
+                                                    </cc1:CalendarExtender>
+                                                </td>
+                                                <td runat="server">
+                                                    <asp:Label ID="lblMedicoAntiparasito" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td runat="server" class="label" colspan="3">
+                                                    <asp:Label ID="Label100" runat="server" Text="Antiparásito"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td runat="server" colspan="3">
+                                                    <asp:TextBox ID="txtAntiparasito" runat="server" CssClass="inputNormal" 
+                                                        Enabled="False" Font-Size="20pt" Height="40px" MaxLength="50" Width="100%"></asp:TextBox>
+                                                    <cc1:AutoCompleteExtender ID="txtAntiparasito_AutoCompleteExtender" 
+                                                        runat="server" CompletionInterval="100" CompletionListCssClass="AutoExtender" 
+                                                        CompletionListHighlightedItemCssClass="AutoExtenderHighlight" 
+                                                        CompletionListItemCssClass="AutoExtenderList" DelimiterCharacters="" 
+                                                        Enabled="True" MinimumPrefixLength="1" OnClientItemSelected="OnAntiparasito" 
+                                                        ServiceMethod="BuscarAntiparasitos" ServicePath="" 
+                                                        ShowOnlyCurrentWordInCompletionListItem="True" 
+                                                        TargetControlID="txtAntiparasito" UseContextKey="True">
+                                                    </cc1:AutoCompleteExtender>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td runat="server" class="label" colspan="3">
+                                                    <asp:Label ID="Label101" runat="server" Text="Precio S/."></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td runat="server" colspan="3">
+                                                    <asp:Label ID="lblPrecioAntiparasito" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td runat="server" class="label" colspan="3">
+                                                    <asp:Label ID="Label102" runat="server" Text="Observación"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td runat="server" colspan="3">
+                                                    <asp:TextBox ID="txtComentarioAntiparasito" runat="server" 
+                                                        CssClass="inputNormal" Enabled="False" Height="50px" TextMode="MultiLine" 
+                                                        Width="100%"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server">
+                                                <td runat="server" colspan="3">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td width="70">
+                                                                <asp:ImageButton ID="ibAceptarAplicaAntiparasito" runat="server" 
+                                                                    Enabled="False" ImageUrl="~/images/Guardar.jpg" 
+                                                                    onclick="ibAceptarAplicaAntiparasito_Click" />
+                                                                <cc1:ConfirmButtonExtender ID="ConfirmButtonExtender14" runat="server" 
+                                                                    ConfirmText="¿Seguro de guardar los datos?" Enabled="True" 
+                                                                    TargetControlID="ibAceptarAplicaAntiparasito">
+                                                                </cc1:ConfirmButtonExtender>
+                                                            </td>
+                                                            <td>
+                                                                &nbsp;</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br />
+                                        <asp:GridView ID="gvAntiparasito" runat="server" AutoGenerateColumns="False" 
+                                            Caption="Antiparásito (Aplicadas)" CssClass="grid" 
+                                            DataKeyNames="i_IdAntiparasito" Width="100%">
+                                            <Columns>
+                                                <asp:BoundField DataField="v_Descripcion" HeaderText="Antiparásito">
+                                                <HeaderStyle HorizontalAlign="Center" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="d_FechaAntiparasito" HeaderText="Fecha Aplicación" />
+                                                <asp:BoundField DataField="v_Nombre" HeaderText="Médico" />
+                                                <asp:TemplateField HeaderText="Editar">
+                                                    <ItemTemplate>
+                                                        <asp:ImageButton ID="btnEditar1" runat="server" ImageUrl="~/images/edit.png" 
+                                                            ToolTip="Editar" />
+                                                    </ItemTemplate>
+                                                    <HeaderStyle HorizontalAlign="Center" />
+                                                    <ItemStyle HorizontalAlign="Center" Width="50px" />
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Quitar">
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                                                    </EditItemTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:ImageButton ID="btnQuitar1" runat="server" ImageUrl="~/images/delete.gif" 
+                                                            ToolTip="Quitar" />
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Center" Width="50px" />
+                                                </asp:TemplateField>
+                                            </Columns>
+                                        </asp:GridView>
+                                    </ContentTemplate>
+                                </cc1:TabPanel>
+                                <cc1:TabPanel ID="tabProgramar1" runat="server" HeaderText="Programar">
+                                    <ContentTemplate>
+                                        <table border="0" cellpadding="5" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td class="label">
+                                                    <asp:Label ID="Label103" runat="server" Text="Fecha Programada"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox ID="txtFechaAntiparasitoProg" runat="server" 
+                                                        CssClass="inputsFecha" MaxLength="15" placeholder="Inicio"></asp:TextBox>
+                                                    <cc1:CalendarExtender ID="txtFechaAntiparasitoProg_CalendarExtender" 
+                                                        runat="server" Enabled="True" Format="dd/MM/yyyy" 
+                                                        TargetControlID="txtFechaAntiparasitoProg">
+                                                    </cc1:CalendarExtender>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="label">
+                                                    <asp:Label ID="Label104" runat="server" Text="Antiparásito"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:TextBox ID="txtAntiparasitoProg" runat="server" CssClass="inputNormal" 
+                                                        Font-Size="20pt" Height="40px" MaxLength="50" Width="100%"></asp:TextBox>
+                                                    <cc1:AutoCompleteExtender ID="txtAntiparasitoProg_AutoCompleteExtender" 
+                                                        runat="server" CompletionInterval="100" CompletionListCssClass="AutoExtender" 
+                                                        CompletionListHighlightedItemCssClass="AutoExtenderHighlight" 
+                                                        CompletionListItemCssClass="AutoExtenderList" DelimiterCharacters="" 
+                                                        Enabled="True" MinimumPrefixLength="1" OnClientItemSelected="OnAntiparasito" 
+                                                        ServiceMethod="BuscarAntiparasitos" ServicePath="" 
+                                                        ShowOnlyCurrentWordInCompletionListItem="True" 
+                                                        TargetControlID="txtAntiparasitoProg" UseContextKey="True">
+                                                    </cc1:AutoCompleteExtender>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td width="70">
+                                                                <asp:ImageButton ID="ibAceptarAntiparasitoProg" runat="server" 
+                                                                    ImageUrl="~/images/Guardar.jpg" />
+                                                                <cc1:ConfirmButtonExtender ID="ibAceptarAntiparasitoProg_ConfirmButtonExtender" 
+                                                                    runat="server" ConfirmText="¿Seguro de guardar los datos?" Enabled="True" 
+                                                                    TargetControlID="ibAceptarAntiparasitoProg">
+                                                                </cc1:ConfirmButtonExtender>
+                                                            </td>
+                                                            <td>
+                                                                &nbsp;</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br />
+                                        <asp:GridView ID="gvProgAntiparasito" runat="server" 
+                                            Caption="Antiparásito (Programación)" CssClass="grid">
+                                        </asp:GridView>
+                                    </ContentTemplate>
+                                </cc1:TabPanel>
+                            </cc1:TabContainer>
+                        </ContentTemplate>
                     </cc1:TabPanel>
 
                     <cc1:TabPanel ID="TabPanel5" runat="server" HeaderText="Baño y Peluquería">
                     </cc1:TabPanel>
 
                     <cc1:TabPanel ID="TabPanel7" runat="server" HeaderText="Historial de Compras">
+                        <ContentTemplate>
+                            <table class="style1">
+                                <tr>
+                                    <td>
+                                        <table class="style1">
+                                            <tr>
+                                                <td width="50">
+                                                    <asp:Label ID="Label87" runat="server" Text="Saldo:"></asp:Label>
+                                                </td>
+                                                <td>
+                                                    <asp:Label ID="lblSaldo" runat="server" Font-Bold="True"></asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:GridView ID="gvCuentaCorriente" runat="server" AutoGenerateColumns="False" 
+                                            Caption="Cuenta Corriente" CssClass="grid" ShowFooter="True">
+                                            <Columns>
+                                                <asp:BoundField DataField="d_FechaMovimiento" HeaderText="Fecha Movimiento" />
+                                                <asp:BoundField DataField="v_Descripcion" HeaderText="Producto / Servicio" />
+                                                <asp:BoundField DataField="f_Venta" DataFormatString="{0:N2}" 
+                                                    HeaderText="Venta">
+                                                <ItemStyle HorizontalAlign="Right" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="f_Pago" DataFormatString="{0:N2}" HeaderText="Pago">
+                                                <ItemStyle HorizontalAlign="Right" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="f_Saldo" DataFormatString="{0:N2}" 
+                                                    HeaderText="Saldo">
+                                                <ItemStyle HorizontalAlign="Right" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="Sucursal" HeaderText="Sucursal" />
+                                                <asp:BoundField DataField="TipoDocumento" HeaderText="Tipo de Documento" />
+                                                <asp:BoundField DataField="v_NroDocumento" HeaderText="Nro Documento" />
+                                            </Columns>
+                                            <FooterStyle CssClass="footer" />
+                                        </asp:GridView>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ContentTemplate>
                     </cc1:TabPanel>
 
             </cc1:TabContainer>

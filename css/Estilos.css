@@ -100,14 +100,15 @@
 
 .footer
 {
-	    border-bottom: 1px solid #cacaca;
-  padding-left: 2px;
-  background-color: #ededed;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#dedede));
-  background-image: -webkit-linear-gradient(top, #fcfcfc, #dedede);
-  background-image: linear-gradient(to bottom, #fcfcfc, #dedede);
-  
-	font-weight: bold;
-	text-align: right;
-	padding-right: 7px;
+    border-bottom: 1px solid #cacaca;
+    padding-left: 2px;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 7px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-top-color: #66FF33;
+    border-bottom-color: #cacaca;
 }
