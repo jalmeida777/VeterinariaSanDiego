@@ -51,6 +51,11 @@
                       <asp:LoginName ID="LoginName1" runat="server" Font-Bold="True" 
                           ForeColor="#333333" />
                               </td>
+
+                              <td>
+                      <asp:LoginName ID="LoginName2" runat="server" Font-Bold="True" 
+                          ForeColor="#333333" />
+                              </td>
                           </tr>
                       </table>
                   </td>

@@ -15,9 +15,33 @@ public partial class Login : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        if (Page.IsPostBack == false)
+             {
         txtUsuario.Focus();
+        ListarAlmacenes();
+        ddlAlmacenes_SelectedIndexChanged(null, null);
+             }
+        
     }
 
+        public void ListarAlmacenes()
+    {
+          
+        DataTable dt = new DataTable();
+        if (dt.Rows.Count == 0)
+        {
+        SqlDataAdapter da = new SqlDataAdapter("CQ_Almacen_Combo", conexion);
+        da.Fill(dt);
+
+        ddlAlmacenes.DataSource = dt;
+        ddlAlmacenes.DataTextField = "v_Descripcion";
+        ddlAlmacenes.DataValueField = "i_IdAlmacen";
+        ddlAlmacenes.DataBind();
+            }
+
+        else { }  
+    }
     protected void btnEntrar_Click(object sender, ImageClickEventArgs e)
     {
         if (txtUsuario.Text == "")
@@ -33,8 +57,10 @@ public partial class Login : System.Web.UI.Page
             return;
         }
 
+    
+
         DataTable dtUsuario = new DataTable();
-        SqlDataAdapter daUsuario = new SqlDataAdapter("Play_Usuario_Select '" + txtUsuario.Text.Trim().ToUpper() + "','" + txtContraseña.Text.Trim() + "'", conexion);
+        SqlDataAdapter daUsuario = new SqlDataAdapter("Play_Usuario_Select '" + txtUsuario.Text.Trim().ToUpper() + "','" + txtContraseña.Text.Trim() + "','" + ddlAlmacenes.SelectedValue.Trim() + "'", conexion);
         daUsuario.Fill(dtUsuario);
         if (dtUsuario != null) 
         {
@@ -42,15 +68,19 @@ public partial class Login : System.Web.UI.Page
             {
                 //Guardar datos del Usuario en la sesión
                 string Usuario = dtUsuario.Rows[0]["v_Usuario"].ToString();
+                //string Almacen = dtUsuario.Rows[0]["i_IdAlmacen"].ToString();
                 string n_IdUsuario = dtUsuario.Rows[0]["n_IdUsuario"].ToString();
                 Session["dtUsuario"] = dtUsuario;
 
                 //Guardar almacenes permitidos el usuario en la sesión
                 DataTable dtAlmacenes = new DataTable();
-                SqlDataAdapter daAlmacenes = new SqlDataAdapter("Play_UsuarioAlmacen_Listar " + n_IdUsuario, conexion);
+                //string i_IdAlmacen = ddlAlmacenes.SelectedValue;
+                SqlDataAdapter daAlmacenes = new SqlDataAdapter("Play_Almacen_Select '" + ddlAlmacenes.SelectedValue.Trim() + "'", conexion);
                 daAlmacenes.Fill(dtAlmacenes);
                 if (dtAlmacenes.Rows.Count > 0)
                 {
+                    string Almacen = dtAlmacenes.Rows[0]["v_Descripcion"].ToString();
+                    string i_IdAlmacen = dtAlmacenes.Rows[0]["i_IdAlmacen"].ToString();
                     Session["dtAlmacenes"] = dtAlmacenes;
                 }
                 else 
@@ -92,7 +122,10 @@ public partial class Login : System.Web.UI.Page
                 //    dtUsuario.Rows[0]["f_TC"] = f_TC;
                 //    dtUsuario.Rows[0]["f_TCPlay"] = f_TCPlay;
                     //Session["dtUsuario"] = dtUsuario;
+
+
                     FormsAuthentication.RedirectFromLoginPage(Usuario, false);
+              
                 //}
                 //else 
                 //{
@@ -100,7 +133,15 @@ public partial class Login : System.Web.UI.Page
                 //}
                 
             }
+            string myStringVariable = string.Empty;
+
+            myStringVariable = "Usuario, contraseña o sucursal Incorrecta";
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + myStringVariable + "');", true);
         }
 
+    }
+    protected void ddlAlmacenes_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        
     }
 }

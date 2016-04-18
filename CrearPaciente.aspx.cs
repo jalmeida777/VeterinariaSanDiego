@@ -99,20 +99,23 @@ public partial class CrearPaciente : System.Web.UI.Page
     {
         if (Session["dtAlmacenes"] != null)
         {
-            DataTable dtAlmacen = new DataTable();
-            dtAlmacen = (DataTable)Session["dtAlmacenes"];
-            ddlAlmacen.DataSource = dtAlmacen;
+            DataTable dtAlmacenes = new DataTable();
+            dtAlmacenes = (DataTable)Session["dtAlmacenes"];
+            string i_IdAlmacen = dtAlmacenes.Rows[0]["i_IdAlmacen"].ToString();
+            string Almacen = dtAlmacenes.Rows[0]["v_Descripcion"].ToString();
+            ddlAlmacen.DataSource = dtAlmacenes;
             ddlAlmacen.DataTextField = "v_Descripcion";
             ddlAlmacen.DataValueField = "i_IdAlmacen";
             ddlAlmacen.DataBind();
             ddlAlmacen.SelectedIndex = 0;
-            if (dtAlmacen.Rows.Count > 1)
+            if (dtAlmacenes.Rows.Count > 1)
             {
                 ddlAlmacen.Enabled = true;
             }
             else
             {
-                ddlAlmacen.Enabled = false;
+                //ddlAlmacen.Enabled = false;
+                ddlAlmacen.Enabled = true;
             }
         }
         else
@@ -128,6 +131,8 @@ public partial class CrearPaciente : System.Web.UI.Page
         {
             DataTable dtAlmacen1 = new DataTable();
             dtAlmacen1 = (DataTable)Session["dtAlmacenes"];
+            string i_IdAlmacen = dtAlmacen1.Rows[0]["i_IdAlmacen"].ToString();
+            string Almacen = dtAlmacen1.Rows[0]["v_Descripcion"].ToString();
             ddlSucursalAntipulgas.DataSource = dtAlmacen1;
             ddlSucursalAntipulgas.DataTextField = "v_Descripcion";
             ddlSucursalAntipulgas.DataValueField = "i_IdAlmacen";
@@ -139,7 +144,8 @@ public partial class CrearPaciente : System.Web.UI.Page
             }
             else
             {
-                ddlSucursalAntipulgas.Enabled = false;
+                //ddlSucursalAntipulgas.Enabled = false;
+                ddlSucursalAntipulgas.Enabled = true;
             }
         }
         else
@@ -155,6 +161,8 @@ public partial class CrearPaciente : System.Web.UI.Page
         {
             DataTable dtAlmacen1 = new DataTable();
             dtAlmacen1 = (DataTable)Session["dtAlmacenes"];
+            string i_IdAlmacen = dtAlmacen1.Rows[0]["i_IdAlmacen"].ToString();
+            string Almacen = dtAlmacen1.Rows[0]["v_Descripcion"].ToString();
             ddlAlmacenAntiparasito.DataSource = dtAlmacen1;
             ddlAlmacenAntiparasito.DataTextField = "v_Descripcion";
             ddlAlmacenAntiparasito.DataValueField = "i_IdAlmacen";
@@ -166,7 +174,8 @@ public partial class CrearPaciente : System.Web.UI.Page
             }
             else
             {
-                ddlAlmacenAntiparasito.Enabled = false;
+                //ddlAlmacenAntiparasito.Enabled = false;
+                ddlAlmacenAntiparasito.Enabled = true;
             }
         }
         else
@@ -347,7 +356,7 @@ public partial class CrearPaciente : System.Web.UI.Page
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> productos = new List<string>();
-                using (SqlDataReader sdr = cmd.ExecuteReader())
+                using ( SqlDataReader sdr = cmd.ExecuteReader())
                 {
                     while (sdr.Read())
                     {
@@ -374,6 +383,7 @@ public partial class CrearPaciente : System.Web.UI.Page
                 cmd.CommandText = "SISGEVET_Antipulgas_Filtrar";
                 cmd.Parameters.AddWithValue("@v_Descripcion", prefixText);
                 cmd.Parameters.AddWithValue("@i_IdAlmacen", contextKey);
+                //cmd.Parameters.AddWithValue("@i_IdAlmacen", contextKey);
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> productos2 = new List<string>();
@@ -991,4 +1001,13 @@ public partial class CrearPaciente : System.Web.UI.Page
         gvProgVacuna.DataBind();
     }
 
+    protected void ddlAlmacen_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void ddlSucursalAntipulgas_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -30,7 +30,7 @@ public partial class CrearInventarioInicial : System.Web.UI.Page
                 SqlDataAdapter da = new SqlDataAdapter("Play_NotaIngreso_Seleccionar " + n_IdNotaIngreso, conexion);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                ddlAlmacen.SelectedValue = dt.Rows[0]["n_IdAlmacen"].ToString();
+                //ddlAlmacen.SelectedValue = dt.Rows[0]["n_IdAlmacen"].ToString();
                 txtFechaInicial.Text = DateTime.Parse(dt.Rows[0]["d_FechaEmision"].ToString()).ToShortDateString();
                 txtObservacion.Text = dt.Rows[0]["t_Observacion"].ToString();
                 lblNumero.Text = dt.Rows[0]["v_NumeroNotaIngreso"].ToString();
@@ -336,6 +336,10 @@ public partial class CrearInventarioInicial : System.Web.UI.Page
             btnGuardar.Enabled = bool.Parse(dtPermisos.Rows[0]["b_Estado"].ToString());
             txtFechaInicial.Enabled = bool.Parse(dtPermisos.Rows[3]["b_Estado"].ToString());
         }
+
+    }
+    protected void ddlAlmacen_SelectedIndexChanged(object sender, EventArgs e)
+    {
 
     }
 }

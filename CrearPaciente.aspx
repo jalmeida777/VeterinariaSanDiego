@@ -206,7 +206,7 @@
                 </td>
             <td colspan="3">
 
-            <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" 
+            <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="2" 
                     Width="100%" CssClass="MyTabStyle">
 
                     <cc1:TabPanel runat="server" HeaderText="Datos Generales" ID="TabPanel1">
@@ -745,7 +745,7 @@
                         </HeaderTemplate>
                         
                     <ContentTemplate>
-                    <table cellpadding="5" width="100%">
+                    <table cellpadding="5" width="100%" style="margin-top: 0px">
                                             <tr runat="server">
                                                 <td class="label" width="355" runat="server">
                                                     <asp:Label ID="Label78" runat="server" Text="Sucursal"></asp:Label>
@@ -878,8 +878,26 @@
                     </cc1:TabPanel>
 
                        <cc1:TabPanel ID="tabProgramar" runat="server" HeaderText="Programar">
+                           <HeaderTemplate>
+                               Programar
+                           </HeaderTemplate>
                            <ContentTemplate>
                                <table border="0" cellpadding="5" cellspacing="0" width="100%">
+
+                                                         <td id="Td1" class="label" runat="server">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="350px">
+                                                        <tr>
+                                                            <td width="305px">
+                                                                <asp:DropDownList ID="DropDownList1" runat="server" CssClass="combo" Width="300px">
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                            <td>
+                                                                <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/images/auth_ok.png" 
+                                                                    OnClick="ibSucursal_Click" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
                                    <tr>
                                        <td class="label">
                                            <asp:Label ID="Label85" runat="server" Text="Fecha Programada"></asp:Label>
@@ -971,7 +989,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <cc1:TabContainer ID="tabAntipulga" runat="server" ActiveTabIndex="0" 
+                                        <cc1:TabContainer ID="tabAntipulga" runat="server" ActiveTabIndex="1" 
                                             CssClass="MyTabStyle" Width="100%">
                                             <cc1:TabPanel ID="TabPanel9" runat="server" HeaderText="Aplicar">
                                                 <HeaderTemplate>
@@ -996,7 +1014,8 @@
                                                                     <tr>
                                                                         <td width="305px">
                                                                             <asp:DropDownList ID="ddlSucursalAntipulgas" runat="server" CssClass="combo" 
-                                                                                Width="300px">
+                                                                                Width="300px" 
+                                                                                onselectedindexchanged="ddlSucursalAntipulgas_SelectedIndexChanged">
                                                                             </asp:DropDownList>
                                                                         </td>
                                                                         <td>

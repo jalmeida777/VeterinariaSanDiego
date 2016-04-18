@@ -152,7 +152,8 @@
                 <table cellpadding="0" cellspacing="0" class="style1">
                     <tr>
                         <td width="155">
-                <asp:DropDownList ID="ddlAlmacen" runat="server" Width="150px" CssClass="combo">
+                <asp:DropDownList ID="ddlAlmacen" runat="server" Width="150px" CssClass="combo" 
+                                onselectedindexchanged="ddlAlmacen_SelectedIndexChanged">
                 </asp:DropDownList>
                         </td>
                         <td>

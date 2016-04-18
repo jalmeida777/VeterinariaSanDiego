@@ -25,7 +25,17 @@
             <PanelCollection>
 <dx:PanelContent runat="server" SupportsDisabledAttribute="True">
 <table cellpadding="4" cellspacing="4" width="100%">
+
             <tr>
+                <td class="label">
+                    <asp:Label ID="Label3" runat="server" Text="Sucursal:"></asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlAlmacenes" runat="server" CssClass="combo" OnSelectedIndexChanged="ddlAlmacenes_SelectedIndexChanged" Width="170px">
+                    </asp:DropDownList>
+                </td>
+                 </tr>
+            <tr>    
                 <td class="label">
                     <asp:Label ID="Label1" runat="server" Text="Usuario:"></asp:Label>
                 </td>
