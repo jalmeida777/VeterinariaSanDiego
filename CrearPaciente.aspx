@@ -206,7 +206,7 @@
                 </td>
             <td colspan="3">
 
-            <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="2" 
+            <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" 
                     Width="100%" CssClass="MyTabStyle">
 
                     <cc1:TabPanel runat="server" HeaderText="Datos Generales" ID="TabPanel1">
@@ -936,7 +936,13 @@
                                </table>
                                <br />
                                <asp:GridView ID="gvProgVacuna" runat="server" Caption="Vacunas (Programación)" 
-                                   CssClass="grid">
+                                   CssClass="grid" AutoGenerateColumns="False" 
+                                   DataKeyNames="i_IdProgramacion">
+                                   <Columns>
+                                       <asp:BoundField DataField="d_FechaProgramacion" HeaderText="Fecha" />
+                                       <asp:BoundField DataField="SubCategoria" HeaderText="Sub Categoría" />
+                                       <asp:BoundField DataField="Producto" HeaderText="Producto" />
+                                   </Columns>
                                </asp:GridView>
                            </ContentTemplate>
                        </cc1:TabPanel>

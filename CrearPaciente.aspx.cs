@@ -57,6 +57,8 @@ public partial class CrearPaciente : System.Web.UI.Page
                     ListarVacunasAplicadas();
                     ListarAntipulgasAplicadas();
                     ListarAntiparasitariosAplicadas();
+
+                    ListarProgramacionVacunas();
                 }
             }
             else if (Request.QueryString["i_IdCliente"] != null) 
@@ -935,10 +937,58 @@ public partial class CrearPaciente : System.Web.UI.Page
 
     protected void ibAceptarVacunaProg_Click(object sender, ImageClickEventArgs e)
     {
+        DataTable dtUsuario = new DataTable();
+        dtUsuario = (DataTable)Session["dtUsuario"];
+        string n_IdUsuario = dtUsuario.Rows[0]["n_IdUsuario"].ToString();
+
         string i_IdPaciente = Request.QueryString["i_IdPaciente"].ToString();
+
         SqlTransaction tran;
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["conexion"].ConnectionString);
         cn.Open();
         tran = cn.BeginTransaction();
+
+        try 
+        {
+
+            //Registrar Vacunación
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cn;
+            cmd.Transaction = tran;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "BDVETER_Programacion_Registrar";
+            cmd.Parameters.AddWithValue("@d_FechaProgramacion", DateTime.Parse(txtFechaVacunacionProg.Text));
+            cmd.Parameters.AddWithValue("@i_IdAlmacen", 1);
+            cmd.Parameters.AddWithValue("@i_IdPaciente", i_IdPaciente);
+            cmd.Parameters.AddWithValue("@n_IdUsuarioMedico", n_IdUsuario);
+            cmd.Parameters.AddWithValue("@i_IdProducto", hfIdProducto.Value);
+            cmd.Parameters.AddWithValue("@t_Observacion", txtComentarioVacunacion.Text);
+            cmd.ExecuteNonQuery();
+
+            ListarProgramacionVacunas();
+        }
+
+        catch (Exception ex)
+        {
+            tran.Rollback();
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: '" + ex.Message + "' });</script>", false);
+        }
+        finally
+        {
+            cn.Close();
+        }
+
     }
+
+    void ListarProgramacionVacunas() 
+    {
+        string i_IdPaciente = Request.QueryString["i_IdPaciente"].ToString();
+
+        DataTable dt = new DataTable();
+        SqlDataAdapter da = new SqlDataAdapter("BDVETER_Programacion_Listar " + i_IdPaciente + "," + 3, conexion);
+        da.Fill(dt);
+        gvProgVacuna.DataSource = dt;
+        gvProgVacuna.DataBind();
+    }
+
 }

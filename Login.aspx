@@ -62,8 +62,8 @@
     </div>
 
     <div style="margin: auto; position: absolute; top: -400px; right: 0px; width: 520px; height: 100px; left: 140px; bottom: 0px;">
-        <asp:Image ID="Image1" runat="server" Height="164px" 
-            ImageUrl="~/images/LogoVeterinaria.jpg" Width="376px" />
+        <asp:Image ID="Image1" runat="server" Height="124px" 
+            ImageUrl="~/images/Logo_Sisgevet.png" Width="376px" />
     </div>
     </form>
 </body>
